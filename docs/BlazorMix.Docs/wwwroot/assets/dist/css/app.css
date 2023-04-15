@@ -1,0 +1,270 @@
+﻿@import "./layout.css";
+
+html {
+    --doc-border-color: #e6e6e6;
+    font-size: 16px;
+}
+
+html, * {
+    margin: 0;
+    padding: 0;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+.nav-item {
+    cursor: pointer;
+}
+
+/* iconpark */
+.i-icon {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.component-container {
+    color: #314659;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: auto;
+}
+
+[data-prefers-color=dark] .component-container {
+    color: #b3b3b3
+}
+
+
+.component-container:not(:first-child):empty {
+    min-height: 32px
+}
+
+.component-container h1, .component-container h2, .component-container h3, .component-container h4, .component-container h5, .component-container h6 {
+    margin-top: calc(3em - 30px);
+    margin-bottom: 18px;
+    color: #0d1a26;
+    font-weight: 500;
+    line-height: 1.40625;
+    position: relative
+}
+
+[data-prefers-color=dark] .component-container h1, [data-prefers-color=dark] .component-container h2, [data-prefers-color=dark] .component-container h3, [data-prefers-color=dark] .component-container h4, [data-prefers-color=dark] .component-container h5, [data-prefers-color=dark] .component-container h6 {
+    color: #e6e6e6
+}
+
+.component-container h1:hover > a[aria-hidden], .component-container h2:hover > a[aria-hidden], .component-container h3:hover > a[aria-hidden], .component-container h4:hover > a[aria-hidden], .component-container h5:hover > a[aria-hidden], .component-container h6:hover > a[aria-hidden] {
+    float: left;
+    margin-left: -1.3em;
+    width: .8em;
+    padding-left: .5em;
+    line-height: 1.15;
+    box-sizing: border-box
+}
+
+@media only screen and (max-width: 767px) {
+    .component-container h1:hover > a[aria-hidden], .component-container h2:hover > a[aria-hidden], .component-container h3:hover > a[aria-hidden], .component-container h4:hover > a[aria-hidden], .component-container h5:hover > a[aria-hidden], .component-container h6:hover > a[aria-hidden] {
+        width: 14px;
+        margin-left: -14px
+    }
+}
+
+.component-container h1:hover > a[aria-hidden]:after, .component-container h2:hover > a[aria-hidden]:after, .component-container h3:hover > a[aria-hidden]:after, .component-container h4:hover > a[aria-hidden]:after, .component-container h5:hover > a[aria-hidden]:after, .component-container h6:hover > a[aria-hidden]:after {
+    content: "#";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em
+}
+
+.component-container h1:hover > a[aria-hidden] span, .component-container h2:hover > a[aria-hidden] span, .component-container h3:hover > a[aria-hidden] span, .component-container h4:hover > a[aria-hidden] span, .component-container h5:hover > a[aria-hidden] span, .component-container h6:hover > a[aria-hidden] span {
+    display: none
+}
+
+.component-container h1 + h1, .component-container h1 + h2, .component-container h1 + h3, .component-container h1 + h4, .component-container h1 + h5, .component-container h1 + h6, .component-container h2 + h1, .component-container h2 + h2, .component-container h2 + h3, .component-container h2 + h4, .component-container h2 + h5, .component-container h2 + h6, .component-container h3 + h1, .component-container h3 + h2, .component-container h3 + h3, .component-container h3 + h4, .component-container h3 + h5, .component-container h3 + h6, .component-container h4 + h1, .component-container h4 + h2, .component-container h4 + h3, .component-container h4 + h4, .component-container h4 + h5, .component-container h4 + h6, .component-container h5 + h1, .component-container h5 + h2, .component-container h5 + h3, .component-container h5 + h4, .component-container h5 + h5, .component-container h5 + h6, .component-container h6 + h1, .component-container h6 + h2, .component-container h6 + h3, .component-container h6 + h4, .component-container h6 + h5, .component-container h6 + h6 {
+    margin-top: 16px
+}
+
+.component-container h1 {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-size: 30px
+}
+
+.component-container h2 {
+    font-size: 24px;
+    padding-bottom: 6px
+}
+
+.component-container h3 {
+    font-size: 18px
+}
+
+.component-container h4 {
+    font-size: 16px
+}
+
+.component-container h5 {
+    font-size: 15px
+}
+
+.component-container h6 {
+    font-size: 14px
+}
+
+.component-container p {
+    margin: 16px 0
+}
+
+.component-container strong {
+    border-bottom: 4px solid #ffe7b2;
+    font-weight: 600
+}
+
+.component-container :not(pre) code {
+    padding: 2px 5px;
+    color: #314659;
+    background: #f5f7fa;
+    border-radius: 4px
+}
+
+[data-prefers-color=dark] .component-container :not(pre) code {
+    color: #ff7875;
+    background: hsla(0,0%,100%,.08)
+}
+
+.component-container code {
+    font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    font-size: 14px
+}
+
+.component-container pre {
+    font-size: 14px;
+    background: #f5f7fa
+}
+
+    .component-container pre:not([class^=language-]) {
+        padding: 1em
+    }
+
+.component-container hr {
+    margin: 16px 0;
+    border: 0;
+    border-top: 1px solid var(--doc-border-color)
+}
+
+.component-container blockquote {
+    margin: 16px 0;
+    padding: 0 24px;
+    color: rgba(49,70,89,.7);
+    border-left: 4px solid var(--doc-border-color);
+    overflow: hidden
+}
+
+[data-prefers-color=dark] .component-container blockquote {
+    color: hsla(0,0%,90.2%,.7)
+}
+
+.component-container ol, .component-container ul {
+    margin: 8px 0 8px 32px;
+    padding: 0
+}
+
+    .component-container ol li, .component-container ul li {
+        margin-bottom: 4px
+    }
+
+.component-container div:has(>table) {
+    border-radius: 12px;
+    border: 1px solid var(--doc-border-color);
+}
+
+.component-container table {
+    width: 100%;
+    border-collapse: collapse;
+    /*overflow: hidden;*/
+}
+
+
+[data-prefers-color=dark] .component-container table {
+    border: 1px solid #3b434b
+}
+
+.component-container table td, .component-container table th {
+    padding: 10px 24px;
+    border: 1px solid #f0f1f3
+}
+
+[data-prefers-color=dark] .component-container table td,
+[data-prefers-color=dark] .component-container table th {
+    border: 1px solid #3b434b
+}
+
+.component-container table th {
+    font-weight: 600;
+    background: #f5f7fa
+}
+
+[data-prefers-color=dark] .component-container table th {
+    background: hsla(0,0%,100%,.08)
+}
+
+.component-container table td:first-child {
+    font-weight: 500
+}
+
+.component-container table thead th {
+    border-top: none
+}
+
+.component-container table tr td:nth-child(2),
+.component-container table tr td:nth-child(3) {
+    max-width: 180px;
+    word-wrap: break-word;
+}
+
+.component-container table tr:last-child td {
+    border-bottom: none
+}
+
+.component-container table tr td:first-child, 
+.component-container table tr th:first-child {
+    border-left: none
+}
+
+.component-container table tr td:last-child,
+.component-container table tr th:last-child {
+    border-right: none
+}
+
+.component-container a {
+    color: #1677ff;
+    text-decoration: none;
+    transition: opacity .2s;
+    outline: none
+}
+
+[data-prefers-color=dark] .component-container a {
+    color: #3086ff
+}
+
+.component-container a:hover {
+    opacity: .7;
+    text-decoration: underline
+}
+
+.component-container a:active {
+    opacity: .9
+}
+
+.component-container img {
+    max-width: 100%
+}

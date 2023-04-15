@@ -1,0 +1,35 @@
+﻿@using System.Reflection;
+
+<div class="previewer-device">
+    @if (_type != null)
+    {
+        <DynamicComponent Type="_type"></DynamicComponent>
+    }
+    else
+    {
+        <div>
+            The file "@Src" doesn't exists.
+        </div>
+    }
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string Src { get; set; } = null!;
+
+    public Type? _type { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+        var typeInfo = Src.Replace("/", ".");
+        if (typeInfo.StartsWith("."))
+        {
+            typeInfo = typeInfo.Substring(1);
+        }
+        _type = Type.GetType($"{executingAssemblyName}.{typeInfo}");
+    }
+}

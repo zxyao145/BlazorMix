@@ -1,0 +1,21 @@
+@import "./theme-common.scss";
+
+
+:root {
+    --primary: #1677ff;
+    --secondary: #6c757d;
+    --info: #0dcaf0;
+    --success: #00b578;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #212529;
+
+    --border-color: #efefef;
+    --border-radius: 0.25rem;
+    --border-width: 1px;
+    --border-style: solid;
+
+    --main-backgroup-color: #fff;
+    --main-text-color: #000;
+}

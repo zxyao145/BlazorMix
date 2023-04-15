@@ -1,0 +1,139 @@
+﻿@import '@/styles/mixins/index.scss';
+@import '@/styles/animation/index.scss';
+
+$btn-prefix: #{$prefix}-btn;
+
+@each $color, $value in $theme-colors {
+    .#{$btn-prefix}-#{$color} {
+        --background-color: #{$value};
+        --border-color: #{$value};
+
+        @if $color == "light" {
+            --text-color: #000;
+        }
+        @else if $color == "dark" {
+            --text-color: #000;
+        }
+        @else {
+            --text-color: #fff;
+        }
+
+        &.#{$btn-prefix}-outline {
+            --text-color: #{$value};
+            --background-color: transparent;
+        }
+
+        &.#{$btn-prefix}-none {
+            --text-color: #{$value};
+            --background-color: transparent;
+            --border-width: 0px;
+        }
+    }
+}
+
+.#{$btn-prefix}-default {
+    --text-color: #{$themm-text-color};
+    --background-color: #{$themm-bg-color};
+}
+
+
+
+.#{$btn-prefix} {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border: var(--border-width) var(--border-style) var(--border-color);
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+    margin: 0;
+    line-height: 1.4;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity .15s ease;
+    font-size: var(--bs-btn-font-size);
+
+    &:active:before {
+        opacity: .08;
+    }
+
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(calc(var(--border-width)*-1),calc(var(--border-width)*-1));
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border: var(--border-width) var(--border-style) #000;
+        opacity: 0;
+        content: " ";
+    }
+
+    &.rounded-circle {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+.#{$btn-prefix}-block {
+    display: block;
+    width: 100%;
+}
+
+.#{$btn-prefix}-disabled {
+    cursor: not-allowed;
+    opacity: .4;
+}
+
+.#{$btn-prefix}-xs {
+    --bs-btn-padding-y: 0.125rem;
+    --bs-btn-padding-x: 0.25rem;
+    --bs-btn-font-size: 0.75rem;
+
+    &.rounded-circle {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.#{$btn-prefix}-sm {
+    --bs-btn-padding-y: 0.25rem;
+    --bs-btn-padding-x: 0.5rem;
+    --bs-btn-font-size: 0.875rem;
+
+    &.rounded-circle {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/*.#{$btn-prefix}-md {
+    
+}*/
+
+.#{$btn-prefix}-lg {
+    --bs-btn-padding-y: 0.5rem;
+    --bs-btn-padding-x: 1rem;
+    --bs-btn-font-size: 1.125rem;
+
+    &.rounded-circle {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+.#{$btn-prefix}-xl {
+    --bs-btn-padding-y: 0.75rem;
+    --bs-btn-padding-x: 1rem;
+    --bs-btn-font-size: 1.25rem;
+
+    &.rounded-circle {
+        width: 54px;
+        height: 54px;
+    }
+}

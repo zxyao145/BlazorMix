@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-src", "2-src", "{403C5757-8143-43B3-99A7-F69587E9C1C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-solution", "1-solution", "{828439F2-D89C-4950-A124-6D2810D8F5A6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix", "src\BlazorMix\BlazorMix.csproj", "{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix.Core", "src\BlazorMix.Core\BlazorMix.Core.csproj", "{BCF79834-1DCD-4882-83DA-7F0C7D884211}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-docs", "3-docs", "{ED70462F-ABCB-4CB9-9C03-8405CF8A071D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix.Docs", "docs\BlazorMix.Docs\BlazorMix.Docs.csproj", "{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix.Docs.SourceGenerators", "docs\BlazorMix.Docs.SourceGenerators\BlazorMix.Docs.SourceGenerators.csproj", "{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix.Docs.Build", "docs\BlazorMix.Docs.Build\BlazorMix.Docs.Build.csproj", "{3A390C40-981D-4ECB-A536-92913579123E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF79834-1DCD-4882-83DA-7F0C7D884211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF79834-1DCD-4882-83DA-7F0C7D884211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF79834-1DCD-4882-83DA-7F0C7D884211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF79834-1DCD-4882-83DA-7F0C7D884211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A390C40-981D-4ECB-A536-92913579123E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A390C40-981D-4ECB-A536-92913579123E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A390C40-981D-4ECB-A536-92913579123E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A390C40-981D-4ECB-A536-92913579123E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868} = {403C5757-8143-43B3-99A7-F69587E9C1C9}
+		{BCF79834-1DCD-4882-83DA-7F0C7D884211} = {403C5757-8143-43B3-99A7-F69587E9C1C9}
+		{BC31F880-3B35-43FF-8BD1-0FEA54B1B6BE} = {ED70462F-ABCB-4CB9-9C03-8405CF8A071D}
+		{9A9BFCBE-D1A1-4E7D-955D-6E73AD26BA75} = {ED70462F-ABCB-4CB9-9C03-8405CF8A071D}
+		{3A390C40-981D-4ECB-A536-92913579123E} = {ED70462F-ABCB-4CB9-9C03-8405CF8A071D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4777FC23-9E9E-47F6-A6BF-450004204680}
+	EndGlobalSection
+EndGlobal

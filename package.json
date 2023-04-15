@@ -1,0 +1,23 @@
+{
+  "name": "blazor-mix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:themes": "node scripts/generate-themes.js",
+    "build:css": "npm run generate:themes && vite build --config vite.config.build.css.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.15.2",
+    "fs-extra": "^11.1.0",
+    "glob": "^9.2.1",
+    "path": "^0.12.7",
+    "postcss-import": "^15.1.0",
+    "sass": "^1.59.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}

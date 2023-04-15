@@ -1,0 +1,41 @@
+@import "./util/index.scss";
+
+
+// blazor mix
+$ui-prefix: "bm";
+$prefix: "bm";
+
+$themm-bg-color: var(--main-backgroup-color);
+$themm-text-color: var(--main-text-color);
+
+// color
+$theme-colors: (
+    "primary": var(--primary), 
+    "secondary": var(--secondary), 
+    "info": var(--info), 
+    "success": var(--success), 
+    "warning": var(--warning), 
+    "danger": var(--danger), 
+    "light": var(--light), 
+    "dark": var(--dark), 
+);
+
+
+// ---- Animation ----
+$animation-duration: 0.25s !default;
+$animation-timing-fun: cubic-bezier(0.55, 0.085, 0.68, 0.53) !default;
+
+// border
+$border-radius: 0.25rem;
+$border-width: 1px;
+$border-style: solid;
+
+
+// size
+$theme-sizes: (
+    "mini": "xs", 
+    "small": "sm", 
+    "mediuem": "md", 
+    "large": "lg", 
+    "extra-large": "xl", 
+);

@@ -1,0 +1,15 @@
+﻿@namespace BlazorMix.Docs.Internal.Components
+
+<div class="demo-block">
+    <div class="block-title">@Title</div>
+    <div class="block-content">@ChildContent</div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "";
+
+    [Parameter]
+    public RenderFragment? ChildContent{ get; set; }
+}

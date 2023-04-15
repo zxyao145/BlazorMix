@@ -1,0 +1,10 @@
+﻿@layout ComponentsLayout
+@page "/components/{ComponentName?}"
+
+
+<div @ref="@_articleRef" class="component-container">
+    <div>
+        @((MarkupString)_content)
+    </div>
+</div>
+

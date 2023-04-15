@@ -1,0 +1,27 @@
+﻿using BlazorMix.Helpers;
+using System.Collections.Generic;
+using System.Data;
+
+namespace BlazorMix;
+public class StyleBuilder : BuilderBase
+{
+    public StyleBuilder() : base()
+    {
+
+    }
+    public StyleBuilder(StyleBuilder builder) : base(builder)
+    {
+
+    }
+
+    public override string ToString()
+    {
+        return string.Join(
+        ";",
+            Items.Where(x => x.Value())
+                .Select(x => x.Key())
+            );
+    }
+
+    public override string Build() => ToString();
+}

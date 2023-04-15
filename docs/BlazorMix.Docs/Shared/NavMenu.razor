@@ -1,0 +1,10 @@
+﻿
+@foreach (var componentName in AppRoutes.Routes)
+{
+    if (!string.IsNullOrEmpty(componentName))
+    {
+        <NavItem Href="@("/components/" + componentName)">
+            @(componentName)
+        </NavItem>
+    }
+}

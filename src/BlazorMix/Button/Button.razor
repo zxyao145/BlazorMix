@@ -1,0 +1,17 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<button type="@Type"
+        class="@_classBuilder.ToString() @ClassBuilder.ToString()"
+        style="@StyleBuilder.ToString()"
+        @onclick="@HandleClick">
+        @if(Loading){
+            <LoadingIcon />
+        }else{
+            @Icon
+        }
+        <span>
+            @ChildContent
+        </span>
+</button>
+

@@ -1,0 +1,91 @@
+﻿
+<DemoBlock Title="Fill Type">
+    <Button Fill="@ButtonFillType.Solid">solid</Button>
+    <Button Fill="@ButtonFillType.Outline">Outline</Button>
+    <Button Fill="@ButtonFillType.None">None</Button>
+</DemoBlock>
+
+<DemoBlock Title="Block">
+    <Button Block>Block</Button>
+</DemoBlock>
+
+<DemoBlock Title="Size">
+    <Space Wrap>
+        <SpaceItem>
+            <Button Size="@ButtonSize.Mini">Mini</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Size="@ButtonSize.Smalll">Smalll</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Size="@ButtonSize.Medium">Medium(default)</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Size="@ButtonSize.Large">Large</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Size="@ButtonSize.ExtraLarge">ExtraLarge</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="Shape">
+    <Space Wrap>
+        <SpaceItem>
+            <Button Shape="@ButtonShape.Circle">
+                <Icon>
+                    <IconPark.AllApplication />
+                </Icon>
+            </Button>
+        </SpaceItem>
+
+        <SpaceItem>
+            <Button Shape="@ButtonShape.Rounded">Rounded(default)</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Shape="@ButtonShape.Rectangular">Rectangular</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Shape="@ButtonShape.Capsule">Capsule</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="Semantic">
+    <Space Wrap>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Default">Default</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Primary">Primary</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Success">Success</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Warning">Warning</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Danger">Danger</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button Color="@ButtonColor.Info">Info</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="Shape">
+    <Space Wrap>
+        <SpaceItem>
+            <Button Loading>
+                Loading
+            </Button>
+        </SpaceItem>
+
+        <SpaceItem>
+            <Button AutoLoading OnClick="@(async () => await Task.Delay(2000))">
+                Auto Loading
+            </Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>

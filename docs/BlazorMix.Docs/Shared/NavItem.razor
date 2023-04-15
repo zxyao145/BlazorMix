@@ -1,0 +1,25 @@
+﻿<span class="nav-item">
+    <MixNavLink class="@Class" href="@Href"
+                Match="@Match"
+                MatchFunc="@MatchFunc">
+        @ChildContent
+    </MixNavLink>
+</span>
+
+@code {
+    [Parameter]
+    public NavLinkMatch Match { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public string Href { get; set; } = "";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public Func<string, bool>? MatchFunc { get; set; } = null;
+
+}

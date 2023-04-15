@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "target": "ESNext",
+    "types": ["vite/client", "jest", "node"],
+    "allowJs": false,
+    "declaration": true,
+    "declarationDir": "./dist/esm/types",
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    // "alwaysStrict": true,
+    // "strictNullChecks": true,
+    // "strictFunctionTypes": true,
+    // "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // "noUnusedParameters": true,
+    // "noUnusedLocals": true,
+    "jsx": "react",
+    "lib": ["esnext", "dom"],
+    // "outDir": "./tsc/test",
+    "paths": {
+      "@/*": ["BlazorMix/*"]
+    }
+  },
+  "include": ["BlazorMix/**/*.ts", "BlazorMix/**/*.d.ts"],
+  "exclude": ["./node_modules/*"]
+}

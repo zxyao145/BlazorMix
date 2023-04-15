@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BlazorMix.Docs.Build": {
+      "commandName": "Project",
+      "commandLineArgs": "-c gendemo -s ../../../../../docs/BlazorMix.Docs/Demos/Components -o ./"
+    }
+  }
+}

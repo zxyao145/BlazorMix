@@ -1,0 +1,21 @@
+﻿.mix-icon {
+    fill: currentColor;
+/*    display: inline-block;
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;*/
+
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.mix-icon-loading {
+    animation: rotation 1s linear infinite;
+}

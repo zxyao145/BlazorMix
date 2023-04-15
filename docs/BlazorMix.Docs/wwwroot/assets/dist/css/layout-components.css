@@ -1,0 +1,11 @@
+﻿
+.component-main {
+    display: flex;
+    flex-direction: row;
+}
+
+.component-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}

@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <RootNamespace>BlazorMix.Docs</RootNamespace>
+        <!-- 禁用Blazor默认的SourceGenerator，否则在自定义的SourceGenerator执行的时候，Blazor组件还没编译 -->
+        <UseRazorSourceGenerator>false</UseRazorSourceGenerator>
+        <!-- 生成SourceGenerator生成的文件 -->
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IconPark.Blazor" Version="1.3.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.CustomElements" Version="7.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BlazorMix\BlazorMix.csproj" />
+        <ProjectReference Include="..\BlazorMix.Docs.SourceGenerators\BlazorMix.Docs.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <DemoDocs Include="Demos\**\*.md" />
+        <DemoSourceCode Include="Demos\**\*.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <DemoDocs Remove="Demos\Components\Button\Doc\index.zh-cn.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\pages\Components\Button\Docs\" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <CliProjectDir>docs/BlazorMix.Docs.Build</CliProjectDir>
+        <CliPath>$(CLIProjectDir)/BlazorMix.Docs.Build.csproj</CliPath>
+        <DocsDir>$(SolutionDir)/docs/BlazorMix.Docs.Build</DocsDir>
+    </PropertyGroup>
+    
+    <Target Name="CopyExmaplesToMd" BeforeTargets="Build">
+        <!--<Copy SourceFiles="@(DemoDocs)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\%(Filename).md" />-->
+        <Copy SourceFiles="@(DemoSourceCode)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\%(Filename).txt" />
+    </Target>
+
+    <Target Name="GenDocsHtml" BeforeTargets="Build">
+        <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet run --project $(CliPath) -- -c gendemo -s $(ProjectDir)/Demos/Components -o $(ProjectDir)/wwwroot/pages" />
+    </Target>
+    
+</Project>

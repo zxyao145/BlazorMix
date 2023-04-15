@@ -1,0 +1,10 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<CascadingValue Value="this" IsFixed="@true">
+    <div class="@_classBuilder.ToString() @ClassBuilder.ToString()"
+         style="@StyleBuilder.ToString()"
+         @onclick="@OnClick">
+        @ChildContent
+    </div>
+</CascadingValue>

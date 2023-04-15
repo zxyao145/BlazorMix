@@ -1,0 +1,91 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="top-row">
+    <div class="logo">
+        Blazor Mix
+    </div>
+    @if (IsComponents())
+    {
+        <div class="component-search">
+            <input value="@searchVal"
+               @oninput="@OnSearchTxtChange"
+               placeholder="search component"
+               type="search" />
+            @if (!string.IsNullOrEmpty(searchVal))
+            {
+                var routes = AppRoutes.Routes
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Where(x => x.Contains(searchVal, StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+                if (routes.Count == 0)
+                {
+                    <ul>
+                        <li>
+                            <span>
+                                <a>
+                                    not found componment
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul @onclick="@OnSearchItemClick">
+                        @foreach (var componentName in routes)
+                        {
+                            <li>
+                                <NavItem Href="@("/components/" + componentName)">
+                                    @(componentName)
+                                </NavItem>
+                            </li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    }
+    <div class="top-nav">
+        <nav>
+            <NavItem Href="/guide">
+                指南
+            </NavItem>
+            <NavItem Href="/components/Button" MatchFunc="@IsComponents">
+                组件
+            </NavItem>
+        </nav>
+    </div>
+</div>
+
+@code {
+    private string searchVal = "";
+
+    private bool IsComponents()
+    {
+        var uri = NavigationManager.Uri;
+        return IsComponents(uri);
+
+    }
+
+    private bool IsComponents(string uri)
+    {
+        var path = new Uri(uri).AbsolutePath;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return false;
+        }
+        Console.WriteLine(path);
+        return path.StartsWith("/components");
+    }
+
+    private void OnSearchTxtChange(ChangeEventArgs e)
+    {
+        searchVal = e.Value?.ToString() ?? "";
+        StateHasChanged();
+    }
+
+    private void OnSearchItemClick()
+    {
+        searchVal = "";
+    }
+}

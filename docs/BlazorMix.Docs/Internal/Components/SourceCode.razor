@@ -1,0 +1,17 @@
+﻿
+<div class="previewer-source">
+    <div>
+        <HighlightCode Code="@Code" CanLoad="@_canLoad" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Code { get; set; } = "";
+    public bool _canLoad = false;
+
+    protected override void OnParametersSet()
+    {
+        _canLoad = !string.IsNullOrEmpty(Code);
+    }
+}
