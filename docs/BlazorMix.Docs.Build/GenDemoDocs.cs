@@ -20,7 +20,10 @@ internal class GenDemoDocs
         {
             var componentName = Path.GetFileName(component);
             ParseDocsMdFile(componentsRootDir, component, componentName);
-            ParseDemoTxt(componentsRootDir, component);
+            if(_options.Type == "full")
+            {
+                ParseDemoTxt(componentsRootDir, component);
+            }
         }
     }
 

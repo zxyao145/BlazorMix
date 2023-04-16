@@ -12,6 +12,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Xml;
 using Markdig.Extensions.Tables;
+using GTranslate;
 
 namespace BlazorMix.Docs.Build;
 internal class DocsMdParser
@@ -41,7 +42,7 @@ internal class DocsMdParser
             var block = document[i];
             if (block is QuoteBlock quoteBlock)
             {
-                if (TryRenderXmlDoc(quoteBlock, componentName, out var tableSb))
+                if (TryRenderXmlDoc(quoteBlock, componentName, lang, out var tableSb))
                 {
                     sb.Append(tableSb);
                     continue;
@@ -66,6 +67,7 @@ internal class DocsMdParser
     private static bool TryRenderXmlDoc(
         QuoteBlock quoteBlock,
         string componentName,
+        string language,
         out StringBuilder tableSb
         )
     {
@@ -75,7 +77,7 @@ internal class DocsMdParser
             var content = string.Join("", paragraph.Inline);
             if (content.Equals("[xmldoc]", StringComparison.CurrentCultureIgnoreCase))
             {
-                var trs = ReadXmlDoc(componentName);
+                var trs = ReadXmlDoc(componentName, language);
 
                 tableSb = new StringBuilder();
                 tableSb.Append(@"<div><table class=""xmldoc-table"">
@@ -99,24 +101,43 @@ internal class DocsMdParser
     }
 
     static Assembly assembly = null;
-    static XDocument xmlDoc = null;
     static Dictionary<string, XElement> members = null;
     static string libName = "BlazorMix";
 
-    private static StringBuilder ReadXmlDoc(string componentName)
+    private static StringBuilder ReadXmlDoc(string componentName, string language)
     {
         var sb = new StringBuilder();
         if (assembly == null)
         {
             assembly = Assembly.Load(libName);
-            var location = assembly.Location;
-            var xmlDocPath = Path.ChangeExtension(location, ".xml");
+            // var location = assembly.Location;
+            var dir = Path.Combine(AppContext.BaseDirectory, "xmldocs");
+
+            var xmlDefaultDocPath = Path.Combine(dir, libName + ".xml");
+
             // 'F:\Git\BcdLib\BlazorMixUi\BlazorMix.xml
-            xmlDoc = XDocument.Load(xmlDocPath);
+            var xmlDoc = XDocument.Load(xmlDefaultDocPath);
             members = xmlDoc.Descendants("member")
                 .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
                 .ToDictionary(x => x.Attribute("name").Value, x => x);
+
+            if (!string.IsNullOrWhiteSpace(language))
+            {
+                var languageXml = Path.ChangeExtension(xmlDefaultDocPath, $".{language}.xml");
+                if (File.Exists(languageXml))
+                {
+                    xmlDoc = XDocument.Load(languageXml);
+                    var langUageMembers = xmlDoc.Descendants("member")
+                        .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
+                        .ToDictionary(x => x.Attribute("name").Value, x => x);
+                    foreach (var member in langUageMembers)
+                    {
+                        members[member.Key] = member.Value;
+                    }
+                }
+            }
         }
+
         var types = assembly.GetTypes();
         var componentCls = assembly.GetType($"{libName}.{componentName}");
         if (componentCls == null)

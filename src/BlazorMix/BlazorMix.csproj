@@ -1,56 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Icon\index.scss" />
-  </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Icon\index.scss" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
+        <PackageReference Include="OneOf" Version="3.0.223" />
+    </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\BlazorMix.Core\BlazorMix.Core.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Folder Include="Dialog\" />
+        <Folder Include="wwwroot\dist\" />
+        <Folder Include="SafeArea\" />
+        <Folder Include="Modal\" />
+        <Folder Include="Toast\" />
+        <Folder Include="NoticeBar\" />
+        <Folder Include="SwipeAction\" />
+        <Folder Include="ActionSheet\" />
+        <Folder Include="FixedNav\" />
+        <Folder Include="Drag\" />
+        <Folder Include="Swiper\" />
+        <Folder Include="Barrage\" />
+        <Folder Include="Watermark\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
-    <PackageReference Include="OneOf" Version="3.0.223" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorMix.Core\BlazorMix.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dialog\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="SafeArea\" />
-    <Folder Include="Modal\" />
-    <Folder Include="Toast\" />
-    <Folder Include="NoticeBar\" />
-    <Folder Include="SwipeAction\" />
-    <Folder Include="ActionSheet\" />
-    <Folder Include="FixedNav\" />
-    <Folder Include="Drag\" />
-    <Folder Include="Swiper\" />
-    <Folder Include="Barrage\" />
-    <Folder Include="Watermark\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\vite.config.build.css.ts">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Update="wwwroot\vite.config.build.css.ts">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
 
 </Project>

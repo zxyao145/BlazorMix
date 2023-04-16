@@ -3,6 +3,10 @@ using CommandLine;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using GTranslate.Translators;
+using GTranslate;
+using static System.Net.Mime.MediaTypeNames;
+using System.Threading.Tasks;
 
 namespace BlazorMix.Docs.Build
 {
@@ -17,12 +21,22 @@ namespace BlazorMix.Docs.Build
 
         [Option('o', "out", Required = true, HelpText = "output directory.")]
         public string Out { get; set; }
+
+        [Option('t', "type", Required = false, HelpText = "output type")]
+        public string Type { get; set; } = "full";
     }
 
     internal class Program
     {
         static void Main(string[] args)
         {
+            //var translator = new AggregateTranslator();
+            //var result = await translator.TranslateAsync("是否渲染为块级元素", "en", "zh-cn");
+            //Console.WriteLine($"Translation: {result.Translation}");
+            //Console.WriteLine($"Source Language: {result.SourceLanguage}");
+            //Console.WriteLine($"Target Language: {result.TargetLanguage}");
+            //Console.WriteLine($"Service: {result.Service}");
+
             Parser.Default.ParseArguments<Options>(args)
                .WithParsed(RunOptions)
                .WithNotParsed(HandleParseError);

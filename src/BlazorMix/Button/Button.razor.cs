@@ -37,12 +37,12 @@ public partial class Button : BmDomComponentBase
     public bool AutoLoading { get; set; }
 
     /// <summary>
-    /// <para>
+    ///     <para>
     ///     The color of button. All built-in values please see <see cref="ButtonColor" />.
-    /// </para>
-    /// <para>
+    ///     </para>
+    ///     <para>
     ///     If you want to customize colors, please define class <c>.btn-{Color}</c>
-    /// </para>
+    ///     </para>
     /// </summary>
     [Parameter]
     public string Color { get; set; } = ButtonColor.Default;
@@ -140,8 +140,8 @@ public partial class Button : BmDomComponentBase
             .Add(PrefixCls)
             .Add($"{Shape}")
             .Add($"{PrefixCls}-{Color}")
-            .AddIf($"{PrefixCls}-{Size}", ()=> Size != ButtonSize.Medium)
-            .AddIf($"{PrefixCls}-{Fill}", ()=> Fill != ButtonFillType.Solid)
+            .AddIf($"{PrefixCls}-{Size}", () => Size != ButtonSize.Medium)
+            .AddIf($"{PrefixCls}-{Fill}", () => Fill != ButtonFillType.Solid)
             .AddIf($"{PrefixCls}-block", () => Block)
             .AddIf($"{PrefixCls}-disabled", () => Disabled)
             .AddIf($"{PrefixCls}-loading", () => Loading);

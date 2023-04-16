@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>BlazorMix</name>
+  </assembly>
+  <members>
+    <!-- button start -->
+    <member name="P:BlazorMix.Button.Block">
+      <summary>
+        是否渲染为块状元素
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Disabled">
+      <summary>
+        是否禁用
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Loading">
+      <summary>
+        是否处于加载中的状态
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.AutoLoading">
+      <summary>
+        自动展示 Loading 状态，这将会覆盖<see cref="P:BlazorMix.Button.Loading" />.
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Color">
+      <summary>
+        <para>
+          按钮颜色，所有内置颜色参考 <see cref="T:BlazorMix.ButtonColor" />。
+        </para>
+        <para>
+          如果你想要自定义颜色，请定义 <c>.btn-{Color}</c> class。
+        </para>
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Shape">
+      <summary>
+        按钮形状
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Type">
+      <summary>
+        原生 button 元素的 type 类型
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Size">
+      <summary>
+        按钮尺寸
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Fill">
+      <summary>
+        填充模式
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.Icon">
+      <summary>
+        按钮内部图标，可完全自定义。当<see cref="P:BlazorMix.Button.Loading"/>是 true 时，该 Icon 将会被因此。
+      </summary>
+    </member>
+    <member name="P:BlazorMix.Button.LoadingIcon">
+      <summary>
+        自定义加载状态的 Icon。
+      </summary>
+      <default>
+        LoadingIcon
+      </default>
+    </member>
+    <member name="P:BlazorMix.Button.OnClick">
+      <summary>
+        OnClick 事件
+      </summary>
+    </member>
+    <!-- button end -->
+    
+  </members>
+</doc>
