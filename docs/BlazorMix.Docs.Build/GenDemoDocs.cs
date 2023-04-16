@@ -35,7 +35,7 @@ internal class GenDemoDocs
 
         foreach (var docPath in docs)
         {
-            // Button\Docs\index.zh-cn.md
+            // Button\Docs\index.zh-CN.md
             var html = DocsMdParser.ParseMdFile(docPath, componentName);
 
             GenerateFiles(

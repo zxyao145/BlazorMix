@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Xml;
 using Markdig.Extensions.Tables;
 using GTranslate;
+using System.Collections;
 
 namespace BlazorMix.Docs.Build;
 internal class DocsMdParser
@@ -101,7 +102,19 @@ internal class DocsMdParser
     }
 
     static Assembly assembly = null;
-    static Dictionary<string, XElement> members = null;
+    static XDocument defaultXmlDoc = null;
+    static string xmlDefaultDocPath = "";
+    static Dictionary<string, Dictionary<string, XElement>> allLangXmlDoc 
+        = new Dictionary<string, Dictionary<string, XElement>>();
+    static Dictionary<Type, object> instances
+        = new Dictionary<Type, object>();
+
+    static Dictionary<string, string> defaultValusCache
+      = new Dictionary<string, string>();
+
+    static Dictionary<string, string> defaultTypeNameCacheCache
+        = new Dictionary<string, string>();
+
     static string libName = "BlazorMix";
 
     private static StringBuilder ReadXmlDoc(string componentName, string language)
@@ -110,33 +123,40 @@ internal class DocsMdParser
         if (assembly == null)
         {
             assembly = Assembly.Load(libName);
+
             // var location = assembly.Location;
             var dir = Path.Combine(AppContext.BaseDirectory, "xmldocs");
-
-            var xmlDefaultDocPath = Path.Combine(dir, libName + ".xml");
-
-            // 'F:\Git\BcdLib\BlazorMixUi\BlazorMix.xml
-            var xmlDoc = XDocument.Load(xmlDefaultDocPath);
-            members = xmlDoc.Descendants("member")
-                .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
-                .ToDictionary(x => x.Attribute("name").Value, x => x);
-
-            if (!string.IsNullOrWhiteSpace(language))
+            if (defaultXmlDoc == null)
             {
-                var languageXml = Path.ChangeExtension(xmlDefaultDocPath, $".{language}.xml");
-                if (File.Exists(languageXml))
-                {
-                    xmlDoc = XDocument.Load(languageXml);
-                    var langUageMembers = xmlDoc.Descendants("member")
-                        .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
-                        .ToDictionary(x => x.Attribute("name").Value, x => x);
-                    foreach (var member in langUageMembers)
-                    {
-                        members[member.Key] = member.Value;
-                    }
-                }
+                xmlDefaultDocPath = Path.Combine(dir, libName + ".xml");
+                // 'F:\Git\BcdLib\BlazorMixUi\BlazorMix.xml
+                defaultXmlDoc = XDocument.Load(xmlDefaultDocPath);
             }
         }
+        if (!allLangXmlDoc.ContainsKey(language))
+        {
+            var languageXml = Path.ChangeExtension(xmlDefaultDocPath, $".{language}.xml");
+            var tempMembers = defaultXmlDoc.Descendants("member")
+                   .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
+                   .ToDictionary(x => x.Attribute("name").Value, x => x);
+
+            if (File.Exists(languageXml))
+            {
+               
+                var xmlDoc = XDocument.Load(languageXml);
+                var langUageMembers = xmlDoc.Descendants("member")
+                    .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
+                    .ToDictionary(x => x.Attribute("name").Value, x => x);
+                foreach (var member in langUageMembers)
+                {
+                    tempMembers[member.Key] = member.Value;
+                }
+
+            }
+
+            allLangXmlDoc.Add(language, tempMembers);
+        }
+
 
         var types = assembly.GetTypes();
         var componentCls = assembly.GetType($"{libName}.{componentName}");
@@ -145,7 +165,14 @@ internal class DocsMdParser
             return sb;
         }
 
-        var defaultInstance = Activator.CreateInstance(componentCls);
+        if(!instances.ContainsKey(componentCls))
+        {
+            instances[componentCls] = Activator.CreateInstance(componentCls);
+        }
+
+        var defaultInstance = instances[componentCls];
+        var members = allLangXmlDoc[language];
+
 
         var allParamters = componentCls
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -155,6 +182,7 @@ internal class DocsMdParser
                 x.GetCustomAttribute<CascadingParameterAttribute>() != null
             )
             .ToList();
+
         foreach (var item in allParamters)
         {
             var fullName = $"P:{libName}.{componentName}.{item.Name}";
@@ -171,11 +199,11 @@ internal class DocsMdParser
                 defaultEle = xmlEle.Elements("default").FirstOrDefault();
             }
 
-
+            // todo optimize
             sb.Append("<tr>");
             sb.Append($"<td>{item.Name}</td>");
             sb.Append($"<td>{GetTypeName(item.PropertyType)}</td>");
-            sb.Append($"<td>{GetDefaultValue(item, defaultInstance, defaultEle)}</td>");
+            sb.Append($"<td>{GetDefaultValue(componentName, item, defaultInstance, defaultEle)}</td>");
             sb.Append($"<td>{Description}</td>");
             sb.Append("</tr>");
         }
@@ -183,32 +211,62 @@ internal class DocsMdParser
         return sb;
     }
 
-    private static string GetDefaultValue(PropertyInfo propertyInfo, object instance, XElement defaultEle)
+    private static string GetDefaultValue(
+        string componentName,
+        PropertyInfo propertyInfo, 
+        object instance, 
+        XElement defaultEle
+        )
     {
-        if (defaultEle != null)
+
+        string DoGetDefaultVal()
         {
-            return defaultEle.Value.Trim();
-        }
-        var type = propertyInfo.PropertyType;
-        if (type.IsEnum)
-        {
-            var enumVal = (Enum)propertyInfo.GetValue(instance);
-            var display = enumVal.GetAttribute<DisplayAttribute>();
-            if (display != null)
+            if (defaultEle != null)
             {
-                return display.Name;
+                return defaultEle.Value.Trim();
             }
-            return enumVal.ToString();
+            var type = propertyInfo.PropertyType;
+            if (type.IsEnum)
+            {
+                var enumVal = (Enum)propertyInfo.GetValue(instance);
+                var display = enumVal.GetAttribute<DisplayAttribute>();
+                if (display != null)
+                {
+                    return display.Name;
+                }
+                return enumVal.ToString();
+            }
+            if (type.IsPrimitive || type == typeof(string))
+            {
+                var val = propertyInfo.GetValue(instance).ToString();
+                return val;
+            }
+            return "";
         }
-        if (type.IsPrimitive || type == typeof(string))
+
+        string key = componentName + propertyInfo.Name;
+        if(!defaultValusCache.ContainsKey(key))
         {
-            var val = propertyInfo.GetValue(instance).ToString();
-            return val;
+            var val = DoGetDefaultVal();
+            defaultValusCache[key] = val;
         }
-        return "";
+
+        return defaultValusCache[key];
     }
 
+
     private static string GetTypeName(Type type)
+    {
+        string key = type.FullName;
+        if (!defaultTypeNameCacheCache.ContainsKey(key))
+        {
+            defaultTypeNameCacheCache[key] = DoGetTypeName(type);
+        }
+        return defaultTypeNameCacheCache[key];
+    }
+
+
+    private static string DoGetTypeName(Type type)
     {
         var name = type.Name;
         if (!type.IsGenericType)

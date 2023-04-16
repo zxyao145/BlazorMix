@@ -21,7 +21,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <None Update="xmldocs/BlazorMix.zh-cn.xml">
+      <None Update="xmldocs\BlazorMix.zh-CN.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
