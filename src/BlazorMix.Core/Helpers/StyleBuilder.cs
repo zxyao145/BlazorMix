@@ -24,4 +24,15 @@ public class StyleBuilder : BuilderBase
     }
 
     public override string Build() => ToString();
+
+    public static implicit operator StyleBuilder(string style)
+    {
+        var builder = new StyleBuilder();
+        if (!string.IsNullOrWhiteSpace(style))
+        {
+            builder.Add(style.Trim());
+        }
+
+        return builder;
+    }
 }

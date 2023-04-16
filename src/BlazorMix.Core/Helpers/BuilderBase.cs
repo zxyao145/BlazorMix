@@ -12,7 +12,7 @@ public abstract class BuilderBase
 
     protected BuilderBase()
     {
-        
+
     }
 
     protected BuilderBase(BuilderBase builderBase)
@@ -23,6 +23,15 @@ public abstract class BuilderBase
     public BuilderBase Add(string style)
     {
         Items.Add(() => style, AlwaysIsTrue);
+        return this;
+    }
+
+    internal BuilderBase AddRange(List<string> styles)
+    {
+        foreach (string style in styles)
+        {
+            Items.Add(() => style, AlwaysIsTrue);
+        }
         return this;
     }
 
@@ -51,4 +60,10 @@ public abstract class BuilderBase
     }
 
     public abstract string Build();
+
+
+    //public static explicit operator string(BuilderBase builder)
+    //{
+    //    return builder?.ToString() ?? "";
+    //}
 }

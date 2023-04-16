@@ -1,0 +1,13 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div class="@_classBuilder.ToString() @Class.ToString()"
+     style="@Style.ToString()">
+    @if (ChildContent != null)
+    {
+        <div class="@PrefixCls-content">
+            @ChildContent
+        </div>
+    }
+</div>
+

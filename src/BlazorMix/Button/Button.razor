@@ -2,8 +2,8 @@
 @inherits BmDomComponentBase
 
 <button type="@Type"
-        class="@_classBuilder.ToString() @ClassBuilder.ToString()"
-        style="@StyleBuilder.ToString()"
+        class="@_classBuilder.ToString() @Class.ToString()"
+        style="@Style.ToString()"
         @onclick="@HandleClick">
         @if(Loading){
             <LoadingIcon />

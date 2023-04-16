@@ -2,9 +2,11 @@
 
 public abstract class BmDomComponentBase : BmComponentBase
 {
-    public ClassBuilder ClassBuilder { get; } = new ClassBuilder();
+    [Parameter]
+    public ClassBuilder Class { get; set; } = new ClassBuilder();
 
     protected ClassBuilder _classBuilder = new ClassBuilder();
 
-    public StyleBuilder StyleBuilder { get; } = new StyleBuilder();
+    [Parameter]
+    public StyleBuilder Style { get; set; } = new StyleBuilder();
 }

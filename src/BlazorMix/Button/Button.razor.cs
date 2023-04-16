@@ -60,7 +60,7 @@ public partial class Button : BmDomComponentBase
     public string Type { get; set; } = ButtonType.Button;
 
     /// <summary>
-    /// size
+    ///Button size
     /// </summary>
     [Parameter]
     public string Size { get; set; } = ButtonSize.Medium;

@@ -27,9 +27,9 @@
     "lib": ["esnext", "dom"],
     // "outDir": "./tsc/test",
     "paths": {
-      "@/*": ["BlazorMix/*"]
+      "@/*": [ "src/BlazorMix/*" ]
     }
   },
-  "include": ["BlazorMix/**/*.ts", "BlazorMix/**/*.d.ts"],
+  "include": [ "src/BlazorMix/**/*.ts", "src/BlazorMix/**/*.d.ts" ],
   "exclude": ["./node_modules/*"]
 }

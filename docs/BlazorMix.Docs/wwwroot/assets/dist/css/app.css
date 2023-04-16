@@ -148,7 +148,7 @@ html, * {
 
 .component-container pre {
     font-size: 14px;
-    background: #f5f7fa
+    /*background: #f5f7fa*/
 }
 
     .component-container pre:not([class^=language-]) {

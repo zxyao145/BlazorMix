@@ -1,6 +1,6 @@
 ﻿namespace BlazorMix;
 
-public class MixColor
+public class BmColor
 {
     public static string Default => "default";
 

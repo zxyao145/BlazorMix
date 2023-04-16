@@ -2,20 +2,20 @@
 
 namespace BlazorMix;
 
-public enum MixSize
+public enum BmSize: byte
 {
+    [Display(Name = "md")]
+    Medium = 0,
+
     [Display(Name = "xs")]
-    Mini,
+    Mini = 1,
 
     [Display(Name = "sm")]
-    Small,
-
-    [Display(Name = "md")]
-    Medium,
+    Small =2,
 
     [Display(Name = "lg")]
-    Large,
+    Large = 3,
 
     [Display(Name = "xl")]
-    ExtraLarge,
+    ExtraLarge = 4,
 }

@@ -4,11 +4,11 @@ namespace BlazorMix;
 
 public class ButtonSize
 {
-    private static string _mini = MixSize.Mini.GetDisplayName();
-    private static string _small = MixSize.Small.GetDisplayName();
-    private static string _medium = MixSize.Medium.GetDisplayName();
-    private static string _large = MixSize.Large.GetDisplayName();
-    private static string _extraLarge = MixSize.ExtraLarge.GetDisplayName();
+    private static string _mini = BmSize.Mini.GetDisplayName();
+    private static string _small = BmSize.Small.GetDisplayName();
+    private static string _medium = BmSize.Medium.GetDisplayName();
+    private static string _large = BmSize.Large.GetDisplayName();
+    private static string _extraLarge = BmSize.ExtraLarge.GetDisplayName();
 
     public static string Mini => _mini;
     public static string Smalll => _small;
@@ -44,7 +44,7 @@ public class ButtonFillType
     public static string Outline => "outline";
     public static string None => "none";
 }
-public class ButtonColor: MixColor
+public class ButtonColor: BmColor
 {
 
 }

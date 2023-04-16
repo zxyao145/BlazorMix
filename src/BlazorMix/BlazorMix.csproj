@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Dialog\" />
-    <Folder Include="Divider\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="SafeArea\" />
     <Folder Include="Modal\" />

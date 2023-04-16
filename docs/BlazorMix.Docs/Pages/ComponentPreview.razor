@@ -1,0 +1,49 @@
+﻿@layout EmptyLayout
+@using System.Reflection;
+@page "/components-preview/{ComponentName?}/{DemoName?}"
+
+
+@if (_type == null)
+{
+    <div style="width: 100%;">
+        loading...
+    </div>
+}
+else
+{
+    <div style="width: 100%;">
+        <DynamicComponent Type="_type"></DynamicComponent>
+    </div>
+}
+
+@code {
+    [Inject]
+    public DocService DocService { get; set; } = default!;
+
+    [Parameter]
+    public string ComponentName { get; set; } = "";
+
+    [Parameter]
+    public string DemoName { get; set; } = "";
+
+    public Type? _type { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (string.IsNullOrWhiteSpace(ComponentName))
+        {
+            ComponentName = "Button";
+        }
+
+        if (string.IsNullOrWhiteSpace(DemoName))
+        {
+            DemoName = "Demo1";
+        }
+
+        var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+        var typeInfo = $"Demos.Components.{ComponentName}.Demos.{DemoName}";
+        _type = Type.GetType($"{executingAssemblyName}.{typeInfo}");
+        StateHasChanged();
+    }
+}

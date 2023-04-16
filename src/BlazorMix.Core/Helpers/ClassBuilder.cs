@@ -23,4 +23,15 @@ public class ClassBuilder : BuilderBase
     }
 
     public override string Build() => ToString();
+
+    public static implicit operator ClassBuilder(string clsStr)
+    {
+        var builder = new ClassBuilder();
+        if(!string.IsNullOrWhiteSpace(clsStr))
+        {
+            builder.Add(clsStr.Trim());
+        }
+
+        return builder;
+    }
 }

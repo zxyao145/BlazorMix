@@ -1,0 +1,30 @@
+﻿
+<DemoBlock Title="基础分割线">
+    <Divider />
+</DemoBlock>
+
+<DemoBlock Title="带内容的分割线">
+    <Divider>
+        默认内容在中间
+    </Divider>
+    <Divider ContentPosition="@ContentPosition.Left">
+        左侧内容
+    </Divider>
+    <Divider ContentPosition="@ContentPosition.Right">
+        右侧内容
+    </Divider>
+</DemoBlock>
+
+<DemoBlock Title="自定义样式">
+    <Divider Style="@("color: #1677ff; border-color: #1677ff; border-style: dashed;")" >
+        自定义样式
+    </Divider>
+</DemoBlock>
+
+<DemoBlock Title="竖向分割线">
+    Text
+    <Divider Direction="@BmDirection.Vertical"/>
+    Text
+    <Divider Direction="@BmDirection.Vertical" />
+    Text
+</DemoBlock>

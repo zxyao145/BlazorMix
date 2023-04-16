@@ -16,7 +16,7 @@ const tocActiveWatch = (hEles, tocEle) => {
                             a.classList.remove("active")
                         }
                     })
-                console.log(`a[href="${path}#${id}"]`);
+                // console.debug(`a[href="${path}#${id}"]`);
                 tocEle.querySelector(`a[href="${path}#${id}"]`)
                     ?.classList.add("active")
             }
@@ -28,7 +28,7 @@ const tocActiveWatch = (hEles, tocEle) => {
 window.Mix = {
     Prism: {
         highlight: (code, language) => {
-            //console.log(language, code);
+            // console.log(language, code);
             return Prism.highlight(code, Prism.languages[language], language);
         },
         highlightAll: () => {
@@ -37,7 +37,7 @@ window.Mix = {
     },
     Docs: {
         renderToc: (articleElm, tocEle) => {
-            console.log(articleElm, tocEle);
+            // console.log(articleElm, tocEle);
             const h1 = articleElm.querySelector("h1");
             h1?.setAttribute("id", getId(h1?.innerText));
             const hEles = articleElm.querySelectorAll("h2,h3");

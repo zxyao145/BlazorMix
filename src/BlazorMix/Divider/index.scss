@@ -1,0 +1,56 @@
+﻿@import '@/styles/mixins/index.scss';
+@import '@/styles/animation/index.scss';
+
+$btn-prefix: #{$prefix}-divider;
+
+.#{$btn-prefix} {
+    --divider-color: #eee;
+    --divider-text-color: #999;
+    color: var(--divider-text-color);
+
+    &.#{$btn-prefix}-horizontal {
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+        border: 0 solid var(--divider-color);
+        font-size: 14px;
+
+        &:before,
+        &:after {
+            flex: auto;
+            display: block;
+            content: "";
+            border-color: inherit;
+            border-style: inherit;
+            border-width: 1px 0 0;
+        }
+
+        &.#{$btn-prefix}-left {
+            &:before {
+                max-width: 10%;
+            }
+        }
+
+        &.#{$btn-prefix}-right {
+            &:after {
+                max-width: 10%;
+            }
+        }
+    }
+
+    &.#{$btn-prefix}-vertical {
+        position: relative;
+        top: -0.06em;
+        display: inline-block;
+        height: 0.9em;
+        margin: 0 16px;
+        vertical-align: middle;
+        border-top: 0;
+        border-left: 1px solid var(--divider-color);
+    }
+
+    & > .#{$btn-prefix}-content {
+        flex: none;
+        padding: 0 16px;
+    }
+}
