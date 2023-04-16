@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BlazorMix;
 
 
-public class SpaceDirection
-{
-    public static string Vertical => "vertical";
-
-    public static string Horizontal => "horizontal";
-}
-
 public partial class Space
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public const string PrefixCls = "bm-space";
+
+    #region Parameter
 
     /// <summary>
     /// start | end |center |baseline
@@ -26,25 +17,45 @@ public partial class Space
     [Parameter]
     public string Align { get; set; } = "";
 
+    /// <summary>
+    /// Cross axis alignment
+    /// </summary>
     [Parameter]
     public string Justify { get; set; } = "";
 
+    /// <summary>
+    /// Whether to render as block level elements
+    /// </summary>
     [Parameter]
     public bool Block { get; set; }
 
+    /// <summary>
+    /// Whether to automatically wrap, only valid when horizontal.
+    /// </summary>
     [Parameter]
     public bool Wrap { get; set; }
 
+    /// <summary>
+    /// Spacing direction
+    /// </summary>
     [Parameter]
-    public string Direction { get; set; } = SpaceDirection.Horizontal;
+    public BmDirection Direction { get; set; } = BmDirection.Horizontal;
 
+    /// <summary>
+    /// Click event of Space.
+    /// </summary>
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+    #endregion
+    
+    /// <summary>
+    /// 
+    /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-
+    /// <inheritdoc/>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
@@ -52,7 +63,7 @@ public partial class Space
         _classBuilder = new ClassBuilder();
         _classBuilder
             .Add(PrefixCls)
-            .Add($"{PrefixCls}-{Direction}")
+            .Add($"{PrefixCls}-{Direction.GetDisplayName()}")
             .AddIf($"{PrefixCls}-block", () => Block)
             .AddIf($"{PrefixCls}-wrap", () => Wrap)
             .AddIf($"{PrefixCls}-justify-{Justify}", () => !string.IsNullOrWhiteSpace(Justify))

@@ -111,6 +111,10 @@ main {
     margin-left: 2rem;
 }
 
+.sidebar span.nav-item{
+    margin-bottom: 0.5rem;
+}
+
 .sidebar span.nav-item > a {
     display: flex;
     flex: 1;

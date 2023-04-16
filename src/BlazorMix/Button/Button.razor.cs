@@ -45,7 +45,7 @@ public partial class Button : BmDomComponentBase
     /// </para>
     /// </summary>
     [Parameter]
-    public string Color { get; set; } = ButtonColor.Primary;
+    public string Color { get; set; } = ButtonColor.Default;
 
     /// <summary>
     /// The shape of the button

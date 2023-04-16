@@ -1,0 +1,102 @@
+﻿<DemoBlock Title='水平方向的间距'>
+    <Space>
+        <SpaceItem>
+            <Button>按钮1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮2</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮3</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='换行'>
+    <Space Wrap>
+        @for (int i = 1; i < 12; i++)
+        {
+            <SpaceItem>
+                <Button>按钮 @i</Button>
+            </SpaceItem>
+        }
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='垂直方向的间距'>
+    <Space Direction="@BmDirection.Vertical">
+        <SpaceItem>
+            <Button>按钮1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮2</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮3</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='自定义间距大小'>
+    <Space Style="@("--space-gap: 24px;")">
+        <SpaceItem>
+            <Button>按钮1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮2</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮3</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='渲染为块级元素'>
+    <Space Direction="@BmDirection.Vertical" Block>
+        <SpaceItem>
+            <Button>按钮1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮2</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>按钮3</Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='主轴对齐方式'>
+    <Space Justify="@("center")" Block>
+        <SpaceItem>
+            <Button>1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>
+                2<br />2
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>
+                3<br />3<br />3
+            </Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='交叉轴对齐方式'>
+    <Space Align="@("end")">
+        <SpaceItem>
+            <Button>1</Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>
+                2<br />2
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button>
+                3<br />3<br />3
+            </Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>

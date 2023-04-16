@@ -5,15 +5,15 @@ $space-prefix: #{$prefix}-space;
 
 .#{$space-prefix} {
     display: inline-flex;
-    --gap: 8px;
-    --gap-vertical: var(--gap);
-    --gap-horizontal: var(--gap);
+    --space-gap: var(--gap);
+    --space-gap-vertical: var(--space-gap);
+    --space-gap-horizontal: var(--space-gap);
 
     &-vertical {
         flex-direction: column;
 
         > .#{$space-prefix}-item {
-            margin-bottom: var(--gap-vertical);
+            margin-bottom: var(--space-gap-vertical);
 
             &:last-child {
                 margin-bottom: 0;
@@ -24,8 +24,9 @@ $space-prefix: #{$prefix}-space;
     &-horizontal {
         flex-direction: row;
 
+
         > .#{$space-prefix}-item {
-            margin-right: var(--gap-horizontal);
+            margin-right: var(--space-gap-horizontal);
 
             &:last-child {
                 margin-right: 0;
@@ -34,10 +35,10 @@ $space-prefix: #{$prefix}-space;
 
         &.#{$space-prefix}-wrap {
             flex-wrap: wrap;
-            margin-bottom: calc(var(--gap-vertical) * -1);
+            margin-bottom: calc(var(--space-gap-vertical) * -1);
 
             > .#{$space-prefix}-item {
-                padding-bottom: var(--gap-vertical);
+                padding-bottom: var(--space-gap-vertical);
             }
         }
     }

@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BlazorMix;
 public partial class SpaceItem
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public const string PrefixCls = "bm-space-item";
 
+    /// <summary>
+    /// 
+    /// </summary>
     [CascadingParameter]
     public Space Parent { get; set; } = default!;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 }
