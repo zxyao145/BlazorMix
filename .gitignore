@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /docs/BlazorMix.Docs/wwwroot/pages
 /src/BlazorMix/wwwroot/dist
-/temp
+/src/BlazorMix/wwwroot/src

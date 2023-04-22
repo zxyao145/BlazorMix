@@ -6,7 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate:themes": "node scripts/generate-themes.js",
-    "build:css": "npm run generate:themes && vite build --config vite.config.build.css.ts"
+    "generate:js": "node scripts/generate-js.js",
+    "generate": "npm run generate:themes && npm run generate:js",
+    "build-dev:css": "npm run generate:themes && vite build --config vite.config.build.css.ts --mode development",
+    "build-dev:js": "npm run generate:js && vite build --config vite.config.build.js.ts --mode development",
+    "build:css": "npm run generate:themes && vite build --config vite.config.build.css.ts --mode production",
+    "build:js": "npm run generate:js && vite build --config vite.config.build.js.ts --mode production",
+    "build-dev": "npm run build-dev:js && && npm run build-dev:css",
+    "build": "npm run generate && vite build --config vite.config.build.ts --mode development -- --theme=defaultt"
   },
   "author": "",
   "license": "MIT",

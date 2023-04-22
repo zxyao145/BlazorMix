@@ -14,7 +14,7 @@ const { resolve } = path
 // https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
-        alias: [{ find: '@', replacement: resolve(__dirname, './src/BlazorMix') }],
+        alias: [{ find: '@', replacement: resolve(__dirname, './src/BlazorMix/wwwroot/src/scss') }],
     },
     css: {
         preprocessorOptions: {
@@ -33,14 +33,20 @@ export default defineConfig({
         outDir: './src/BlazorMix/wwwroot/dist',
         rollupOptions: {
             output: {
-                banner,
+                banner, 
+                assetFileNames: (fileInfo) => {
+                    // if (fileInfo.name == 'style.css'){
+                    //     return 'index.min.css';
+                    // }
+                    return `[name].[ext]`
+                },
             },
         },
         lib: {
-            entry: './temp/styles/themes/default.scss',
+            entry: './src/BlazorMix/wwwroot/src/scss/styles/themes/default.scss',
             formats: ['es'],
-            name: 'style',
-            fileName: 'style',
+            name: 'index',
+            fileName: 'index',
         },
     },
 })
