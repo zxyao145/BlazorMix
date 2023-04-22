@@ -1,5 +1,4 @@
-﻿using BlazorMix.Helpers;
-using System.Data;
+﻿using System.Data;
 
 namespace BlazorMix;
 public class ClassBuilder : BuilderBase
@@ -15,7 +14,7 @@ public class ClassBuilder : BuilderBase
 
     public override string ToString()
     {
-        return string.Join(
+        return (TransitionBuilder?.ToString() ?? "") + " " + string.Join(
         " ",
             Items.Where(x => x.Value())
                 .Select(x => x.Key())

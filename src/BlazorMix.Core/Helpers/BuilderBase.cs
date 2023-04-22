@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorMix.Helpers;
+namespace BlazorMix;
 public abstract class BuilderBase
 {
-    protected readonly Dictionary<Func<string>, Func<bool>> Items = new();
+    protected readonly Dictionary<Func<string>, Func<bool>> Items 
+        = new();
+
+    public BuilderBase? TransitionBuilder { get; set; }
+
     protected static Func<bool> AlwaysIsTrue = () => true;
 
     protected BuilderBase()

@@ -1,0 +1,10 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<CascadingValue Value="@_options">
+    @if (!_hasDestroyed)
+    {
+        @ChildContent
+    }
+</CascadingValue>
+
