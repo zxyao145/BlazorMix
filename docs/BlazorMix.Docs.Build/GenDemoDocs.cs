@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BlazorMix.Docs.Build;
@@ -16,11 +17,19 @@ internal class GenDemoDocs
     {
         var componentsRootDir = Path.Combine(AppContext.BaseDirectory, _options.Src);
         var components = Directory.GetDirectories(componentsRootDir);
+        var cache = new Dictionary<string, bool>();
         foreach (var component in components)
         {
             var componentName = Path.GetFileName(component);
+            if (cache.ContainsKey(componentName))
+            {
+                continue;
+            }
+
+            cache[componentName] = true;
+
             ParseDocsMdFile(componentsRootDir, component, componentName);
-            if(_options.Type == "full")
+            if (_options.Type == "full")
             {
                 ParseDemoTxt(componentsRootDir, component);
             }

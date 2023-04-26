@@ -1,0 +1,10 @@
+﻿@import '@/styles/mixins/index.scss';
+@import '@/styles/animation/index.scss';
+
+$btn-prefix: #{$prefix}-actionsheet;
+
+.#{$btn-prefix} {
+    --divider-color: #eee;
+    --divider-text-color: #999;
+    color: var(--divider-text-color);
+}

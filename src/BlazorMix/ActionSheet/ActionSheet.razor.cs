@@ -4,12 +4,12 @@ namespace BlazorMix;
 /// <summary>
 /// 
 /// </summary>
-public partial class Divider : BmDomComponentBase
+public partial class ActionSheet : BmDomComponentBase
 {
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-divider";
+    public const string PrefixCls = "bm-actionsheet";
 
     /// <summary>
     /// 
@@ -42,7 +42,8 @@ public partial class Divider : BmDomComponentBase
     {
         await base.SetParametersAsync(parameters);
 
-        _classBuilder.Clear()
+        _classBuilder
+            .Clear()
             .Add(PrefixCls)
             .Add($"{PrefixCls}-{ContentPosition.GetDisplayName()}")
             .Add($"{PrefixCls}-{Direction.GetDisplayName()}");

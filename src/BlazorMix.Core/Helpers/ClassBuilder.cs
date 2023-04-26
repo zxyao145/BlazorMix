@@ -1,6 +1,9 @@
 ﻿using System.Data;
 
 namespace BlazorMix;
+
+public record BuilderItem(string Value, bool Show);
+
 public class ClassBuilder : BuilderBase
 {
     public ClassBuilder() : base()
@@ -14,11 +17,10 @@ public class ClassBuilder : BuilderBase
 
     public override string ToString()
     {
-        return (TransitionBuilder?.ToString() ?? "") + " " + string.Join(
-        " ",
-            Items.Where(x => x.Value())
-                .Select(x => x.Key())
-            );
+        var res = TransitionBuilder?.GetContentArr().ToList() ?? new List<BuilderItem>();
+        res.AddRange(base.GetContentArr());
+
+        return string.Join( " ", res.Select(x => x.Value).Distinct());
     }
 
     public override string Build() => ToString();
@@ -26,7 +28,7 @@ public class ClassBuilder : BuilderBase
     public static implicit operator ClassBuilder(string clsStr)
     {
         var builder = new ClassBuilder();
-        if(!string.IsNullOrWhiteSpace(clsStr))
+        if (!string.IsNullOrWhiteSpace(clsStr))
         {
             builder.Add(clsStr.Trim());
         }

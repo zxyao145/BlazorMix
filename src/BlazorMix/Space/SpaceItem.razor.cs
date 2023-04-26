@@ -1,5 +1,8 @@
 ﻿
+using System.Collections.Generic;
+
 namespace BlazorMix;
+
 public partial class SpaceItem
 {
     /// <summary>
@@ -12,6 +15,16 @@ public partial class SpaceItem
     /// </summary>
     [CascadingParameter]
     public Space Parent { get; set; } = default!;
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (Parent == null)
+        {
+            throw new ArgumentNullException($"{nameof(SpaceItem)} must be a child of Space");
+        }
+    }
+
 
     /// <summary>
     /// 

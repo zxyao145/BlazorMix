@@ -1,0 +1,70 @@
+﻿<DemoBlock Title="基础使用">
+    <Button OnClick="() => { show1 = true; StateHasChanged(); }">带有动画</Button>
+    <AniMask Visible="@show1" OnClick="() => { show1 = false; StateHasChanged(); }" />
+
+    <Button OnClick="() => { show2 = true; }">没有动画</Button>
+    <Mask Visible="@show2" OnClick="() => { show2 = false; }" />
+</DemoBlock>
+
+
+<DemoBlock Title="背景蒙层的颜色深度">
+    <Button OnClick="() => { show3 = true; }">背景蒙层的颜色深度</Button>
+    <AniMask Opacity="0.9" Visible="@show3" OnClick="() => { show3 = false; }" />
+</DemoBlock>
+
+<DemoBlock Title="背景蒙层的颜色">
+    <Button OnClick="() => { show4 = true; }">白色</Button>
+    <AniMask Color="white" Visible="@show4" OnClick="() => { show4 = false; }" />
+</DemoBlock>
+
+<DemoBlock Title="自定义内容">
+    <Button OnClick="() => { show5 = true; }">显示带内容的背景蒙层</Button>
+    <AniMask Visible="@show5" OnClick="() => { show5 = false; }">
+        <div class="content-style">
+            内容
+        </div>
+    </AniMask>
+</DemoBlock>
+
+
+<DemoBlock Title="事件">
+    <Button OnClick="() => { show6 = true; }">事件</Button>
+    <AniMask Visible="@show6"
+             OnClick="@(() => { show6 = false; })"
+             AfterShow="@(() => { Console.WriteLine("mask AfterShow"); return ValueTask.CompletedTask;})"
+             AfterClose="@(() => { Console.WriteLine("mask AfterClose"); return ValueTask.CompletedTask;})"
+             Container="@null"
+             DestroyOnClose="true"
+             DisableBodyScroll="@false"
+             >
+        <div class="content-style">
+            事件
+        </div>
+    </AniMask>
+</DemoBlock>
+
+<style>
+    .content-style {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -75px;
+        margin-left: -75px;
+        background: #fff;
+        border-radius: 16px;
+    }
+</style>
+
+@code {
+    private bool show1 = false;
+    private bool show2 = false;
+    private bool show3 = false;
+    private bool show4 = false;
+    private bool show5 = false;
+    private bool show6 = false;
+}

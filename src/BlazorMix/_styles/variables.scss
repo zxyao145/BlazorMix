@@ -1,9 +1,12 @@
 @import "./util/index.scss";
+@import "./mixins/index.scss";
+
 
 
 // blazor mix
 $ui-prefix: "bm";
 $prefix: "bm";
+$prefixCls: $prefix;
 
 $themm-bg-color: var(--main-backgroup-color);
 $themm-text-color: var(--main-text-color);
@@ -22,7 +25,7 @@ $theme-colors: (
 
 
 // ---- Animation ----
-$animation-duration: 0.25s !default;
+$animation-duration: var(--animation-duration);
 $animation-timing-fun: cubic-bezier(0.55, 0.085, 0.68, 0.53) !default;
 
 // border

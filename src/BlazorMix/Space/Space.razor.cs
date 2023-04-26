@@ -59,9 +59,7 @@ public partial class Space
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-
-        _classBuilder = new ClassBuilder();
-        _classBuilder
+        _classBuilder.Clear()
             .Add(PrefixCls)
             .Add($"{PrefixCls}-{Direction.GetDisplayName()}")
             .AddIf($"{PrefixCls}-block", () => Block)

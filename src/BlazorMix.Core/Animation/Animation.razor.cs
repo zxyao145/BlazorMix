@@ -1,10 +1,11 @@
 ﻿
+// ReSharper disable CheckNamespace
 namespace BlazorMix;
 
 /// <summary>
 /// 
 /// </summary>
-public partial class Transition : BmDomComponentBase
+public partial class Animation
 {
 
     /// <summary>
@@ -13,25 +14,21 @@ public partial class Transition : BmDomComponentBase
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    private TransitionOptions _options = new TransitionOptions();
+    private AniOptions _options = new ();
 
     #region paramters
 
-    /// <inheritdoc cref="TransitionOptions.Name"/>
+    /// <inheritdoc cref="AniOptions.Name"/>
     [Parameter]
-    public string Name { get => _options.TranisitionName; set => _options.TranisitionName = value; }
+    public string Name { get => _options.Name; set => _options.Name = value; }
 
-    /// <inheritdoc cref="TransitionOptions.Visible"/>
+    /// <inheritdoc cref="AniOptions.In"/>
     [Parameter]
-    public bool Visible { get => _options.Visible; set => _options.Visible = value; }
+    public bool In { get => _options.In; set => _options.In = value; }
 
-    /// <inheritdoc cref="TransitionOptions.Duration"/>
+    /// <inheritdoc cref="AniOptions.Duration"/>
     [Parameter]
     public double Duration { get => _options.Duration; set => _options.Duration = value; }
-
-    /// <inheritdoc cref="TransitionOptions.DestroyOnExit"/>
-    [Parameter]
-    public bool DestroyOnExit { get => _options.DestroyOnExit; set => _options.DestroyOnExit = value; }
 
 
     #region event
@@ -76,10 +73,9 @@ public partial class Transition : BmDomComponentBase
     #endregion
 
 
-    private Queue<Func<ValueTask>> _actionQueue = new Queue<Func<ValueTask>>();
+    private readonly Queue<Func<ValueTask>> _actionQueue = new();
 
-    private DateTime beginTime;
-    private bool _hasDestroyed = false;
+    private DateTime _beginTime;
 
     /// <summary>
     /// 
@@ -89,26 +85,22 @@ public partial class Transition : BmDomComponentBase
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-        if (Visible && !_hasDestroyed)
+        if (In)
         {
-            beginTime = DateTime.UtcNow;
+            _beginTime = DateTime.UtcNow;
             OnEnter?.Invoke();
-            _options.SetState(TransitionState.Enter);
+            _options.SetState(AniState.Enter);
             OnEntering?.Invoke();
         }
-        else if (_options.State == TransitionState.Entered)
+        else if (_options.State == AniState.Entered)
         {
-            beginTime = DateTime.UtcNow;
+            _beginTime = DateTime.UtcNow;
             OnExit?.Invoke();
-            _options.SetState(TransitionState.Leave);
+            _options.SetState(AniState.Leave);
             OnExiting?.Invoke();
         }
     }
 
-    protected override Task OnParametersSetAsync()
-    {
-        return base.OnParametersSetAsync();
-    }
 
     /// <summary>
     /// 
@@ -117,35 +109,34 @@ public partial class Transition : BmDomComponentBase
     /// <returns></returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine($"OnAfterRenderAsync:{Visible},{_options.State},{DestroyOnExit}");
-        if (Visible)
+        if (In)
         {
             switch (_options.State)
             {
-                case TransitionState.Leave:
+                case AniState.Leave:
                     _actionQueue.Enqueue(() =>
                     {
-                        beginTime = DateTime.UtcNow;
+                        _beginTime = DateTime.UtcNow;
                         OnEnter?.Invoke();
-                        _options.SetState(TransitionState.Enter);
+                        _options.SetState(AniState.Enter);
                         OnEntering?.Invoke();
                         return ValueTask.CompletedTask;
                     });
                     break;
-                case TransitionState.Enter:
+                case AniState.Enter:
                     _actionQueue.Enqueue(() =>
                     {
-                        _options.SetState(TransitionState.Entering);
+                        _options.SetState(AniState.Entering);
                         OnEnterEnd?.Invoke();
                         StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
-                case TransitionState.Entering:
+                case AniState.Entering:
                     _actionQueue.Enqueue(async () =>
                     {
                         await Wait();;
-                        _options.SetState(TransitionState.Entered);
+                        _options.SetState(AniState.Entered);
                         OnEnterEnd?.Invoke();
                         StateHasChanged();
                     });
@@ -156,28 +147,20 @@ public partial class Transition : BmDomComponentBase
         {
             switch (_options.State)
             {
-                case TransitionState.Leave:
+                case AniState.Leave:
                     _actionQueue.Enqueue(() =>
                     {
-                        _options.SetState(TransitionState.Leaving);
+                        _options.SetState(AniState.Leaving);
                         OnExitEnd?.Invoke();
                         StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
-                case TransitionState.Leaving:
+                case AniState.Leaving:
                     _actionQueue.Enqueue(async () =>
                     {
                         await Wait();
-                        if (DestroyOnExit && !_hasDestroyed)
-                        {
-                            _hasDestroyed = true;
-                            _options.SetState(TransitionState.Unmounted);
-                        }
-                        else
-                        {
-                            _options.SetState(TransitionState.Leaved);
-                        }
+                        _options.SetState(AniState.Leaved);
                         StateHasChanged();
                     });
                     break;
@@ -196,8 +179,7 @@ public partial class Transition : BmDomComponentBase
 
     private async ValueTask Wait()
     {
-        var d = Duration - (DateTime.UtcNow - beginTime).TotalMilliseconds;
-        Console.WriteLine(d);
+        var d = Duration - (DateTime.UtcNow - _beginTime).TotalMilliseconds;
         if(d > 0)
         {
             await Task.Delay((int)d);
@@ -210,10 +192,9 @@ public partial class Transition : BmDomComponentBase
     /// <param name="disposing"></param>
     protected override void Dispose(bool disposing)
     {
-        if (this.Visible && !this._hasDestroyed)
+        if (this.In)
         {
-            this.Visible = false;
-            this._hasDestroyed = true;
+            this.In = false;
         }
         base.Dispose(disposing);
     }

@@ -117,8 +117,21 @@ internal class DocsMdParser
 
     static string libName = "BlazorMix";
 
+    private static List<string> ignoreParamterName = new List<string>()
+    {
+        "AniOptions",
+        "ChildContent",
+        "Class",
+        "Style"
+    };
+
     private static StringBuilder ReadXmlDoc(string componentName, string language)
     {
+        Console.WriteLine("componentName: {0}", componentName);
+        if (componentName == "Mask")
+        {
+            Console.WriteLine("debug");
+        }
         var sb = new StringBuilder();
         if (assembly == null)
         {
@@ -157,8 +170,6 @@ internal class DocsMdParser
             allLangXmlDoc.Add(language, tempMembers);
         }
 
-
-        var types = assembly.GetTypes();
         var componentCls = assembly.GetType($"{libName}.{componentName}");
         if (componentCls == null)
         {
@@ -173,8 +184,7 @@ internal class DocsMdParser
         var defaultInstance = instances[componentCls];
         var members = allLangXmlDoc[language];
 
-
-        var allParamters = componentCls
+        var allParameters = componentCls
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(x =>
                 x.GetCustomAttribute<ParameterAttribute>() != null
@@ -183,28 +193,47 @@ internal class DocsMdParser
             )
             .ToList();
 
-        foreach (var item in allParamters)
+        foreach (var item in allParameters)
         {
-            var fullName = $"P:{libName}.{componentName}.{item.Name}";
-            var Description = item.Name;
-            XElement defaultEle = null;
-            if (members.ContainsKey(fullName))
+            if (ignoreParamterName.Contains(item.Name))
             {
-                var xmlEle = members[fullName];
+                continue;
+            }
+            var realComponentName = componentName;
+            var realInstance = defaultInstance;
+            if (item.DeclaringType != null && item.DeclaringType != componentCls)
+            {
+                realComponentName = item.DeclaringType.Name;
+                if (!item.DeclaringType.IsAbstract)
+                {
+                    if (!instances.ContainsKey(item.DeclaringType))
+                    {
+                        instances[item.DeclaringType] = Activator.CreateInstance(item.DeclaringType);
+                    }
+
+                    realInstance = instances[componentCls];
+                }
+            }
+
+            var fullName = $"P:{libName}.{realComponentName}.{item.Name}";
+            var description = item.Name;
+            XElement defaultEle = null;
+            if (members.TryGetValue(fullName, out XElement xmlEle))
+            {
                 if (xmlEle != null)
                 {
                     var summary = xmlEle.Elements("summary").FirstOrDefault();
-                    Description = GetSummaryText(summary);
+                    description = GetSummaryText(summary);
                 }
-                defaultEle = xmlEle.Elements("default").FirstOrDefault();
+                defaultEle = xmlEle?.Elements("default").FirstOrDefault();
             }
 
             // todo optimize
             sb.Append("<tr>");
             sb.Append($"<td>{item.Name}</td>");
             sb.Append($"<td>{GetTypeName(item.PropertyType)}</td>");
-            sb.Append($"<td>{GetDefaultValue(componentName, item, defaultInstance, defaultEle)}</td>");
-            sb.Append($"<td>{Description}</td>");
+            sb.Append($"<td>{GetDefaultValue(realComponentName, item, realInstance, defaultEle)}</td>");
+            sb.Append($"<td>{description}</td>");
             sb.Append("</tr>");
         }
 
@@ -238,8 +267,15 @@ internal class DocsMdParser
             }
             if (type.IsPrimitive || type == typeof(string))
             {
-                var val = propertyInfo.GetValue(instance).ToString();
-                return val;
+                try
+                {
+                    var val = propertyInfo.GetValue(instance).ToString();
+                    return val;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
             return "";
         }
@@ -264,7 +300,6 @@ internal class DocsMdParser
         }
         return defaultTypeNameCacheCache[key];
     }
-
 
     private static string DoGetTypeName(Type type)
     {

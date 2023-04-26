@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BlazorMix;
 
 #pragma warning disable CS1591
-public enum TransitionState
+public enum AniState
 {
     [Display(Name = "unmounted")]
     Unmounted,

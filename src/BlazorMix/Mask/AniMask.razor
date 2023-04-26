@@ -1,0 +1,19 @@
+﻿@namespace BlazorMix
+@inherits MaskBase
+
+<Animation Name="@AniNames.Fade" In="@Visible">
+    <Mask Visible="@Visible"
+          AfterClose="@AfterClose"
+          AfterShow="@AfterShow"
+          ChildContent="@ChildContent"
+          Class="@Class"
+          Color="@Color"
+          Container="@Container"
+          DestroyOnClose="@DestroyOnClose"
+          DisableBodyScroll="@DisableBodyScroll"
+          OnClick="@OnClick"
+          Opacity="@Opacity"
+          Style="@Style" />
+</Animation>
+
+

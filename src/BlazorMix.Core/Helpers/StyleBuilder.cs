@@ -14,11 +14,15 @@ public class StyleBuilder : BuilderBase
 
     public override string ToString()
     {
-        return (TransitionBuilder?.ToString() ?? "") + ";" + string.Join(
-        ";",
-            Items.Where(x => x.Value())
-                .Select(x => x.Key())
-            );
+        var res = TransitionBuilder?.GetContentArr().ToList() ?? new List<BuilderItem>();
+        res.AddRange(base.GetContentArr());
+        return string.Join("; ", res.Select(x =>
+                new KeyValuePair<string, string>(x.Value.Split(":")[0], x.Value)
+                )
+            .DistinctBy(x => x.Key)
+            .Select(x => x.Value)
+            .Distinct()
+        );
     }
 
     public override string Build() => ToString();

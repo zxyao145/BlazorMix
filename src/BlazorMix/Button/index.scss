@@ -39,6 +39,12 @@ $btn-prefix: #{$prefix}-btn;
     --btn-border-color: var(--border-color);
 }
 
+button {
+    --bs-btn-padding-y: 0.5rem;
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-font-size: 1rem;
+}
+
 .#{$btn-prefix} {
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color);

@@ -40,7 +40,6 @@ public static class IJSComponentConfigurationExt
             name = ToKebab(type.Name);
         }
 
-        Console.WriteLine($"{name} --> {type.Name}");
         componentConfiguration.RegisterForJavaScript
             (
                 type,

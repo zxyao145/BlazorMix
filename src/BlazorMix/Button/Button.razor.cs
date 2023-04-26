@@ -135,8 +135,8 @@ public partial class Button : BmDomComponentBase
     {
         await base.SetParametersAsync(parameters);
 
-        _classBuilder = new ClassBuilder();
         _classBuilder
+            .Clear()
             .Add(PrefixCls)
             .Add($"{Shape}")
             .Add($"{PrefixCls}-{Color}")

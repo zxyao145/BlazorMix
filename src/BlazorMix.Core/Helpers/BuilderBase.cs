@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace BlazorMix;
 public abstract class BuilderBase
 {
-    protected readonly Dictionary<Func<string>, Func<bool>> Items 
+    protected readonly Dictionary<Func<string>, Func<string, bool>> Items 
         = new();
 
     public BuilderBase? TransitionBuilder { get; set; }
 
-    protected static Func<bool> AlwaysIsTrue = () => true;
+    protected static Func<string, bool> AlwaysIsTrue = (str) => true;
 
     protected BuilderBase()
     {
@@ -30,30 +30,27 @@ public abstract class BuilderBase
         return this;
     }
 
-    internal BuilderBase AddRange(List<string> styles)
+    public BuilderBase Add(Func<string> styleFunc)
     {
-        foreach (string style in styles)
-        {
-            Items.Add(() => style, AlwaysIsTrue);
-        }
+        Items.Add(styleFunc, AlwaysIsTrue);
         return this;
     }
 
     public BuilderBase AddIf(string style, Func<bool> func)
     {
+        Items.Add(() => style, str => func());
+        return this;
+    }
+
+    public BuilderBase AddIf(string style, Func<string, bool> func)
+    {
         Items.Add(() => style, func);
         return this;
     }
 
-    public BuilderBase Get(Func<string> funcName)
+    public BuilderBase AddIf(Func<string> styleFunc, Func<string, bool> func)
     {
-        Items.Add(funcName, AlwaysIsTrue);
-        return this;
-    }
-
-    public BuilderBase GetIf(Func<string> funcName, Func<bool> func)
-    {
-        Items.Add(funcName, func);
+        Items.Add(styleFunc, func);
         return this;
     }
 
@@ -65,6 +62,17 @@ public abstract class BuilderBase
 
     public abstract string Build();
 
+    internal IEnumerable<BuilderItem> GetContentArr()
+    {
+        return Items
+            .Select(x =>
+            {
+                var val = x.Key();
+                var show = x.Value(val);
+                return new BuilderItem(val, show);
+            })
+            .Where(x => x.Show && !string.IsNullOrWhiteSpace(x.Value));
+    }
 
     //public static explicit operator string(BuilderBase builder)
     //{
