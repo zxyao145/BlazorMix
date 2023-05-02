@@ -1,0 +1,23 @@
+﻿<DemoBlock Title='多层堆叠'>
+    <Button OnClick="@(()=> show1 = true)">展开第一个弹出层</Button>
+    <Popup Visible="@show1"
+           Style="@("height: 40vh;")"
+           OnMaskClick="@(() => { show1 = false;})">
+        <div style="padding: 20px;">
+            <p>这是弹出层1</p>
+            <Button OnClick="@(() => show2 = true)">展开第二个弹出层</Button>
+            <Popup Style="@("height: 20vh;")" 
+                   Visible="@show2"
+                   OnMaskClick="@(() => { show2 = false; })">
+                <div style="padding: 20px;">
+                    这是弹出层2
+                </div>
+            </Popup>
+        </div>
+    </Popup>
+</DemoBlock>
+
+@code{
+    private bool show1 = false;
+    private bool show2 = false;
+}

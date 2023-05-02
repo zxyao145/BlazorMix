@@ -51,6 +51,7 @@
 
     <ItemGroup>
       <DemoSourceCode Remove="Demos\Components\Mask\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\Popup\Demos\Demo2.razor" />
       <DemoSourceCode Remove="Demos\Components\Space\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\Divider\Demos\Demo1.razor" />
     </ItemGroup>

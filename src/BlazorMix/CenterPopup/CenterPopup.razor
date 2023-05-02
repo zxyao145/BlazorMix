@@ -1,0 +1,34 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div class="@PrefixCls">
+    @if (ShowMask)
+    {
+        <AniMask Visible="@Visible"
+                 DisableBodyScroll="false"
+                 OnClick="@HandleOnMaskClick" 
+                 Class="@MaskClass"
+                 Style="@MaskStyle"
+                 Container="@null"
+        />
+    }
+    <div class="@($"{PrefixCls}-wrap")">
+        <AniDiv Name="@AniNames.Zoom"
+                In="@Visible"
+                Class="@_classBuilder.ToString()"
+                Style="@Style"
+                OnClick="@OnClick"
+        >
+            @if (ShowCloseButton)
+            {
+                <a @onclick="HandleCloserClick" 
+                   @onclick:preventDefault
+                   @onclick:stopPropagation
+                   class="bm-popup-close-icon bm-plain-anchor">
+                    <CloserIcon />
+                </a>
+            }
+            @ChildContent
+        </AniDiv>
+    </div>
+</div>

@@ -8,15 +8,14 @@
     align-items: stretch;
     border-radius: 12px;
     overflow: hidden;
-    --border-color: var(--doc-border-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--doc-border-color);
 }
 
 .previewer-source {
     flex: 1 1;
     overflow-x: scroll;
     height: 100%;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--doc-border-color);
     background-color: #f5f2f0;
     overflow-y: scroll;
 }
@@ -53,12 +52,13 @@
     overflow: hidden;
 }
 
-.previewer-device .device-action {
-    position:relative;
-    display:flex;
-    justify-content: flex-end;
-    padding: 8px 22px;
-}
+    .previewer-device .device-action {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px 22px;
+        border-top: 1px solid var(--doc-border-color);
+    }
 
 .previewer-device .device-action > a {
     padding: 0;

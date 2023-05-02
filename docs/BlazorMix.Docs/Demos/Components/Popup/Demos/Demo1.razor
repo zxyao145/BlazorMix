@@ -1,0 +1,109 @@
+﻿<DemoBlock Title='弹出位置'>
+    <Space Direction="BmDirection.Vertical">
+        <SpaceItem>
+            <Button OnClick="@(()=> show1 = true)">底部弹出</Button>
+            <Popup Visible="@show1"
+                   OnMaskClick="@(() => { show1 = false;})">
+                @content
+            </Popup>
+        </SpaceItem>
+        
+        <SpaceItem>
+            <Button OnClick="@(()=> show2 = true)">顶部弹出</Button>
+            <Popup Visible="@show2"
+                   OnMaskClick="@(() => { show2 = false;})"
+                   Position="Position.Top"
+            >
+                @content
+            </Popup>
+        </SpaceItem>
+        
+        <SpaceItem>
+            <Button OnClick="@(()=> show3 = true)">左侧弹出</Button>
+            <Popup Visible="@show3"
+                   OnMaskClick="@(() => { show3 = false;})"
+                   Position="Position.Left">
+                @content
+            </Popup>
+        </SpaceItem>
+        
+        <SpaceItem>
+            <Button OnClick="@(()=> show4 = true)">右侧弹出</Button>
+            <Popup Visible="@show4"
+                   OnMaskClick="@(() => { show4 = false;})"
+                   Position="Position.Right">
+                @content
+            </Popup>
+        </SpaceItem>
+
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title='自定义样式'>
+    <Space Direction="BmDirection.Vertical">
+        <SpaceItem>
+            <Button OnClick="@(()=> show5 = true)">
+                圆角的弹出层
+            </Button>
+            <Popup Visible="@show5"
+                   Class="@BorderRadius.Rounded"
+                   OnMaskClick="@(() => { show5 = false;})">
+                @content
+            </Popup>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(()=> show6 = true)">
+                显示关闭按钮
+            </Button>
+            <Popup Visible="@show6"
+                   ShowCloseButton
+                   OnClose="@(() => { show6 = false;})">
+                @contentWithCloser
+            </Popup>
+        </SpaceItem>  
+
+        <SpaceItem>
+            <Button OnClick="@(()=> show7 = true)">
+                显示右侧弹出关闭按钮
+            </Button>
+            <Popup Visible="@show7"
+                   Position="Position.Right"
+                   Style="@("width: 100vw;")"
+                   ShowCloseButton
+                   OnClose="@(() => { show7 = false; })">
+                @contentWithCloser
+            </Popup>
+        </SpaceItem>   
+        
+        <SpaceItem>
+            <Button OnClick="@(()=> show8 = true)">
+                内容超长滚动
+            </Button>
+            <Popup Visible="@show8"
+                   Style="@("height: 40vh; overflow-y: scroll;")"
+                   OnMaskClick="@(() => { show8 = false;})">
+                @longContent
+            </Popup>
+        </SpaceItem> 
+    </Space>
+</DemoBlock>
+@code{
+
+    private static RenderFragment content = @<div style="padding: 20px;">Hello world!</div>;
+    private static RenderFragment contentWithCloser = @<div style="padding: 40px 20px 20px;">Hello world!</div>;
+    private static RenderFragment longContent = @<div style="padding: 20px;">
+        Minim in irure occaecat nostrud. Consectetur pariatur sit in. Anim labore consequat ex voluptate pariatur excepteur reprehenderit ea sit aliqua dolore deserunt ut velit. Ut consequat cillum ad deserunt anim proident nulla ullamco quis pariatur ullamco elit cupidatat incididunt. Ut qui incididunt id velit elit pariatur aliquip. Ullamco laboris tempor laboris. Ad officia veniam ipsum ipsum aliquip.
+                                                </div>;
+
+    private bool show1 = false;
+    private bool show2 = false;
+    private bool show3 = false;
+    private bool show4 = false;
+
+    private bool show5 = false;
+    private bool show6 = false;
+    private bool show7 = false;
+    private bool show8 = false;
+
+
+}

@@ -1,0 +1,13 @@
+﻿<DemoBlock Title='中心弹出的弹层'>
+    <Button OnClick="@(()=> show1 = true)">打开</Button>
+    <CenterPopup Visible="@show1"
+           OnMaskClick="@(() => { show1 = false;})">
+        <div style="text-align: center; padding: 2rem;">
+            Hello
+        </div>
+    </CenterPopup>
+</DemoBlock>
+
+@code{
+    private bool show1 = false;
+}
