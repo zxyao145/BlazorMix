@@ -5,8 +5,8 @@
 @if (!_hasDestroyed)
 {
     <div @ref="@_maskRef"
-         class="@_classBuilder.ToString() @Class.ToString()"
-         style="@_styleBuilder.ToString() @Style.ToString()"
+         class="@_classBuilder.ToString() @Class?.ToString()"
+         style="@_styleBuilder.ToString() @Style?.ToString()"
         @onclick="HandleMaskClick"
         @onclick:preventDefault
         @onclick:stopPropagation>

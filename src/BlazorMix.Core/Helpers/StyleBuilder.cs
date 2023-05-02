@@ -3,6 +3,14 @@
 namespace BlazorMix;
 public class StyleBuilder : BuilderBase
 {
+    private string _name = "";
+
+    internal StyleBuilder(string name)
+    {
+        _name = name;
+    }
+
+
     public StyleBuilder() : base()
     {
 
@@ -16,13 +24,20 @@ public class StyleBuilder : BuilderBase
     {
         var res = TransitionBuilder?.GetContentArr().ToList() ?? new List<BuilderItem>();
         res.AddRange(base.GetContentArr());
-        return string.Join("; ", res.Select(x =>
+        var result = string.Join("; ", res.Select(x =>
                 new KeyValuePair<string, string>(x.Value.Split(":")[0], x.Value)
                 )
             .DistinctBy(x => x.Key)
             .Select(x => x.Value)
             .Distinct()
         );
+
+        if (!string.IsNullOrWhiteSpace(_name))
+        {
+            Console.WriteLine("builder name:{0}, {1}", _name, result);
+        }
+        
+        return result;
     }
 
     public override string Build() => ToString();

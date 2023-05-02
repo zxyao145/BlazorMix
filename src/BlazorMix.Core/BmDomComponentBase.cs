@@ -9,10 +9,10 @@ public abstract class BmDomComponentBase : BmComponentBase
     public AniOptions? AniOptions { get; set; } //= new();
     
     [Parameter]
-    public ClassBuilder Class { get; set; } = new ClassBuilder();
+    public ClassBuilder? Class { get; set; }
 
     [Parameter]
-    public StyleBuilder Style { get; set; } = new StyleBuilder();
+    public StyleBuilder? Style { get; set; }
 
     private readonly ClassBuilder _class = new();
     private readonly StyleBuilder _stye = new();

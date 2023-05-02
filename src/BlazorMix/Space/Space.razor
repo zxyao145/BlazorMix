@@ -2,8 +2,8 @@
 @inherits BmDomComponentBase
 
 <CascadingValue Value="this" IsFixed="@true">
-    <div class="@_classBuilder.ToString() @Class.ToString()"
-         style="@Style.ToString()"
+    <div class="@_classBuilder.ToString() @Class?.ToString()"
+         style="@Style?.ToString()"
          @onclick="@OnClick">
         @ChildContent
     </div>

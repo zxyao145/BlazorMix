@@ -1,5 +1,8 @@
 ﻿
 // ReSharper disable CheckNamespace
+
+using Microsoft.AspNetCore.Components.Web;
+
 namespace BlazorMix;
 
 /// <summary>
@@ -65,11 +68,13 @@ public partial class AniDiv
     /// 
     /// </summary>
     [Parameter]
-    public Action? OnExitEnd { get; set; } 
+    public Action? OnExitEnd { get; set; }
     #endregion
 
     #endregion
 
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     private readonly Queue<Func<ValueTask>> _actionQueue = new Queue<Func<ValueTask>>();
 
@@ -82,26 +87,23 @@ public partial class AniDiv
     /// <returns></returns>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
+        var lastState = In;
         await base.SetParametersAsync(parameters);
-        if (In)
+        if (lastState != In && In)
         {
             _beginTime = DateTime.UtcNow;
             OnEnter?.Invoke();
             _options.SetState(AniState.Enter);
             OnEntering?.Invoke();
         }
-        else if (_options.State == AniState.Entered)
+        else if (lastState != In)
         {
+            Console.WriteLine("Animation SetParametersAsync:{0},{1}", In, _options.State);
             _beginTime = DateTime.UtcNow;
             OnExit?.Invoke();
             _options.SetState(AniState.Leave);
             OnExiting?.Invoke();
         }
-    }
-
-    protected override Task OnParametersSetAsync()
-    {
-        return base.OnParametersSetAsync();
     }
 
     /// <summary>
@@ -111,6 +113,7 @@ public partial class AniDiv
     /// <returns></returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        // Console.WriteLine("Animation _options.State:{0}", _options.State);
         if (In)
         {
             switch (_options.State)
@@ -130,17 +133,15 @@ public partial class AniDiv
                     {
                         _options.SetState(AniState.Entering);
                         OnEnterEnd?.Invoke();
-                        StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
                 case AniState.Entering:
                     _actionQueue.Enqueue(async () =>
                     {
-                        await Wait();;
+                        await Wait();
                         _options.SetState(AniState.Entered);
                         OnEnterEnd?.Invoke();
-                        StateHasChanged();
                     });
                     break;
             }
@@ -154,7 +155,6 @@ public partial class AniDiv
                     {
                         _options.SetState(AniState.Leaving);
                         OnExitEnd?.Invoke();
-                        StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
@@ -163,18 +163,20 @@ public partial class AniDiv
                     {
                         await Wait();
                         _options.SetState(AniState.Leaved);
-                        StateHasChanged();
                     });
                     break;
             }
         }
-        
 
 
-        while (_actionQueue.Count > 0)
+        if (_actionQueue.Count > 0)
         {
-            var func = _actionQueue.Dequeue();
-            await func();
+            while (_actionQueue.Count > 0)
+            {
+                var func = _actionQueue.Dequeue();
+                await func();
+            }
+            StateHasChanged();
         }
     }
 
@@ -185,6 +187,15 @@ public partial class AniDiv
         if(d > 0)
         {
             await Task.Delay((int)d);
+        }
+    }
+
+
+    private async Task HandleClick(MouseEventArgs e)
+    {
+        if (OnClick.HasDelegate)
+        {
+            await OnClick.InvokeAsync();
         }
     }
 

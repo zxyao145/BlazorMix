@@ -24,7 +24,6 @@ public partial class Mask
         _classBuilder.Clear()
             .Add(PrefixCls);
 
-        Console.WriteLine("AniOptions ==null :{0}", AniOptions == null);
         var rgb = Color == "black" ? "0, 0, 0" : "255, 255, 255";
         var bgColor = Color == "transparent"
             ? "transparent"

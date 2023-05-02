@@ -6,6 +6,13 @@ public record BuilderItem(string Value, bool Show);
 
 public class ClassBuilder : BuilderBase
 {
+    private string _name = "";
+
+    internal ClassBuilder(string name)
+    {
+        _name = name;
+    }
+
     public ClassBuilder() : base()
     {
 
@@ -20,7 +27,14 @@ public class ClassBuilder : BuilderBase
         var res = TransitionBuilder?.GetContentArr().ToList() ?? new List<BuilderItem>();
         res.AddRange(base.GetContentArr());
 
-        return string.Join( " ", res.Select(x => x.Value).Distinct());
+        var result = string.Join( " ", res.Select(x => x.Value).Distinct());
+
+        if (!string.IsNullOrWhiteSpace(_name))
+        {
+            Console.WriteLine("builder name:{0}, {1}", _name, result);
+        }
+
+        return result;
     }
 
     public override string Build() => ToString();

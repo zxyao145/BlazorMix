@@ -1,5 +1,7 @@
 ﻿
 // ReSharper disable CheckNamespace
+using Microsoft.AspNetCore.Components.RenderTree;
+
 namespace BlazorMix;
 
 /// <summary>
@@ -84,16 +86,18 @@ public partial class Animation
     /// <returns></returns>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
+        var lastState = In;
         await base.SetParametersAsync(parameters);
-        if (In)
+        if (lastState != In && In)
         {
             _beginTime = DateTime.UtcNow;
             OnEnter?.Invoke();
             _options.SetState(AniState.Enter);
             OnEntering?.Invoke();
         }
-        else if (_options.State == AniState.Entered)
+        else if(lastState != In)
         {
+            Console.WriteLine("Animation SetParametersAsync:{0},{1}", In, _options.State);
             _beginTime = DateTime.UtcNow;
             OnExit?.Invoke();
             _options.SetState(AniState.Leave);
@@ -109,6 +113,7 @@ public partial class Animation
     /// <returns></returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        // Console.WriteLine("Animation _options.State:{0}", _options.State);
         if (In)
         {
             switch (_options.State)
@@ -128,17 +133,15 @@ public partial class Animation
                     {
                         _options.SetState(AniState.Entering);
                         OnEnterEnd?.Invoke();
-                        StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
                 case AniState.Entering:
                     _actionQueue.Enqueue(async () =>
                     {
-                        await Wait();;
+                        await Wait();
                         _options.SetState(AniState.Entered);
                         OnEnterEnd?.Invoke();
-                        StateHasChanged();
                     });
                     break;
             }
@@ -152,7 +155,6 @@ public partial class Animation
                     {
                         _options.SetState(AniState.Leaving);
                         OnExitEnd?.Invoke();
-                        StateHasChanged();
                         return ValueTask.CompletedTask;
                     });
                     break;
@@ -161,18 +163,20 @@ public partial class Animation
                     {
                         await Wait();
                         _options.SetState(AniState.Leaved);
-                        StateHasChanged();
                     });
                     break;
             }
         }
-        
 
 
-        while (_actionQueue.Count > 0)
+        if (_actionQueue.Count > 0)
         {
-            var func = _actionQueue.Dequeue();
-            await func();
+            while (_actionQueue.Count > 0)
+            {
+                var func = _actionQueue.Dequeue();
+                await func();
+            }
+            StateHasChanged();
         }
     }
 

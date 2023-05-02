@@ -26,8 +26,8 @@ public class AniOptions
         CalcStyleBuilder(exited, running);
     }
 
-    public ClassBuilder Class { get; init; } = new ClassBuilder();
-    public StyleBuilder Style { get; init; } = new StyleBuilder();
+    public ClassBuilder Class { get; init; } = new ClassBuilder("anioptions");
+    public StyleBuilder Style { get; init; } = new StyleBuilder("anioptions");
 
 
     private void CalcClassBuilder(out bool exited, out bool running)
@@ -55,15 +55,15 @@ public class AniOptions
             if (!string.IsNullOrWhiteSpace(Name))
             {
                 return (unmounted || exited) && !In
-                    ? "display: none"
+                    ? "display: none;"
                     : "";
             }
 
-            return !In ? "display: none" : "";
+            return !In ? "display: none;" : "";
         }
 
         Style.Clear()
-            .Add($"--animation-duration: {Duration}ms")
+            .Add($"--animation-duration: {Duration}ms;")
             .Add(()=> $"{GetDisplay()}")
             ;
     }
