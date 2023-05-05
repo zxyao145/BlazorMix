@@ -1,0 +1,73 @@
+﻿@namespace BlazorMix
+@inherits BmComponentBase
+
+@foreach (var eleRef in _actionSheetRefs)
+{
+    var option = eleRef.Option;
+    <ActionSheet @key="@option"
+             Style="@option.Style"
+             Class="@option.Class"
+             AfterClose="@option.AfterClose"
+             AfterShow="@option.AfterShow"
+             OnAction="@option.OnAction"
+             Actions="@option.Actions"
+             CancelText="@option.CancelText"
+             CloseOnAction="@option.CloseOnAction"
+             CloseOnMaskClick="@option.CloseOnMaskClick"
+             Extra="@option.Extra"
+             MaskClass="@option.MaskClass"
+             MaskStyle="@option.MaskStyle"
+             OnMaskClick="@option.OnMaskClick"
+             PopupClass="@option.PopupClass"
+             PopupStyle="@option.PopupStyle"
+             SafeArea="@option.SafeArea"
+             ShowMask="@option.ShowMask"
+             Visible="@option.Visible"
+             DestroyOnClose="@true"
+             OnClose="@(async ()=> await HandleOnClose(eleRef))" />
+}
+
+@code {
+
+    [Inject]
+    internal ActionSheetService Service { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Service.OnAddEvent += OnAdd;
+        Service.OnUpdateEvent += OnUpdate;
+    }
+
+    private readonly List<ActionSheetRef> _actionSheetRefs = new();
+
+    internal async Task HandleOnClose(ActionSheetRef action)
+    {
+        action.Option.Visible = false;
+        if (action.Option.OnClose.HasDelegate)
+        {
+            await action.Option.OnClose.InvokeAsync();
+        }
+        StateHasChanged();
+    }
+
+    public async ValueTask OnAdd(ActionSheetRef eleRef)
+    {
+        _actionSheetRefs.Add(eleRef);
+        eleRef.Option.Added = true;
+        await InvokeStateHasChangedAsync();
+    }
+
+    public async ValueTask DoRemove(ActionSheetRef eleRef)
+    {
+        _actionSheetRefs.Remove(eleRef);
+        eleRef.Option.Added = false;
+        await InvokeStateHasChangedAsync();
+    }
+
+    public async ValueTask OnUpdate()
+    {
+        await InvokeStateHasChangedAsync();
+    }
+}

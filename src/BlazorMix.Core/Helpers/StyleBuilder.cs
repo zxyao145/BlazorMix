@@ -32,11 +32,6 @@ public class StyleBuilder : BuilderBase
             .Distinct()
         );
 
-        if (!string.IsNullOrWhiteSpace(_name))
-        {
-            Console.WriteLine("builder name:{0}, {1}", _name, result);
-        }
-        
         return result;
     }
 

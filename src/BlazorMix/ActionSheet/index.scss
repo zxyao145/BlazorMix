@@ -1,10 +1,78 @@
 ﻿@import '@/styles/mixins/index.scss';
 @import '@/styles/animation/index.scss';
 
-$btn-prefix: #{$prefix}-actionsheet;
+$cls-prefix: #{$prefix}-action-sheet;
 
-.#{$btn-prefix} {
-    --divider-color: #eee;
-    --divider-text-color: #999;
-    color: var(--divider-text-color);
+.#{$cls-prefix} {
+    &-popup-body {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        overflow: hidden;
+    }
+
+    &-extra {
+        display: flex;
+        justify-content: center;
+        color: var(--weak-text-color);
+        font-size: 15px;
+        padding: 18px 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &-button-list {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &-button-item-wrapper {
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &-button-item {
+        text-align: center;
+        display: block;
+        background-color: var(--main-backgroup-color);
+        padding: 16px;
+
+        &:active {
+            background-color: #eeeeee;
+        }
+
+        &-disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        &-name {
+            color: var(--color-gray-dark);
+            font-size: 18px;
+        }
+
+        &-description {
+            font-size: 14px;
+            color: var(--weak-text-color);
+            padding-top: 4px;
+        }
+
+        &-danger {
+            .#{$cls-prefix}-button-item-name {
+                color: var(--danger);
+            }
+        }
+
+        &-bold {
+            .#{$cls-prefix}-button-item-name {
+                font-weight: bold;
+            }
+        }
+    }
+
+    &-cancel {
+        background-color: var(--color-box);
+        padding-top: 8px;
+    }
 }

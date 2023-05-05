@@ -47,7 +47,6 @@ public partial class Mask
         });
         if (lastVisible != Visible)
         {
-            Console.WriteLine("lastVisible,Visible: {0},{1}",lastVisible, Visible);
             _afterCallbackState.State = Visible;
         }
     }

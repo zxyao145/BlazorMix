@@ -1,0 +1,125 @@
+﻿@inject ActionSheetService ActionSheetService
+
+<DemoBlock Title="基础用法">
+    <Space Wrap>
+        <SpaceItem>
+            <Button OnClick="@(() => show1 = true)">最简单的用法</Button>
+            <ActionSheet Visible="@show1"
+                         Actions="@actions"
+                         OnClose="@(() => show1 = false)" />
+        </SpaceItem>
+
+        <SpaceItem>
+            <Button OnClick="@(() => show2 = true)">取消按钮和额外描述</Button>
+            <ActionSheet Visible="@show2"
+                         Actions="@actions"
+                         OnClose="@(() => show2 = false)"
+                         Extra="@("请选择你要进行的操作")"
+                         CancelText="@("取消")" />
+        </SpaceItem>
+    </Space>
+
+</DemoBlock>
+
+<DemoBlock Title="选项状态">
+    <Button OnClick="@(() => show3 = true)">禁用和危险的选项</Button>
+    <ActionSheet Visible="@show3"
+                 Actions="@actionsForOptions"
+                 OnClose="@(() => show3 = false)" />
+</DemoBlock>
+
+<DemoBlock Title="事件处理">
+    <Button OnClick="@(() => show4 = true)">禁用和危险的选项</Button>
+    <ActionSheet Visible="@show4"
+                 Actions="@actionsForEvent"
+                 OnClose="@(() => show4 = false)"
+                 OnAction="@((action, i) => {
+                                if (action.Key == "edit" || action.Key == "copy")
+                                {
+                                    Console.WriteLine($"点击了{i}: {action.Text.OriginText}");
+                                }
+                                                return ValueTask.CompletedTask; }
+)"
+                 AfterClose="@(() => { Console.WriteLine("动作面板已关闭"); return ValueTask.CompletedTask;})" />
+
+</DemoBlock>
+
+<DemoBlock Title="指令式">
+    <Button OnClick="@(() => ActionSheetService.Show(new ActionSheetOption { Actions = actions }))">
+        显示
+    </Button>
+</DemoBlock>
+
+@code {
+    private List<ActionInfo> actions = new List<ActionInfo>()
+            {
+                new()
+                {
+                    Key = "copy",
+                    Text = "复制"
+                },
+                new()
+                {
+                    Key = "edit",
+                    Text = "修改"
+                },
+                new()
+                {
+                    Key = "save",
+                    Text = "保存"
+                },
+            };
+
+    private bool show1 = false;
+    private bool show2 = false;
+
+    private List<ActionInfo> actionsForOptions = new List<ActionInfo>()
+    {
+        new()
+        {
+            Key = "copy",
+            Text = "复制"
+        },
+        new()
+        {
+            Key = "edit",
+            Text = "修改",
+            Disabled = true
+        },
+        new()
+        {
+            Key = "save",
+            Text = "保存",
+            Description = "删除后数据不可恢复",
+            Danger = true,
+            Bold = true
+        },
+    };
+
+    private bool show3 = false;
+
+    private List<ActionInfo> actionsForEvent = new List<ActionInfo>()
+    {
+        new()
+        {
+            Key = "copy",
+            Text = "复制"
+        },
+        new()
+        {
+            Key = "edit",
+            Text = "修改"
+        },
+        new()
+        {
+            Key = "save",
+            Text = "保存",
+            OnClick = async () =>
+            {
+                Console.WriteLine("save is clicked!");
+            }
+        },
+    };
+
+    private bool show4 = false;
+}

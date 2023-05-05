@@ -1,13 +1,65 @@
 ﻿@namespace BlazorMix
 @inherits BmDomComponentBase
 
-<div class="@_classBuilder.ToString() @Class?.ToString()"
-     style="@Style?.ToString()">
-    @if (ChildContent != null)
-    {
-        <div class="@PrefixCls-content">
-            @ChildContent
+<Popup Visible="@Visible"
+       OnMaskClick="@HandlePopupMaskClick"
+       AfterClose="@AfterClose"
+       AfterShow="@AfterShow"
+       Class="@_popupClass"
+       Style="@PopupStyle"
+       DestroyOnClose="@DestroyOnClose">
+    <div class="@PrefixCls">
+        @if (Extra != null)
+        {
+            <div class="@(PrefixCls + "-extra")">
+                @Extra.Value.Node
+            </div>
+        }
+        <div class="@(PrefixCls + "-button-list")">
+            @{
+                for (var i = 0; i < Actions.Count; i++)
+                {
+                    var action = Actions[i];
+                    <ActionSheetButtonItem @key="@action.Key"
+                                   Parent="@this"
+                                   Index="@i"
+                                   Action="@action" />
+                }
+            }
         </div>
-    }
-</div>
+
+        @if (CancelText != null)
+        {
+            var classBuilder = new ClassBuilder()
+            .Add("bm-plain-anchor")
+            .Add(PrefixCls + "-button-item");
+
+
+            <div class="@(PrefixCls+"-cancel")"
+                 role="option"
+                 aria-label="@CancelText">
+                <div class="@(PrefixCls + "-button-item-wrapper")">
+                    <a class="@classBuilder.ToString()"
+                   @onclick="@(async (e) =>{
+                                       if (OnClose.HasDelegate)
+                                       {
+                                           await OnClose.InvokeAsync();
+                                       }
+                                 })">
+                        <div class="@(PrefixCls + "-button-item-name")">
+                            @CancelText.Value.Node
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+
+
+        @if (SafeArea)
+        {
+            <SafeArea Position="SafeAreaPosition.Bottom" />
+        }
+
+    </div>
+</Popup>
 

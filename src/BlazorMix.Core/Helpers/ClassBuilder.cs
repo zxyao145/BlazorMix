@@ -26,14 +26,7 @@ public class ClassBuilder : BuilderBase
     {
         var res = TransitionBuilder?.GetContentArr().ToList() ?? new List<BuilderItem>();
         res.AddRange(base.GetContentArr());
-
         var result = string.Join( " ", res.Select(x => x.Value).Distinct());
-
-        if (!string.IsNullOrWhiteSpace(_name))
-        {
-            Console.WriteLine("builder name:{0}, {1}", _name, result);
-        }
-
         return result;
     }
 

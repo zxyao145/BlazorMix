@@ -1,30 +1,18 @@
-﻿
-namespace BlazorMix;
-
-/// <summary>
-/// 
-/// </summary>
-public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
+﻿namespace BlazorMix;
+public class ActionSheetOption: IActionSheetProps
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public const string PrefixCls = "bm-action-sheet";
+    internal bool Visible { get; set; }
 
-    #region paramters
+    internal bool Added { get; set; }
 
-    /// <summary>
-    /// 是否可见	
-    /// </summary>
+
+    /// <inheritdoc />
     [Parameter]
-    public bool Visible { get; set; }
+    public ClassBuilder? Class { get; set; }
 
-    /// <summary>
-    /// 不可见时卸载内容
-    /// </summary>
+    /// <inheritdoc />
     [Parameter]
-    public bool DestroyOnClose { get; set; } = true;
-
+    public StyleBuilder? Style { get; set; }
 
     /// <inheritdoc />
     [Parameter]
@@ -37,7 +25,7 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
     /// <inheritdoc />
     [Parameter]
     public Func<ValueTask>? AfterShow { get; set; }
-    
+
     /// <inheritdoc />
     [Parameter]
     public StringOrRenderFragment? Extra { get; set; }
@@ -45,8 +33,7 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
     /// <inheritdoc />
     [Parameter]
     public StringOrRenderFragment? CancelText { get; set; }
-    
-    
+
     /// <inheritdoc />
     [Parameter]
     public Func<ActionInfo, int, ValueTask>? OnAction { get; set; }
@@ -59,21 +46,18 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
     [Parameter]
     public bool CloseOnAction { get; set; }
 
-
     /// <inheritdoc />
     [Parameter]
     public bool SafeArea { get; set; }
 
     /// <inheritdoc />
-    [Parameter] 
+    [Parameter]
     public ClassBuilder PopupClass { get; set; } = new();
 
     /// <inheritdoc />
-    [Parameter] 
+    [Parameter]
     public StyleBuilder PopupStyle { get; set; } = new();
 
-
-    #region Mask 
 
     /// <inheritdoc />
     [Parameter]
@@ -95,41 +79,4 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
     [Parameter]
     public StyleBuilder? MaskStyle { get; set; }
 
-    #endregion
-
-    #endregion
-
-    private readonly ClassBuilder _popupClass = new();
-
-
-    /// <summary>
-    /// override
-    /// </summary>
-    /// <param name="parameters"></param>
-    /// <returns></returns>
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-
-        _classBuilder
-            .Clear()
-            .Add(PrefixCls);
-
-        _popupClass.Clear()
-            .Add(PrefixCls + "-popup-body")
-            .Add(() => PopupClass.ToString());
-    }
-
-    private async Task HandlePopupMaskClick()
-    {
-        if (OnMaskClick.HasDelegate)
-        {
-            await OnMaskClick.InvokeAsync();
-        }
-
-        if (CloseOnMaskClick && OnClose.HasDelegate)
-        {
-            await OnClose.InvokeAsync();
-        }
-    }
 }

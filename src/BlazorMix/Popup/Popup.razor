@@ -1,7 +1,7 @@
 ﻿@namespace BlazorMix
-@inherits BmDomComponentBase
+@inherits PopupBase
 
-<div class="@PrefixCls">
+<div @ref="@PopupRef" class="@PrefixCls">
     @if (ShowMask)
     {
         <AniMask Visible="@Visible"
@@ -12,7 +12,7 @@
                  Container="@null"
         />
     }
-    <AniDiv Name="@_aimateName"
+    <AniDiv Name="@_animateName"
             In="@Visible"
             Class="@_classBuilder"
             Style="@Style"

@@ -1,7 +1,7 @@
 ﻿namespace BlazorMix;
 
 /// <summary>
-/// Button Options
+/// Button Option
 /// </summary>
 public class ButtonOptions
 {

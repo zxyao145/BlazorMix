@@ -63,7 +63,7 @@ namespace BlazorMix.Docs.Shared
                         allNodes
                         .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
                         .OfType<ClassDeclarationSyntax>();
-                var components = new List<string>();
+                var components = new HashSet<string>();
                 //System.Diagnostics.Debugger.Launch();
 
                 foreach (ClassDeclarationSyntax classDef in allClasses)

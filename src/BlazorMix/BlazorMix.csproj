@@ -32,7 +32,6 @@
     
     <ItemGroup>
         <Folder Include="Dialog\" />
-        <Folder Include="SafeArea\" />
         <Folder Include="Modal\" />
         <Folder Include="Toast\" />
         <Folder Include="NoticeBar\" />

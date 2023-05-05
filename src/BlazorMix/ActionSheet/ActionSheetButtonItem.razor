@@ -1,0 +1,57 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div @key="@Action.Key" class="@(ActionSheet.PrefixCls + "-button-item-wrapper")">
+    <a class="@_classBuilder.ToString()"
+       @onclick="@(async e =>{
+                     if (Action.OnClick != null)
+                     {
+                         await Action.OnClick();
+                     }
+                     if (Parent.OnAction != null)
+                     {
+                         await Parent.OnAction(Action, Index);
+                     }
+                     if (Parent is { CloseOnAction: true, OnClose.HasDelegate: true })
+                     {
+                         await Parent.OnClose.InvokeAsync();
+                     }
+                })"
+       role='option'
+       aria-disabled="@Action.Disabled">
+        <div class="@(ActionSheet.PrefixCls + "-button-item-name")">
+            @Action.Text.Node
+        </div>
+        @if (Action.Description != null)
+        {
+            <div class="@(ActionSheet.PrefixCls + "-button-item-description")">
+                @Action.Description.Value.Node
+            </div>
+        }
+    </a>
+</div>
+
+@code {
+    [Parameter]
+    public ActionSheet Parent { get; set; } = default!;
+
+    [Parameter]
+    public int Index { get; set; } = default!;
+
+    [Parameter]
+    public ActionInfo Action { get; set; } = default!;
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        _classBuilder
+            .Clear()
+            .Add("bm-plain-anchor")
+            .Add(ActionSheet.PrefixCls + "-button-item")
+            .AddIf(ActionSheet.PrefixCls + "-button-item-danger", () => Action.Danger)
+            .AddIf(ActionSheet.PrefixCls + "-button-item-disabled", () => Action.Disabled)
+            .AddIf(ActionSheet.PrefixCls + "-button-item-bold", () => Action.Bold);
+
+    }
+}

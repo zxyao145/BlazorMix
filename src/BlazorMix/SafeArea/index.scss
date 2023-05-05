@@ -1,0 +1,20 @@
+﻿@import '@/styles/mixins/index.scss';
+@import '@/styles/animation/index.scss';
+
+$cls-prefix: #{$prefix}-safe-area;
+
+
+
+.#{$cls-prefix} {
+    --multiple: 1;
+    display: block;
+    width: 100%;
+
+    &-position-top {
+        padding-top: calc(env(safe-area-inset-top) * var(--multiple));
+    }
+
+    &-position-bottom {
+        padding-bottom: calc(env(safe-area-inset-bottom) * var(--multiple));
+    }
+}
