@@ -1,34 +1,36 @@
 ﻿@namespace BlazorMix
 @inherits PopupBase
 
-<div @ref="@PopupRef" class="@PrefixCls">
-    @if (ShowMask)
-    {
-        <AniMask Visible="@Visible"
-                 DisableBodyScroll="false"
-                 OnClick="@HandleOnMaskClick" 
-                 Class="@MaskClass"
-                 Style="@MaskStyle"
-                 Container="@null"
-        />
-    }
-    <AniDiv Name="@_animateName"
-            In="@Visible"
-            Class="@_classBuilder"
-            Style="@Style"
-            OnClick="@OnClick"
-            >
-        @if (ShowCloseButton)
+@if (!_hasDestroyed)
+{
+    <div @ref="@PopupRef" class="@PrefixCls">
+        @if (ShowMask)
         {
-            <a @onclick="HandleCloserClick" 
-               @onclick:preventDefault
-               @onclick:stopPropagation
-               class="@PrefixCls-close-icon bm-plain-anchor">
-                <CloserIcon />
-            </a>
+            <AniMask Visible="@Visible"
+                     DisableBodyScroll="false"
+                     OnClick="@HandleOnMaskClick" 
+                     Class="@MaskClass"
+                     Style="@MaskStyle"
+                     Container="@null"
+            />
         }
+        <AniDiv Name="@_animateName"
+                In="@Visible"
+                Class="@_classBuilder"
+                Style="@Style"
+                OnClick="@OnClick"
+        >
+            @if (ShowCloseButton)
+            {
+                <a @onclick="HandleCloserClick" 
+                   @onclick:preventDefault
+                   @onclick:stopPropagation
+                   class="@PrefixCls-close-icon bm-plain-anchor">
+                    <CloserIcon />
+                </a>
+            }
         
-        @ChildContent
-    </AniDiv>
-</div>
-
+            @ChildContent
+        </AniDiv>
+    </div>
+}

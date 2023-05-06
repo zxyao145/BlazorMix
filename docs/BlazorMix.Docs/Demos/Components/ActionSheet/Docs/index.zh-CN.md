@@ -19,13 +19,13 @@
 
 | 属性        | 说明           | 类型               | 默认值  |
 | ----------- | -------------- | ------------------ | ------- |
-| Danger      | 是否为危险状态 | `bool`          | `false` |
-| Description | 描述           | `StringOrRenderFragment`        | -       |
-| Disabled    | 是否为禁用状态 | `bool`          | `false` |
-| Key         | 唯一标记       | `string` | -       |
-| OnClick     | 点击时触发     | `Func<ValueTask>?`       | -       |
+| Danger      | 是否为危险状态   | `bool`                      | `false` |
+| Description | 描述           | `StringOrRenderFragment`    | -       |
+| Disabled    | 是否为禁用状态   | `bool`                      | `false` |
+| Key         | 唯一标记        | `string`                      | -       |
+| OnClick     | 点击时触发      | `Func<ValueTask>?`             | -       |
 | Text        | 标题           | `StringOrRenderFragment`        | -       |
-| Bold        | 标题是否加粗   | `bool`          | `false` |
+| Bold        | 标题是否加粗     | `bool`                      | `false` |
 
 ### 服务
 

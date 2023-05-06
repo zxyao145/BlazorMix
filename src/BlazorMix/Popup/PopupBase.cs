@@ -103,7 +103,7 @@ public abstract class PopupBase: BmDomComponentBase
     private StateFunc2? _afterCallbackState;
     private StateFunc? _moveEleToState;
     private StateFunc2? _disableBodyScrollState;
-    private bool _hasDestroyed;
+    protected bool _hasDestroyed;
 
 
     /// <summary>
@@ -192,7 +192,7 @@ public abstract class PopupBase: BmDomComponentBase
 
             if (DestroyOnClose && !_hasDestroyed)
             {
-                await Task.Delay(TimeSpan.FromMilliseconds(AniOptions?.Duration ?? 0));
+                await Task.Delay(TimeSpan.FromMilliseconds(AniOptions?.Duration ?? AniConstant.MaxDuration));
                 _hasDestroyed = true;
                 _moveEleToState!.State = false;
                 StateHasChanged();

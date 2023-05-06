@@ -21,5 +21,4 @@ internal class JsConstants
     public const string EnableBodyScroll = $"{PrefixCommon}{nameof(EnableBodyScroll)}";
 
     #endregion
-
 }
