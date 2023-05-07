@@ -1,0 +1,10 @@
+﻿$cls-prefix: #{$prefix}-auto-center;
+
+.#{$cls-prefix} {
+    display: flex;
+    justify-content: center;
+
+    &-content {
+        flex: 0 1 auto;
+    }
+}

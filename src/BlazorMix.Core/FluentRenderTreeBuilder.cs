@@ -5,9 +5,9 @@ namespace BlazorMix;
 
 public static class FluentRenderTreeBuilderExt
 {
-    public static FluentRenderTreeBuilder Fluent(this RenderTreeBuilder builder)
+    public static FluentRenderTreeBuilder Fluent(this RenderTreeBuilder builder, int initSequence = 0)
     {
-        return new FluentRenderTreeBuilder(builder);
+        return new FluentRenderTreeBuilder(builder, initSequence);
     }
 }
 
@@ -16,14 +16,17 @@ public class FluentRenderTreeBuilder
     private readonly RenderTreeBuilder _builder;
     private int _sequence;
 
+    public int CurSequence => _sequence;
+
     private int GetSequence()
     {
         return _sequence++;
     }
 
-    public FluentRenderTreeBuilder(RenderTreeBuilder builder)
+    public FluentRenderTreeBuilder(RenderTreeBuilder builder, int initSequence = 0)
     {
         _builder = builder;
+        _sequence = initSequence;
     }
 
     public FluentRenderTreeBuilder OpenComponent<TComponent>() where TComponent : notnull, IComponent

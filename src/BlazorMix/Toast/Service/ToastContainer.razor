@@ -1,0 +1,60 @@
+﻿@namespace BlazorMix
+@using BlazorMix.Core
+@inherits BmComponentBase
+
+@if (_option != null)
+{
+    <div @key="_version">
+        @(new ToastInner(_option).Node)
+        @*<Toast Props="_option"></Toast>*@
+    </div>
+   
+}
+@code {
+    private ToastOption? _option = null;
+    private long _version;
+
+        [Inject]
+    public ToastService? Service { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Service != null)
+        {
+            Service.OnAddEvent += OnOnAddEvent;
+            Service.OnRemove += OnRemove;
+            Service.OnUpdateEvent += OnUpdateEvent;
+        }
+        base.OnInitialized();
+    }
+
+    private async ValueTask OnOnAddEvent(ToastRef arg)
+    {
+        _version += 1;
+        _option = arg.Option;
+        _option.Visible = true;
+        await InvokeStateHasChangedAsync();
+    }
+
+    private async ValueTask OnUpdateEvent()
+    {
+        await InvokeStateHasChangedAsync();
+    }
+
+    private async ValueTask OnRemove()
+    {
+        if (_option is {Visible: true })
+        {
+            _option.Visible = false;
+            await InvokeStateHasChangedAsync();
+        }
+
+        var curVersion = _version;
+        await Task.Delay(AniConstant.MaxDuration);
+        if (curVersion == _version)
+        {
+            _option = null;
+            await InvokeStateHasChangedAsync();
+        }
+    }
+}

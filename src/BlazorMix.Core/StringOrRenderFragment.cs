@@ -1,7 +1,14 @@
-﻿namespace BlazorMix;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace BlazorMix;
 
 public struct StringOrRenderFragment
 {
+    public static RenderFragment EmptyRenderFragment = builder =>
+    {
+        builder.Fluent().AddContent("");
+    };
+
     public RenderFragment Node { get; private set; }
     public string OriginText { get; private set; } = "";
 

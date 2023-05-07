@@ -1,6 +1,4 @@
-﻿using BlazorMix;
-
-namespace BlazorMix;
+﻿namespace BlazorMix;
 
 public class ActionSheetRef : IRef
 {

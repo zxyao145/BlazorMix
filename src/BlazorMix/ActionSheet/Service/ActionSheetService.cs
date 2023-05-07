@@ -18,7 +18,6 @@ public class ActionSheetService
             await OnAddEvent.Invoke(r);
         }
         return r;
-
     }
 
     public async Task<ActionSheetRef?> Show(ActionSheetOption option)

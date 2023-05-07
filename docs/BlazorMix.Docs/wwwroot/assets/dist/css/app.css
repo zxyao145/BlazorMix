@@ -22,6 +22,7 @@ html, * {
     display: inline-block;
     color: inherit;
     font-style: normal;
+    font-size: inherit;
     line-height: 0;
     text-align: center;
     text-transform: none;

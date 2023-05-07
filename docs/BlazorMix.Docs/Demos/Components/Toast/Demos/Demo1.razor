@@ -1,0 +1,211 @@
+﻿@using Microsoft.AspNetCore.Components.Rendering
+@using Toast = BlazorMix.Toast
+@inject ToastService ToastService
+<DemoBlock Title="基础用法">
+    <Button OnClick="@(
+        async () =>
+        {
+            await ToastService.Show(
+                    new ToastOption()
+                    {
+                         Content = "Hello World",
+                         AfterClose = () =>
+                             {
+                                Console.WriteLine("AfterClose");
+                                return ValueTask.CompletedTask;
+                             }
+                    }
+                );
+        })">
+        轻提示
+    </Button>
+</DemoBlock>
+
+<DemoBlock Title="图标">
+    <Space Wrap>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Icon = ToastIconType.Success,
+                        }
+                        );
+                })">
+                成功
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Icon = ToastIconType.Fail
+                        }
+                        );
+                })">
+                失败
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Icon = ToastIconType.Loading
+                        }
+                        );
+                })">
+                加载中
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Icon = _customRenderFragment
+                        });
+                })">
+                自定义图标
+            </Button>
+        </SpaceItem>
+    </Space>
+
+</DemoBlock>
+
+<DemoBlock Title="更多功能">
+    <Space Wrap>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Position = ToastPosition.Top
+                        }
+                        );
+                })">
+                顶部提示
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            Position = ToastPosition.Bottom
+                        }
+                        );
+                })">
+                底部提示
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    await ToastService.Show(
+                        new ToastOption()
+                        {
+                            Content = "Hello World",
+                            MaskClickable = false,
+                        }
+                        );
+                })">
+                阻止背景点击
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+                async () =>
+                {
+                    var sec = 5;
+                    var option = new ToastOption()
+                    {
+                        Content = $"还剩 {sec} 秒",
+                        Icon = ToastIconType.Loading,
+                        DurationMs = 5000,
+                    };
+                    await ToastService.Show(option);
+
+                    _ = Task.Run(async () =>
+                    {
+                        while(sec > 1)
+                        {
+                            await Task.Delay(1000);
+                            sec -= 1;
+                            option.Content= $"还剩 {sec} 秒";
+                            await ToastService.Update();
+                        }
+                    });
+                })">
+                动态内容
+            </Button>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="手动清除">
+    <Space Wrap>
+        <SpaceItem>
+            <Button OnClick="@(
+    async () =>
+    {
+        _toastRef = await ToastService.Show(
+            new ToastOption()
+            {
+                Content = "这条提示不会自动消失",
+                DurationMs = 0
+            }
+            );
+    })">
+                显示
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+    async () => {
+        await ToastService.Clear();
+    })">
+                清除
+            </Button>
+        </SpaceItem>
+        <SpaceItem>
+            <Button OnClick="@(
+    async () => { if (_toastRef != null)
+        {
+            await _toastRef.Close();
+        }
+    })">
+                关闭
+            </Button>
+        </SpaceItem>
+    </Space>
+
+</DemoBlock>
+
+
+@code
+{
+    readonly RenderFragment _customRenderFragment = @<IconPark.Upload />;
+
+    private ToastRef? _toastRef;
+}

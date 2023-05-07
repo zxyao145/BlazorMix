@@ -7,6 +7,7 @@
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <RootNamespace>BlazorMix</RootNamespace>
+        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,7 +34,6 @@
     <ItemGroup>
         <Folder Include="Dialog\" />
         <Folder Include="Modal\" />
-        <Folder Include="Toast\" />
         <Folder Include="NoticeBar\" />
         <Folder Include="SwipeAction\" />
         <Folder Include="FixedNav\" />

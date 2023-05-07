@@ -7,6 +7,7 @@ public static class ServiceExt
         (this IServiceCollection services)
     {
         services.AddScoped<ActionSheetService>();
+        services.AddScoped<ToastService>();
         return services;
     }
 }

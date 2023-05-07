@@ -1,0 +1,16 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+<div class="@PrefixCls">
+    <div class="@($"{PrefixCls}-content")">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    public const string PrefixCls = "bm-auto-center";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
