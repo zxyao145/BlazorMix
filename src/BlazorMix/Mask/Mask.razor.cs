@@ -106,7 +106,6 @@ public partial class Mask
         {
             if (_disableBodyScrollState!.State)
             {
-                Console.WriteLine($"_disableBodyScrollState.State:{_disableBodyScrollState.State}");
                 await _disableBodyScrollState.Invoke();
             }
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.CompilerServices;
 
 namespace BlazorMix;
-internal partial class ToastInner : BmDomComponentBase
+internal partial class Toast : BmDomComponentBase
 {
     public const string PrefixCls = "bm-toast";
 
@@ -12,7 +12,7 @@ internal partial class ToastInner : BmDomComponentBase
     private readonly ClassBuilder _mainClass;
     private RenderFragment? _iconElement = null;
 
-    public ToastInner(ToastOption props)
+    public Toast(ToastOption props)
     {
         _props = props;
 

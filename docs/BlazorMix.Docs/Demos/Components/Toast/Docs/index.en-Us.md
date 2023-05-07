@@ -1,24 +1,46 @@
-# Divider 分割线
+# Toast 轻提示
 
-区隔内容的分割线。
+对操作结果的轻量级反馈，无需用户操作即可自行消失。
 
 ## 何时使用
 
-- 对不同章节的文本段落进行分割。
-- 对行内文字/链接进行分割，例如表格的操作列。
+适用于页面内容的变化不能直接反应操作结果时使用。
 
-<code-demo Src="Demos/Components/Divider/Demos/Demo1"></code-demo>
+<code-demo Src="Demos/Components/Toast/Demos/Demo1"></code-demo>
 
-## API
+## Toast
 
-### 属性
+## 指令式 API
 
-> [xmldoc]
+Toast 只支持指令式调用。
 
-### CSS 变量
+```csharp
+@inject ToastService ToastService;
+ToastService.Show(new ToastOption(){});
+```
 
-| 属性                  | 说明     | 默认值                |
-| --------------------- | -------- | --------------------- |
-| --divider-color       | 背景颜色 | `#eee`                |
-| --divider-text-color  | 文字颜色 | `#999`                |
+### ToastService.Show
 
+`Show` 方法支持传入一个 `ToastOption` 对象，它包含了以下这些属性：
+
+> [xmldoc](ToastOption)
+
+> 同一时间只允许弹出一个轻提示，新出现的 Toast 会将之前正在显示中的 Toast 挤掉。
+
+`Show` 方法返回一个 `ToastRef` 对象，可以通过 `ToastRef.Close` 关闭显示中的 Toast 对象.
+
+### ToastService.Clear
+
+关闭所有显示中的 Toast。
+
+### ToastService.Config
+
+全局配置，支持配置 duration、position 和 maskClickable。
+
+```csharp
+public void Config(
+        int? durationMs = null,
+        ToastPosition? position = null,
+        bool? maskClickable = null
+        )
+```

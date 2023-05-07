@@ -33,6 +33,12 @@ window.Mix = {
         },
         highlightAll: () => {
             Prism.highlightAll();
+        },
+        highlightComponent: () => {
+            console.log("highlightComponent");
+            for (let e of document.querySelectorAll(".page-code")) {
+                Prism.highlightElement(e);
+            }
         }
     },
     Docs: {

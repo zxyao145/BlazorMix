@@ -14,6 +14,7 @@ using System.Xml;
 using Markdig.Extensions.Tables;
 using GTranslate;
 using System.Collections;
+using Markdig.Syntax.Inlines;
 
 namespace BlazorMix.Docs.Build;
 internal class DocsMdParser
@@ -43,18 +44,35 @@ internal class DocsMdParser
             var block = document[i];
             if (block is QuoteBlock quoteBlock)
             {
+                if (componentName == "Toast")
+                {
+                    Console.WriteLine("debug");
+                }
+
                 if (TryRenderXmlDoc(quoteBlock, componentName, lang, out var tableSb))
                 {
                     sb.Append(tableSb);
                     continue;
                 }
                 RenderToHtml(pipeline, sb, block);
+                continue;
             }
             else if (block is Table tableBlock)
             {
                 var writer = GetHtml(pipeline, tableBlock);
 
                 sb.Append($"<div>{writer.ToString()}</div>");
+                continue;
+            }
+            else if (block is CodeBlock codeBlock)
+            {
+                var writer = GetHtml(pipeline, codeBlock);
+                var xml = XDocument.Parse(writer.ToString()!);
+                var code = xml.Descendants("code").ToList()[0];
+                var l = code.Attribute("class")?.Value ?? "";
+                xml.Root.SetAttributeValue("class", l + " page-code");
+                var s = xml.ToString(SaveOptions.DisableFormatting);
+                sb.Append($"{s}");
                 continue;
             }
             RenderToHtml(pipeline, sb, block);
@@ -65,6 +83,8 @@ internal class DocsMdParser
 
     #region xmldoc 解析
 
+    static XmlDocHelper xmlDocHelper = new XmlDocHelper();
+
     private static bool TryRenderXmlDoc(
         QuoteBlock quoteBlock,
         string componentName,
@@ -72,26 +92,57 @@ internal class DocsMdParser
         out StringBuilder tableSb
         )
     {
+        if (componentName == "Toast")
+        {
+            Console.WriteLine("debug");
+        }
+
         var firstLine = quoteBlock.ToList()[0];
         if (firstLine is ParagraphBlock { Inline: { } } paragraph)
         {
-            var content = string.Join("", paragraph.Inline);
-            if (content.Equals("[xmldoc]", StringComparison.CurrentCultureIgnoreCase))
-            {
-                var trs = ReadXmlDoc(componentName, language);
+            StringBuilder trs = null;
 
+            if (paragraph.Inline.FirstChild is LinkInline url)
+            {
+                var label = ((LiteralInline)url.FirstChild).Content.ToString();
+                if (label == "xmldoc")
+                {
+                    var classInfo = url.Url!.Trim().Split("#");
+                    Func<PropertyInfo, bool> propertyFilter = null;
+                    if (classInfo.Length > 1)
+                    {
+                        propertyFilter = p => p.Name == classInfo[1];
+                    }
+
+                    trs = xmlDocHelper.ReadClassPropertyMdTable(classInfo[0], language, propertyFilter);
+                }
+            }
+            else
+            {
+                var content = string.Join("", paragraph.Inline).Trim();
+                if (content.StartsWith("[xmldoc]", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (content == "[xmldoc]")
+                    {
+                        trs = xmlDocHelper.ReadComponentXmlDocToMdTable(componentName, language);
+                    }
+                }
+            }
+
+            if (trs != null)
+            {
                 tableSb = new StringBuilder();
                 tableSb.Append(@"<div><table class=""xmldoc-table"">
-	<thead>
-		<tr>
-			<th>Property</th>
-			<th>Type</th>
-			<th>Default</th>
-			<th>Description</th>
-		</tr>
-	</thead>
-	
-	<tbody>");
+	                <thead>
+		                <tr>
+			                <th>Property</th>
+			                <th>Type</th>
+			                <th>Default</th>
+			                <th>Description</th>
+		                </tr>
+	                </thead>
+	                
+	                <tbody>");
                 tableSb.Append(trs);
                 tableSb.Append(@"</tbody></table></div>");
                 return true;
@@ -99,275 +150,6 @@ internal class DocsMdParser
         }
         tableSb = null;
         return false;
-    }
-
-    static Assembly assembly = null;
-    static XDocument defaultXmlDoc = null;
-    static string xmlDefaultDocPath = "";
-    static Dictionary<string, Dictionary<string, XElement>> allLangXmlDoc 
-        = new Dictionary<string, Dictionary<string, XElement>>();
-    static Dictionary<Type, object> instances
-        = new Dictionary<Type, object>();
-
-    static Dictionary<string, string> defaultValusCache
-      = new Dictionary<string, string>();
-
-    static Dictionary<string, string> defaultTypeNameCacheCache
-        = new Dictionary<string, string>();
-
-    static string libName = "BlazorMix";
-
-    private static List<string> ignoreParamterName = new List<string>()
-    {
-        "AniOptions",
-        "ChildContent",
-        "Class",
-        "Style"
-    };
-
-    private static StringBuilder ReadXmlDoc(string componentName, string language)
-    {
-        Console.WriteLine("componentName: {0}", componentName);
-        if (componentName == "Mask")
-        {
-            Console.WriteLine("debug");
-        }
-        var sb = new StringBuilder();
-        if (assembly == null)
-        {
-            assembly = Assembly.Load(libName);
-
-            // var location = assembly.Location;
-            var dir = Path.Combine(AppContext.BaseDirectory, "xmldocs");
-            if (defaultXmlDoc == null)
-            {
-                xmlDefaultDocPath = Path.Combine(dir, libName + ".xml");
-                // 'F:\Git\BcdLib\BlazorMixUi\BlazorMix.xml
-                defaultXmlDoc = XDocument.Load(xmlDefaultDocPath);
-            }
-        }
-        if (!allLangXmlDoc.ContainsKey(language))
-        {
-            var languageXml = Path.ChangeExtension(xmlDefaultDocPath, $".{language}.xml");
-            var tempMembers = defaultXmlDoc.Descendants("member")
-                   .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
-                   .ToDictionary(x => x.Attribute("name").Value, x => x);
-
-            if (File.Exists(languageXml))
-            {
-               
-                var xmlDoc = XDocument.Load(languageXml);
-                var langUageMembers = xmlDoc.Descendants("member")
-                    .Where(x => x.Attribute("name")?.Value.StartsWith("P:") ?? false)
-                    .ToDictionary(x => x.Attribute("name").Value, x => x);
-                foreach (var member in langUageMembers)
-                {
-                    tempMembers[member.Key] = member.Value;
-                }
-
-            }
-
-            allLangXmlDoc.Add(language, tempMembers);
-        }
-
-        var componentCls = assembly.GetType($"{libName}.{componentName}");
-        if (componentCls == null)
-        {
-            return sb;
-        }
-
-        if(!instances.ContainsKey(componentCls))
-        {
-            instances[componentCls] = Activator.CreateInstance(componentCls);
-        }
-
-        var defaultInstance = instances[componentCls];
-        var members = allLangXmlDoc[language];
-
-        var allParameters = componentCls
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(x =>
-                x.GetCustomAttribute<ParameterAttribute>() != null
-                ||
-                x.GetCustomAttribute<CascadingParameterAttribute>() != null
-            )
-            .ToList();
-
-        foreach (var item in allParameters)
-        {
-            if (ignoreParamterName.Contains(item.Name))
-            {
-                continue;
-            }
-            var realComponentName = componentName;
-            var realInstance = defaultInstance;
-            if (item.DeclaringType != null && item.DeclaringType != componentCls)
-            {
-                realComponentName = item.DeclaringType.Name;
-                if (!item.DeclaringType.IsAbstract)
-                {
-                    if (!instances.ContainsKey(item.DeclaringType))
-                    {
-                        instances[item.DeclaringType] = Activator.CreateInstance(item.DeclaringType);
-                    }
-
-                    realInstance = instances[componentCls];
-                }
-            }
-
-            var fullName = $"P:{libName}.{realComponentName}.{item.Name}";
-            var description = item.Name;
-            XElement defaultEle = null;
-            if (members.TryGetValue(fullName, out XElement xmlEle))
-            {
-                if (xmlEle != null)
-                {
-                    var summary = xmlEle.Elements("summary").FirstOrDefault();
-                    description = GetSummaryText(summary);
-                }
-                defaultEle = xmlEle?.Elements("default").FirstOrDefault();
-            }
-
-            // todo optimize
-            sb.Append("<tr>");
-            sb.Append($"<td>{item.Name}</td>");
-            sb.Append($"<td>{GetTypeName(item.PropertyType)}</td>");
-            sb.Append($"<td>{GetDefaultValue(realComponentName, item, realInstance, defaultEle)}</td>");
-            sb.Append($"<td>{description}</td>");
-            sb.Append("</tr>");
-        }
-
-        return sb;
-    }
-
-    private static string GetDefaultValue(
-        string componentName,
-        PropertyInfo propertyInfo, 
-        object instance, 
-        XElement defaultEle
-        )
-    {
-
-        string DoGetDefaultVal()
-        {
-            if (defaultEle != null)
-            {
-                return defaultEle.Value.Trim();
-            }
-            var type = propertyInfo.PropertyType;
-            if (type.IsEnum)
-            {
-                var enumVal = (Enum)propertyInfo.GetValue(instance);
-                var display = enumVal.GetAttribute<DisplayAttribute>();
-                if (display != null)
-                {
-                    return display.Name;
-                }
-                return enumVal.ToString();
-            }
-            if (type.IsPrimitive || type == typeof(string))
-            {
-                try
-                {
-                    var val = propertyInfo.GetValue(instance).ToString();
-                    return val;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-            return "";
-        }
-
-        string key = componentName + propertyInfo.Name;
-        if(!defaultValusCache.ContainsKey(key))
-        {
-            var val = DoGetDefaultVal();
-            defaultValusCache[key] = val;
-        }
-
-        return defaultValusCache[key];
-    }
-
-
-    private static string GetTypeName(Type type)
-    {
-        string key = type.FullName;
-        if (!defaultTypeNameCacheCache.ContainsKey(key))
-        {
-            defaultTypeNameCacheCache[key] = DoGetTypeName(type);
-        }
-        return defaultTypeNameCacheCache[key];
-    }
-
-    private static string DoGetTypeName(Type type)
-    {
-        var name = type.Name;
-        if (!type.IsGenericType)
-        {
-            return name;
-        }
-        name = name.Split('`')[0];
-        var argeuments = type.GetGenericArguments();
-        var typeNameList = argeuments.Select(x => GetTypeName(x));
-        var typeNames = string.Join(", ", typeNameList);
-        name += $"&lt;{typeNames}&gt;";
-        return name;
-    }
-
-    private static string GetSummaryText(XElement element)
-    {
-        if (element == null)
-        {
-            return "";
-        }
-        if (!element.HasElements)
-        {
-            return element.Value.Trim();
-        }
-        var description = "";
-
-        var nodes = element.Nodes().ToList();
-        foreach (var node in nodes)
-        {
-            if (node.NodeType == XmlNodeType.Text)
-            {
-                var ele = (XText)node;
-                description += ele.Value.Trim();
-            }
-            else if (node.NodeType == XmlNodeType.Element)
-            {
-                var ele = (XElement)node;
-                if (ele.Name == "see")
-                {
-                    var cref = ele.Attribute("cref");
-                    if (cref != null)
-                    {
-                        var crefVal = cref.Value.Trim();
-                        if (!string.IsNullOrWhiteSpace(crefVal))
-                        {
-                            description += $"<code>{crefVal.Split("BlazorMix.")[1]}</code>";
-                        }
-                    }
-                }
-                if (ele.Name == "c")
-                {
-                    description += $"<code>{ele.Value.Trim()}</code>";
-                }
-                if (ele.Name == "code")
-                {
-                    //  <pre class="language-c#"><code>@sourceCode</code></pre>
-                    description += $"<code>{ele.Value.Trim()}</code>";
-                }
-                else
-                {
-                    description += GetSummaryText(ele);
-                }
-            }
-            description += " ";
-        }
-        return description;
     }
 
     #endregion

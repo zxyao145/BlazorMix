@@ -97,7 +97,6 @@ public partial class Animation
         }
         else if(lastState != In)
         {
-            Console.WriteLine("Animation SetParametersAsync:{0},{1}", In, _options.State);
             _beginTime = DateTime.UtcNow;
             OnExit?.Invoke();
             _options.SetState(AniState.Leave);

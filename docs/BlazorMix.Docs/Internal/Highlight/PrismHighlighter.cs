@@ -21,7 +21,7 @@ namespace BlazorMix.Docs.Internal.Components
 
         public async Task HighlightAllAsync()
         {
-            await jsRuntime.InvokeVoidAsync("AntDesign.Prism.highlightAll");
+            await jsRuntime.InvokeVoidAsync("Mix.Prism.highlightAll");
         }
     }
 }

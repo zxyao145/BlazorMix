@@ -12,7 +12,7 @@ public partial class Components: IDisposable
     public DocService DocService { get; set; } = default!;
 
     [Inject]
-    public IJSRuntime JSRuntime { get; set; } = default!;
+    public IJSRuntime JsRuntime { get; set; } = default!;
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = default!;
@@ -58,7 +58,8 @@ public partial class Components: IDisposable
             if(secondRender) 
             {
                 secondRender = false;
-                await JSRuntime.InvokeVoidAsync("Mix.Docs.renderToc", _articleRef, TocRefWrapper!.EleRef);
+                await JsRuntime.InvokeVoidAsync("Mix.Docs.renderToc", _articleRef, TocRefWrapper!.EleRef);
+                await JsRuntime.InvokeVoidAsync("Mix.Prism.highlightComponent");
             }
         }
         await ScrollToFragment();
@@ -88,7 +89,7 @@ public partial class Components: IDisposable
 
             if (!string.IsNullOrEmpty(elementId))
             {
-                await JSRuntime.InvokeVoidAsync("Mix.Docs.blazorScrollToId", elementId);
+                await JsRuntime.InvokeVoidAsync("Mix.Docs.blazorScrollToId", elementId);
             }
         }
     }
