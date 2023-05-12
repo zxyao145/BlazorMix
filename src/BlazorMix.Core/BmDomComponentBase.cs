@@ -2,6 +2,10 @@
 
 public abstract class BmDomComponentBase : BmComponentBase
 {
+    protected Lazy<string> Id = new(
+        () => $"bm-" + Guid.NewGuid()
+        );
+
     /// <summary>
     /// AniOptions is a parameter specifically designed for component Animation, please use it with caution
     /// </summary>

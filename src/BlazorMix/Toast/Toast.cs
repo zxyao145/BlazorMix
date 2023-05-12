@@ -61,7 +61,6 @@ internal partial class Toast : BmDomComponentBase
 
         var fluentRenderTreeBuilder = builder.Fluent();
         fluentRenderTreeBuilder
-            .OpenElement("div")
             .OpenComponent<AniMask>()
             .AddAttribute("Visible", _props.Visible)
             .AddAttribute("DestroyOnClose", true)
@@ -103,8 +102,7 @@ internal partial class Toast : BmDomComponentBase
             }
         ));
         fluentRenderTreeBuilder
-            .CloseComponent()
-            .CloseElement();
+            .CloseComponent();
     }
 
 }

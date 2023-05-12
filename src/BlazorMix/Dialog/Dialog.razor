@@ -1,5 +1,75 @@
-﻿<h3>Dialog</h3>
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
 
-@code {
 
-}
+<CenterPopup Visible="@Visible"
+             Style="@Style"
+             Class="@((Class?.ToString() ?? "") + PrefixCls)"
+             OnMaskClick="HandleMaskClick"
+             Container="@Container"
+             AfterClose="@AfterClose"
+             AfterShow="@AfterShow"
+             BodyStyle="@BodyStyle"
+             BodyClass="@_bodyClass"
+             MaskClass="@MaskClass"
+             MaskStyle="@MaskStyle"
+             DestroyOnClose="@DestroyOnClose"
+             DisableBodyScroll="@DisableBodyScroll">
+    @if (!string.IsNullOrWhiteSpace(Image))
+    {
+        <div class="@PrefixCls-image-container">
+            <div class="bm-image" style="--width:100%; width: 100%;">
+                <img class="bm-image-img" src="@Image" alt="dialog header image"
+                     draggable="false"
+                     style="object-fit: fill; display: block;" />
+            </div>
+            @*<Image src={props.image} alt='dialog header image' width='100%' />*@
+        </div>
+    }
+
+    @if (Header != null)
+    {
+        <div class="@PrefixCls-header">
+            <AutoCenter>@Header.Value.Node</AutoCenter>
+        </div>
+    }
+    @if (Title != null)
+    {
+        <div class="@PrefixCls-title">
+            @Title.Value.Node
+        </div>
+    }
+    <div class="@PrefixCls-content @_classBuilder">
+        @if (Content.HasValue)
+        {
+            if (Content.Value.IsText)
+            {
+                <AutoCenter>@Content.Value.OriginText</AutoCenter>
+            }
+            else
+            {
+                @Content.Value.Node
+            }
+        }
+    </div>
+    <div class="@PrefixCls-footer">
+        @{
+            var index = 0;
+            foreach (var actionInfoGrp in Actions)
+            {
+                <div class="@PrefixCls-action-row" @key="actionInfoGrp">
+                    @foreach (var actionInfo in actionInfoGrp.ActionList)
+                    {
+                        var temp = index;
+                        <DialogActionButton @key="actionInfo.Key"
+                                ActionItem="@actionInfo"
+                                OnAction="@(async () => await HandleAction(actionInfo, temp))" />
+
+                    }
+                </div>
+
+                index += 1;
+            }
+        }
+    </div>
+</CenterPopup>

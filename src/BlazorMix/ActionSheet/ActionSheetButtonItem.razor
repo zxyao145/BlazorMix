@@ -41,10 +41,9 @@
     [Parameter]
     public ActionInfo Action { get; set; } = default!;
 
-    public override async Task SetParametersAsync(ParameterView parameters)
+    protected override void OnInitialized()
     {
-        await base.SetParametersAsync(parameters);
-
+        base.OnInitialized();
         _classBuilder
             .Clear()
             .Add("bm-plain-anchor")

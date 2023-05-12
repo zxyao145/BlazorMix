@@ -46,7 +46,7 @@
                 圆角的弹出层
             </Button>
             <Popup Visible="@show5"
-                   Class="@BorderRadius.Rounded"
+                   BodyClass="@BorderRadius.RoundedTop"
                    OnMaskClick="@(() => { show5 = false;})">
                 @content
             </Popup>

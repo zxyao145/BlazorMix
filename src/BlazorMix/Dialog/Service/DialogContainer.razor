@@ -1,0 +1,82 @@
+﻿@namespace BlazorMix
+@using System.ComponentModel
+@inherits BmComponentBase
+
+
+@foreach (var eleRef in _dialogRefs)
+{
+    var option = eleRef.Option;
+    <Dialog @key="@option"
+            Style="@option.Style"
+            Class="@option.Class"
+            Visible="@option.Visible"
+            AfterClose="@option.AfterClose"
+            AfterShow="@option.AfterShow"
+            CloseOnMaskClick="@option.CloseOnMaskClick"
+            MaskClass="@option.MaskClass"
+            MaskStyle="@option.MaskStyle"
+            BodyClass="@option.BodyClass"
+            BodyStyle="@option.BodyStyle"
+            DestroyOnClose="@option.DestroyOnClose"
+            DisableBodyScroll="@option.DisableBodyScroll"
+            Actions="@option.Actions"
+            Image="@option.Image"
+            Header="@option.Header"
+            Title="@option.Title"
+            Content="@option.Content"
+            OnAction="@option.OnAction"
+            CloseOnAction="@option.CloseOnAction"
+            OnClose="@(async () => { await HandleOnClose(eleRef); })"
+    >
+    </Dialog>
+}
+
+@code {
+    [Inject]
+    public DialogService? Service { get; set; }
+
+    private readonly List<DialogRef> _dialogRefs = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Service == null)
+        {
+            return;
+        }
+        Service.OnAddEvent += OnAdd;
+        Service.OnUpdateEvent += OnUpdate;
+        Service.OnClear += OnOnClear;
+    }
+
+    private Task OnOnClear()
+    {
+        _dialogRefs.Clear();
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+
+    internal async Task HandleOnClose(DialogRef action)
+    {
+        if (action.Option.OnClose != null)
+        {
+            await action.Option.OnClose();
+        }
+        action.Option.Visible = false;
+        StateHasChanged();
+    }
+
+    public async Task OnAdd(DialogRef eleRef)
+    {
+        _dialogRefs.Add(eleRef);
+        eleRef.Option.Added = true;
+        await InvokeStateHasChangedAsync();
+    }
+
+
+    public async Task OnUpdate()
+    {
+        await InvokeStateHasChangedAsync();
+    }
+}

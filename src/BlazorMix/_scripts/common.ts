@@ -1,13 +1,20 @@
-﻿
-export const MoveEleTo = (ref: HTMLElement, container: HTMLElement | string) => {
-    let c: HTMLElement;
-    if (typeof container === "string") {
-        c = document.querySelector(container as string) as HTMLElement;
+﻿const getEle = (e: HTMLElement | string) => {
+    if (typeof e === "string") {
+        return document.querySelector(e as string) as HTMLElement;
     } else {
-        c = container as HTMLElement;
+        return e;
     }
+}
 
-    c.append(ref);
+export const MoveEleTo = (
+    ref: HTMLElement | string,
+    container: HTMLElement | string
+) => {
+    let ele = getEle(ref);
+    let c = getEle(container);
+    if (ele && c) {
+        c.append(ele);
+    } 
 }
 
 

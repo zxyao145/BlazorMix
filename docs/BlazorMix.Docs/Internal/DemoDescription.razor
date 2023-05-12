@@ -1,0 +1,9 @@
+﻿@namespace BlazorMix.Docs.Internal.Components
+
+<div class="demo-description">
+    @ChildContent
+</div>
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent{ get; set; }
+}

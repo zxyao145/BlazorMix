@@ -26,26 +26,27 @@ public abstract class BuilderBase
 
     public BuilderBase Add(string style)
     {
-        Add(() => style);
-        return this;
+        return Add(() => style);
+    }
+
+    public BuilderBase Add(BuilderBase b)
+    {
+        return Add(()=> b.ToString() ?? "");
     }
 
     public BuilderBase Add(Func<string> styleFunc)
     {
-        AddIf(styleFunc, AlwaysIsTrue);
-        return this;
+        return AddIf(styleFunc, AlwaysIsTrue);
     }
 
     public BuilderBase AddIf(string style, Func<bool> func)
     {
-        AddIf(() => style, str => func());
-        return this;
+        return AddIf(() => style, str => func());
     }
 
     public BuilderBase AddIf(string style, Func<string, bool> func)
     {
-        AddIf(() => style, func);
-        return this;
+        return AddIf(() => style, func);
     }
 
     public BuilderBase AddIf(Func<string> styleFunc, Func<string, bool> func)

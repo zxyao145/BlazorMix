@@ -1,0 +1,37 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<Button @key="@ActionItem.Key"
+        OnClick="@OnAction"
+        Class="@_classBuilder"
+        Fill="@ButtonFillType.None"
+        Shape="@ButtonShape.Rectangular"
+        Block
+        Color="@(ActionItem.Danger ? ButtonColor.Danger : ButtonColor.Primary)"
+        AutoLoading
+        Disabled="@ActionItem.Disabled">
+    @ActionItem.Text.Node
+</Button>
+
+@code {
+
+    [Parameter]
+    public DialogActionItem ActionItem { get; set; } = new();
+
+    [Parameter]
+    public EventCallback OnAction { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _classBuilder
+            .Add("bm-dialog-button")
+            .AddIf("bm-dialog-button-bold", () => ActionItem.Bold)
+            .Add(() => ActionItem.Class?.ToString() ?? "");
+
+        _styleBuilder
+            .Add(() => ActionItem.Style?.ToString() ?? "");
+
+        base.OnInitialized();
+    }
+
+}

@@ -14,5 +14,5 @@ public class ActionInfo
 
     public bool Bold { get; set; } = false;
 
-    public Func<ValueTask>? OnClick { get; set; }
+    public Func<Task>? OnClick { get; set; }
 }

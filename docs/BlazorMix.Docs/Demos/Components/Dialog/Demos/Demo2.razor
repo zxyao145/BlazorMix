@@ -1,0 +1,188 @@
+﻿@using IconPark
+@inject DialogService DialogService
+@inject ToastService ToastService
+
+<DemoBlock Title="内容区域">
+    <Space Direction="BmDirection.Vertical" Block>
+        <SpaceItem>
+            <Button Block OnClick="@CustomContent">
+                自定义内容区域
+            </Button>
+            </SpaceItem>
+            <SpaceItem>
+            <Button Block OnClick="@CustomImg">
+                有标题和图片
+            </Button>
+            </SpaceItem>
+            <SpaceItem>
+            <Button Block OnClick="@LongText">
+                超长文本
+            </Button>
+            </SpaceItem>
+            </Space>
+
+</DemoBlock>
+
+<DemoBlock Title="获取点击结果">
+<Space Direction="BmDirection.Vertical" Block>
+        <SpaceItem>
+            <Button Block OnClick="@WaitAlert">
+                等待 Alert 完成
+            </Button>
+            <DemoDescription>
+                Alert 和 Confirm 方法都会返回一个 Task，你可以通过这个 Task 实现等待弹窗关闭
+            </DemoDescription>
+            </SpaceItem>
+            <SpaceItem>
+            <Button Block OnClick="@WaitConfirm">
+                等待 Confirm 完成
+            </Button>
+            <DemoDescription>
+                Confirm 返回的是 Task &lt;bool&gt; 你可以通过这个 bool 来判断用户是点击的确认还是取消
+            </DemoDescription>
+            </SpaceItem>
+            </Space>
+
+            </DemoBlock>
+
+<DemoBlock Title="声明式">
+    <Button Block OnClick="@(() => _show1 = true)"> 显示对话框</Button>
+    <Dialog Visible="@_show1"
+            CloseOnAction
+            OnClose="@DeclarativeOnClose"
+            Actions="@(
+                             new List<DialogAction>(){
+                                 new DialogAction()
+                                 {
+                                     Key = "confirm",
+                                     Text = "我知道了",
+                                 }
+                             })"
+    >
+        <AutoCenter>
+            人在天边月上明
+        </AutoCenter>
+    </Dialog>
+    <DemoDescription>
+        你可以手动控制 visible 状态
+    </DemoDescription>
+</DemoBlock>
+
+<DemoBlock Title="自定义关闭操作">
+    <Button Block OnClick="CustomClose">显示对话框</Button>
+    <DemoDescription>
+        你可以根据需求，自定义关闭弹窗的时机
+    </DemoDescription>
+</DemoBlock>
+@code {
+    private readonly RenderFragment _content = @<div>
+        <div> 请用手机拍摄手持工牌照，注意保持照片清晰 </div>
+        <div>
+            详情说明请查阅 <a>操作指引</a>
+        </div>
+    </div>;
+
+    private readonly RenderFragment header = @<IconPark.Attention Theme="@ThemeType.Filled"
+                    Size="64"
+                    Fill="@(new List<string>(){"#ff8f1f"})" />;
+    private void CustomContent()
+    {
+        _ = DialogService.Alert(new DialogAlertOption()
+            {
+                Header = header,
+                Title = "注意",
+                Content = _content
+            }
+        );
+    }
+
+    private void CustomImg()
+    {
+        var url = "https://gw.alipayobjects.com/mdn/rms_efa86a/afts/img/A*SE7kRojatZ0AAAAAAAAAAAAAARQnAQ";
+        _ = DialogService.Alert(new DialogAlertOption()
+            {
+                Image = url,
+                Title = "手持工牌照示例",
+                Content = "请用手机拍摄手持工牌照，注意保持照片清晰"
+            }
+        );
+    }
+
+    private void LongText()
+    {
+        _ = DialogService.Confirm(new DialogConfirmOption()
+            {
+                Title = "提示",
+                Content = "Ipsum aute est quis veniam qui pariatur incididunt duis laboris esse deserunt eu irure magna. Deserunt duis irure consequat fugiat enim cupidatat esse excepteur aliquip magna quis. Non deserunt exercitation id laboris est laboris reprehenderit pariatur tempor commodo voluptate. Culpa magna pariatur labore et culpa qui velit. Laboris sunt eu incididunt nulla adipisicing elit incididunt consectetur officia fugiat occaecat est irure aute. Ut sunt aute cupidatat tempor dolor. Pariatur nulla eiusmod non minim commodo officia consectetur pariatur Lorem consequat aliquip. Quis esse sit veniam ullamco incididunt tempor ullamco ea culpa velit consectetur anim. Laboris anim consectetur laboris laborum. Sint nulla ex mollit quis eiusmod laboris ad cupidatat ad eiusmod ex veniam. Eiusmod et id esse labore fugiat ullamco labore veniam incididunt tempor. Id ut est labore deserunt et dolore aliquip elit veniam id est. Nostrud sunt quis eiusmod. Id ipsum nulla culpa non excepteur ut officia eu nisi magna veniam quis nulla minim quis. Nisi laborum sunt ipsum laboris aliqua Lorem aliquip laboris. Elit voluptate nostrud sunt. Tempor veniam minim duis Lorem et deserunt dolore aliqua. Fugiat deserunt adipisicing adipisicing. Consequat do pariatur excepteur cillum anim minim ipsum enim aliquip pariatur do velit sint commodo. Nulla occaecat voluptate quis cillum mollit nulla. Sunt cillum enim consequat qui tempor ullamco exercitation Lorem reprehenderit. Anim eu eiusmod nostrud nostrud proident dolore reprehenderit ad ipsum. Et deserunt adipisicing minim in tempor dolore mollit magna ipsum cupidatat officia. Dolore laboris do excepteur exercitation est pariatur enim labore laboris minim enim. Sunt aliqua tempor dolore anim culpa ullamco aute. Dolore officia culpa sit fugiat consectetur fugiat culpa cillum dolor commodo reprehenderit incididunt non. Laboris dolore commodo labore et do ea labore culpa proident velit ex reprehenderit ea veniam. Eu minim pariatur officia qui officia. Eiusmod enim irure officia veniam minim proident incididunt veniam pariatur est nostrud. Lorem voluptate proident tempor magna. Sint anim pariatur aliquip dolore sit consectetur id pariatur. Sint esse adipisicing ipsum incididunt eu aliquip. Duis amet Lorem ut. Adipisicing ullamco consequat qui fugiat. Fugiat id dolore aliqua consequat voluptate voluptate ea exercitation enim mollit cupidatat cupidatat sint occaecat pariatur. Tempor dolore commodo duis ad. Nulla sit qui exercitation cupidatat ad sit dolore quis do Lorem fugiat culpa duis laboris. Veniam quis culpa ullamco laborum voluptate."
+            }
+        );
+    }
+
+    private async Task WaitAlert()
+    {
+        await DialogService.Alert(new DialogAlertOption()
+            {
+                Title = "提示",
+                Content = "人在天边月上明"
+            }
+        );
+
+        await ToastService.Show(new ToastOption()
+            {
+                Content = "已经关闭",
+                Position = ToastPosition.Bottom
+            });
+    }
+
+    private async Task WaitConfirm()
+    {
+        var isConfirm = await DialogService.Confirm(new DialogConfirmOption()
+            {
+                Title = "提示",
+                Content = "人在天边月上明"
+            }
+        );
+        var btn = isConfirm ? "确认" : "取消";
+        await ToastService.Show(new ToastOption()
+            {
+                Content = "点击了 " + btn,
+                Position = ToastPosition.Bottom
+            });
+    }
+
+
+    private bool _show1 = false;
+    private void DeclarativeOnClose()
+    {
+        Console.WriteLine("DeclarativeOnClose");
+        _show1 = false; 
+        StateHasChanged();
+    }
+
+
+    private async Task CustomClose()
+    {
+        await DialogService.Show(new DialogOption()
+        {
+            Title = "提示",
+            Content = "人在天边月上明",
+            CloseOnAction = true,
+            Actions = new List<DialogAction>()
+            {
+                new ()
+                {
+                    Key= "close",
+                    Text = "关闭",
+                    OnClick = async e =>
+                    {
+                        if (Random.Shared.NextDouble() > 0.5)
+                        {
+                            e.Cancel = true;
+                            await ToastService.Show("再试一下");
+                        }
+                    }
+                }
+            }
+        });
+    }
+}

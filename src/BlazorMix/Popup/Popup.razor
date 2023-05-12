@@ -3,7 +3,9 @@
 
 @if (!_hasDestroyed)
 {
-    <div @ref="@PopupRef" class="@PrefixCls">
+    <div @ref="@Ref"
+         class="@PrefixCls @(Class?.ToString() ?? "")" 
+         style="@Style?.ToString()">
         @if (ShowMask)
         {
             <AniMask Visible="@Visible"
@@ -17,7 +19,7 @@
         <AniDiv Name="@_animateName"
                 In="@Visible"
                 Class="@_classBuilder"
-                Style="@Style"
+                Style="@BodyStyle"
                 OnClick="@OnClick"
         >
             @if (ShowCloseButton)

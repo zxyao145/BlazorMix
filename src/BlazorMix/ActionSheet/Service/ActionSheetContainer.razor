@@ -59,13 +59,6 @@
         await InvokeStateHasChangedAsync();
     }
 
-    public async ValueTask DoRemove(ActionSheetRef eleRef)
-    {
-        _actionSheetRefs.Remove(eleRef);
-        eleRef.Option.Added = false;
-        await InvokeStateHasChangedAsync();
-    }
-
     public async ValueTask OnUpdate()
     {
         await InvokeStateHasChangedAsync();

@@ -26,7 +26,7 @@ public static class EventUtil
     // The logic here just calls the callback without triggering any re-rendering
     class ReceiverBase : IHandleEvent
     {
-        public Task HandleEventAsync(EventCallbackWorkItem item, object arg) => item.InvokeAsync(arg);
+        public Task HandleEventAsync(EventCallbackWorkItem item, object? arg) => item.InvokeAsync(arg);
     }
 
 

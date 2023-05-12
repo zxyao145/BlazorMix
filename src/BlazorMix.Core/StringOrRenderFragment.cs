@@ -4,13 +4,10 @@ namespace BlazorMix;
 
 public struct StringOrRenderFragment
 {
-    public static RenderFragment EmptyRenderFragment = builder =>
-    {
-        builder.Fluent().AddContent("");
-    };
-
-    public RenderFragment Node { get; private set; }
+    public RenderFragment? Node { get; private set; }
     public string OriginText { get; private set; } = "";
+
+    public bool IsText { get; private set; } =false;
 
     public StringOrRenderFragment(string text)
     {
@@ -19,16 +16,17 @@ public struct StringOrRenderFragment
             builder.Fluent().AddContent(text);
         };
         OriginText = text;
+        IsText = true;
     }
 
-    public StringOrRenderFragment(RenderFragment renderFragment)
+    public StringOrRenderFragment(RenderFragment? renderFragment)
     {
         Node = renderFragment;
     }
 
     public static implicit operator StringOrRenderFragment(string text) => new(text);
 
-    public static implicit operator StringOrRenderFragment(RenderFragment renderFragment) => new(renderFragment);
+    public static implicit operator StringOrRenderFragment(RenderFragment? renderFragment) => new(renderFragment);
 
 
 }

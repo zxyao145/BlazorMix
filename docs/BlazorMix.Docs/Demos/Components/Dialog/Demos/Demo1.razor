@@ -1,0 +1,159 @@
+﻿@inject DialogService DialogService
+@inject ToastService ToastService
+
+<DemoBlock Title="基础用法">
+    <Space Direction="BmDirection.Vertical" Block>
+        <SpaceItem>
+            <Button Block OnClick="@Basic">
+                最简单的小对话框
+            </Button>
+            </SpaceItem>
+
+            <SpaceItem>
+            <Button Block OnClick="@MaskClose">
+                点击遮罩关闭
+            </Button>
+            </SpaceItem>
+
+            </Space>
+</DemoBlock>
+
+<DemoBlock Title="操作按钮">
+<Space Direction="BmDirection.Vertical">
+<SpaceItem>
+<Button Block OnClick="@CustomButtons">
+    自定义按钮
+</Button>
+<DemoDescription>
+    如果你想完全自由地控制按钮区域，那么可以通过 actions 参数来自定义操作按钮。
+    当传入一个 DialogActionItem 数组时，可以在同一行内并排放置多个按钮
+</DemoDescription>
+</SpaceItem>
+<SpaceItem>
+<Divider />
+</SpaceItem>
+<SpaceItem>
+<Button Block
+        OnClick="@Success">
+    异步操作执行成功
+</Button>
+</SpaceItem>
+<SpaceItem>
+<Button Block
+        OnClick="@Fail">
+    异步操作执行失败
+</Button>
+<DemoDescription>
+    DialogAlertOption.OnConfirm、DialogConfirmOption.OnConfirm、DialogConfirmOption.OnCancel 和 DialogActionItem/DialogAction 的 OnClick 都有一个参数DialogActionEventArgs，
+    都会接收一个参数 DialogActionEventArgs，可以用来取消 Dialog 的关闭动作。OnConfirm 的动作中，发生异常也会取消 Dialog 的关闭动作。
+</DemoDescription>
+</SpaceItem>
+</Space>
+</DemoBlock>
+
+
+@code {
+    private void Basic()
+    {
+        _= DialogService.Alert(new DialogAlertOption
+            {
+                Content = "人在天边月上明",
+                OnAction = (info, i) =>
+                {
+                    Console.WriteLine("Confirmed");
+                    return Task.CompletedTask;
+                },
+            });
+    }
+
+    private void MaskClose()
+    {
+        _ = DialogService.Alert(new DialogAlertOption
+            {
+                Content = "人在天边月上明",
+                CloseOnMaskClick = true,
+            });
+    }
+
+    private void CustomButtons()
+    {
+        _ = DialogService.Show
+            (
+                new DialogAlertOption
+                    {
+                        Content = "人在天边月上明，风初紧，吹入画帘旌",
+                        CloseOnAction = true,
+                        Actions = new List<DialogAction>() {
+                        new()
+                        {
+                            Key = "online", Text = "在线阅读",
+                        },
+                        new DialogActionItem()
+                        {
+                            Key = "download", Text = "下载文件",
+                        },
+                        new List<DialogActionItem>()
+                        {
+                            new()
+                            {
+                                Key = "cancel",
+                                Text = "取消",
+                            },
+                            new()
+                            {
+                                Key = "delete",
+                                Text = "删除",
+                                Bold = true,
+                                Danger = true
+                            },
+                        }
+                        }
+                    }
+            );
+    }
+
+    private void Success()
+    {
+        _ = DialogService.Confirm
+        (
+            new DialogConfirmOption()
+                {
+                    Content = "是否提交申请",
+                    OnConfirm = async (e) =>
+                    {
+                        await Task.Delay(3000);
+                        await ToastService.Show(
+                            new ToastOption()
+                            {
+                                Icon = ToastIconType.Success,
+                                Content = "提交成功",
+                                Position = ToastPosition.Bottom
+                            }
+                            );
+                    }
+                }
+        );
+    }
+
+    private void Fail()
+    {
+        _= DialogService.Confirm(new DialogConfirmOption()
+            {
+                Content = "是否提交申请",
+                OnConfirm = async (e) =>
+                {
+                    await Task.Delay(3000);
+                    await ToastService.Show(new ToastOption()
+                    {
+                        Icon = ToastIconType.Fail,
+                        Content = "提交失败",
+                        Position = ToastPosition.Bottom
+                    });
+                    throw new Exception();
+                    // or
+                    // e.Cancel = true;
+                }
+            });
+    }
+
+}

@@ -1,9 +1,9 @@
 ﻿namespace BlazorMix;
 public class ToastService
 {
-    internal event Func<ToastRef, ValueTask>? OnAddEvent;
-    internal event Func<ValueTask>? OnRemove;
-    internal event Func<ValueTask>? OnUpdateEvent;
+    internal event Func<ToastRef, Task>? OnAddEvent;
+    internal event Func<Task>? OnRemove;
+    internal event Func<Task>? OnUpdateEvent;
 
     private Task? _lastClearTask;
     private CancellationTokenSource? _cts;
@@ -11,9 +11,21 @@ public class ToastService
     /// <summary>
     /// 显示一个 Toast。注意：同一时间只允许显示一个 Toast，新出现的 Toast 会将之前正在显示中的 Toast 挤掉。
     /// </summary>
+    public async Task<ToastRef?> Show(StringOrRenderFragment content, ToastPosition position = ToastPosition.Center)
+    {
+        return await Show(new ToastOption()
+        {
+            Content = content,
+            Position = position
+        });
+    }
+
+    /// <summary>
+    /// 显示一个 Toast。注意：同一时间只允许显示一个 Toast，新出现的 Toast 会将之前正在显示中的 Toast 挤掉。
+    /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
-    public async ValueTask<ToastRef?> Show(ToastOption option)
+    public async Task<ToastRef?> Show(ToastOption option)
     {
         if (OnAddEvent == null)
         {
@@ -48,7 +60,7 @@ public class ToastService
     /// 更新 options 后，调用次方法可以更新 Toast
     /// </summary>
     /// <returns></returns>
-    public async ValueTask Update()
+    public async Task Update()
     {
         if (OnUpdateEvent != null)
         {
@@ -60,7 +72,7 @@ public class ToastService
     /// 关闭所有显示中的 Toast。
     /// </summary>
     /// <returns></returns>
-    public async ValueTask Clear()
+    public async Task Clear()
     {
         if (OnRemove != null)
         {
@@ -74,7 +86,7 @@ public class ToastService
     /// </summary>
     /// <param name="toastRef"></param>
     /// <returns></returns>
-    public async ValueTask Close(ToastRef toastRef)
+    public async Task Close(ToastRef toastRef)
     {
         await Clear();
     }

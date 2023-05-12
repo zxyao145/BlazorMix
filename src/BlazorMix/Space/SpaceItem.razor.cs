@@ -13,7 +13,7 @@ public partial class SpaceItem
     /// <summary>
     /// 
     /// </summary>
-    [CascadingParameter]
+    [CascadingParameter, EditorRequired]
     public Space Parent { get; set; } = default!;
 
     public override async Task SetParametersAsync(ParameterView parameters)

@@ -19,7 +19,10 @@ public partial class Mask
     {
         var lastVisible = Visible;
         await base.SetParametersAsync(parameters);
-
+        if (Visible)
+        {
+            _hasDestroyed = false;
+        }
 
         _classBuilder.Clear()
             .Add(PrefixCls);
@@ -75,12 +78,6 @@ public partial class Mask
         await base.OnAfterRenderAsync(firstRender);
         if (Visible)
         {
-            if (_hasDestroyed)
-            {
-                _hasDestroyed = false;
-                StateHasChanged();
-            }
-
             if (!string.IsNullOrWhiteSpace(Container))
             {
                 if (!_moveEleToState!.State)

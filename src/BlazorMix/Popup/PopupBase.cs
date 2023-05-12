@@ -51,6 +51,12 @@ public abstract class PopupBase: BmDomComponentBase
     public bool ShowCloseButton { get; set; }
 
     /// <summary>
+    /// 是否禁用 body 滚动
+    /// </summary>
+    [Parameter]
+    public bool DisableBodyScroll { get; set; } = true;
+
+    /// <summary>
     /// 不可见时卸载内容
     /// </summary>
     [Parameter]
@@ -61,6 +67,18 @@ public abstract class PopupBase: BmDomComponentBase
     /// </summary>
     [Parameter]
     public string Container { get; set; } = "body";
+
+    /// <summary>
+    /// body class
+    /// </summary>
+    [Parameter]
+    public ClassBuilder BodyClass { get; set; } = new();
+
+    /// <summary>
+    /// body style
+    /// </summary>
+    [Parameter]
+    public StyleBuilder BodyStyle { get; set; } = new();
 
     #region Mask 
 
@@ -98,12 +116,12 @@ public abstract class PopupBase: BmDomComponentBase
 
     #endregion
 
-    protected ElementReference PopupRef;
+    protected ElementReference Ref;
 
     private StateFunc2? _afterCallbackState;
     private StateFunc? _moveEleToState;
     private StateFunc2? _disableBodyScrollState;
-    protected bool _hasDestroyed;
+    protected bool _hasDestroyed = true;
 
 
     /// <summary>
@@ -115,6 +133,10 @@ public abstract class PopupBase: BmDomComponentBase
     {
         var lastVisible = Visible;
         await base.SetParametersAsync(parameters);
+        if (Visible)
+        {
+            _hasDestroyed = false;
+        }
 
         _afterCallbackState ??= new StateFunc2(async () =>
         {
@@ -138,13 +160,14 @@ public abstract class PopupBase: BmDomComponentBase
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        Console.WriteLine("popup base OnAfterRenderAsync");
         if (firstRender)
         {
             _moveEleToState = new StateFunc(async () =>
             {
-                if (PopupRef.Context != null)
+                if (Ref.Context != null)
                 {
-                    await JsRuntime.MoveEleTo(PopupRef, Container);
+                    await JsRuntime.MoveEleTo(Ref, Container);
                 }
             });
             _disableBodyScrollState = new StateFunc2(async () =>
@@ -159,12 +182,6 @@ public abstract class PopupBase: BmDomComponentBase
 
         if (Visible)
         {
-            if (_hasDestroyed)
-            {
-                _hasDestroyed = false;
-                StateHasChanged();
-            }
-
             if (_afterCallbackState is { State: true })
             {
                 await _afterCallbackState.Invoke();
@@ -174,7 +191,10 @@ public abstract class PopupBase: BmDomComponentBase
             {
                 if (!_moveEleToState!.State)
                 {
-                    await _moveEleToState.Invoke();
+                    if (Ref.Context != null)
+                    {
+                        await _moveEleToState.Invoke();
+                    }
                 }
             }
 

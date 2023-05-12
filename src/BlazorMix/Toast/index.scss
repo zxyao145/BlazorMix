@@ -1,6 +1,9 @@
 ﻿$cls-prefix: #{$prefix}-toast;
 
 .#{$cls-prefix}-mask {
+    --toast-z-index: calc(var(--mask-z-index) + 100);
+    z-index: var(--toast-z-index) !important;
+
     .#{$cls-prefix}-wrap {
         position: fixed;
         top: 0;

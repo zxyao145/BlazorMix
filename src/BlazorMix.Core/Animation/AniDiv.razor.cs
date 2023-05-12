@@ -26,7 +26,7 @@ public partial class AniDiv
 
     /// <inheritdoc cref="AniOptions.In"/>
     [Parameter]
-    public new bool In { get => _options.In; set => _options.In = value; }
+    public bool In { get => _options.In; set => _options.In = value; }
 
     /// <inheritdoc cref="AniOptions.Duration"/>
     [Parameter]

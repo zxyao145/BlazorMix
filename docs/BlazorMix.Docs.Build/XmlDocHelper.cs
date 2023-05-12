@@ -219,7 +219,7 @@ public class XmlDocHelper
             {
                 try
                 {
-                    var val = propertyInfo.GetValue(instance).ToString();
+                    var val = propertyInfo.GetValue(instance)?.ToString() ?? "";
                     return val;
                 }
                 catch (Exception e)

@@ -114,9 +114,10 @@
         {
             Key = "save",
             Text = "保存",
-            OnClick = async () =>
+            OnClick = () =>
             {
                 Console.WriteLine("save is clicked!");
+                return Task.CompletedTask;
             }
         },
     };

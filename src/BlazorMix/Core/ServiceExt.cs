@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorMix;
+
 public static class ServiceExt
 {
     public static IServiceCollection AddBlazorMix
@@ -8,6 +9,7 @@ public static class ServiceExt
     {
         services.AddScoped<ActionSheetService>();
         services.AddScoped<ToastService>();
+        services.AddScoped<DialogService>();
         return services;
     }
 }

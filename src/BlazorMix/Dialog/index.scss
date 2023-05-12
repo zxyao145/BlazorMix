@@ -1,0 +1,93 @@
+﻿/*@import '@/styles/mixins/index.scss';
+@import '@/styles/animation/index.scss';*/
+
+$c-prefix: #{$prefix}-dialog;
+
+
+.#{$c-prefix} {
+    --dialog-z-index: var(--popup-z-index, 1000);
+    --border-radius: 0.5rem;
+        
+    .bm-center-popup {
+        --z-index: var(--dialog-z-index);
+    }
+}
+
+.#{$c-prefix}-body {
+  width: 100%;
+  max-height: 70vh;
+  font-size: 14px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  > * {
+    flex: none;
+  }
+  > .bm-dialog-content {
+    flex: auto;
+  }
+
+  &:not(.bm-dialog-with-image) {
+    padding-top: 20px;
+  }
+}
+
+.bm-dialog-image-container {
+  margin-bottom: 12px;
+  max-height: 40vh;
+}
+.bm-dialog-header {
+  margin-bottom: 8px;
+  padding: 0 12px;
+}
+.bm-dialog-title {
+  margin-bottom: 8px;
+  padding: 0 12px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+.bm-dialog-content {
+    padding: 0 12px 20px;
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--color-gray-dark);
+
+    &-empty {
+        padding: 0;
+        height: 12px;
+    }
+}
+.#{$c-prefix}-footer {
+  user-select: none;
+  .bm-dialog-action-row {
+    display: flex;
+    align-items: stretch;
+    border-top: 0.5px solid var(--border-color);
+    > * {
+      flex: 1;
+    }
+    > .bm-dialog-button {
+      padding: 10px;
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 0;
+      &-bold {
+        font-weight: bold;
+      }
+      border-right: solid 0.5px var(--border-color);
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.#{$c-prefix}-image-container {
+  overflow-y: auto;
+}

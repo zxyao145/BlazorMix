@@ -44,6 +44,8 @@
     <ItemGroup>
       <DemoDocs Remove="Demos\Components\ActionSheet\Docs\index.en-Us.md" />
       <DemoDocs Remove="Demos\Components\ActionSheet\Docs\index.zh-CN.md" />
+      <DemoDocs Remove="Demos\Components\Dialog\Docs\index.en-Us.md" />
+      <DemoDocs Remove="Demos\Components\Dialog\Docs\index.zh-CN.md" />
       <DemoDocs Remove="Demos\Components\Toast\Docs\index.en-Us.md" />
       <DemoDocs Remove="Demos\Components\Toast\Docs\index.zh-CN.md" />
       <DemoDocs Remove="Demos\Components\Mask\Docs\index.en-Us.md" />
@@ -55,6 +57,8 @@
 
     <ItemGroup>
       <DemoSourceCode Remove="Demos\Components\ActionSheet\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\Dialog\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\Dialog\Demos\Demo2.razor" />
       <DemoSourceCode Remove="Demos\Components\Toast\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\Mask\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\Popup\Demos\Demo2.razor" />

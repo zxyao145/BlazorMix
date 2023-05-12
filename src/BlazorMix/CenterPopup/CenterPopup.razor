@@ -1,7 +1,10 @@
 ﻿@namespace BlazorMix
 @inherits PopupBase
 
-<div @ref="@PopupRef" class="@PrefixCls">
+<div @ref="@Ref"
+     class="@PrefixCls @(Class?.ToString() ?? "")" 
+     style="@Style?.ToString()"
+     >
     @if (ShowMask)
     {
         <AniMask Visible="@Visible"
@@ -16,7 +19,7 @@
         <AniDiv Name="@AniNames.Zoom"
                 In="@Visible"
                 Class="@_classBuilder.ToString()"
-                Style="@Style"
+                Style="@BodyStyle"
                 OnClick="@OnClick"
         >
             @if (ShowCloseButton)

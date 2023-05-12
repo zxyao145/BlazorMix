@@ -39,18 +39,13 @@ public partial class Popup
 
     private string _animateName = AniNames.FadeUp;
 
-    /// <summary>
-    /// override
-    /// </summary>
-    /// <param name="parameters"></param>
-    /// <returns></returns>
-    public override async Task SetParametersAsync(ParameterView parameters)
+    protected override void OnAfterRender(bool firstRender)
     {
-        await base.SetParametersAsync(parameters);
-
         _classBuilder
             .Add($"{PrefixCls}-body")
-            .Add(() => Class?.ToString() ?? "")
+            .Add(() => BodyClass?.ToString() ?? "")
             .Add($"{PrefixCls}-body-position-{Position.GetDisplayName()}");
+
+        base.OnAfterRender(firstRender);
     }
 }

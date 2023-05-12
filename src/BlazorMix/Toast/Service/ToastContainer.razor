@@ -1,5 +1,4 @@
 ﻿@namespace BlazorMix
-@using BlazorMix.Core
 @inherits BmComponentBase
 
 @if (_option != null)
@@ -14,7 +13,7 @@
     private ToastOption? _option = null;
     private long _version;
 
-        [Inject]
+    [Inject]
     public ToastService? Service { get; set; }
 
     protected override void OnInitialized()
@@ -28,7 +27,7 @@
         base.OnInitialized();
     }
 
-    private async ValueTask OnOnAddEvent(ToastRef arg)
+    private async Task OnOnAddEvent(ToastRef arg)
     {
         _version += 1;
         _option = arg.Option;
@@ -36,12 +35,12 @@
         await InvokeStateHasChangedAsync();
     }
 
-    private async ValueTask OnUpdateEvent()
+    private async Task OnUpdateEvent()
     {
         await InvokeStateHasChangedAsync();
     }
 
-    private async ValueTask OnRemove()
+    private async Task OnRemove()
     {
         if (_option is {Visible: true })
         {

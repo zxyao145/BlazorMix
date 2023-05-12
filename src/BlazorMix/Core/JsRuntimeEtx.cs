@@ -21,6 +21,22 @@ public static class JsRuntimeEtx
         }
     }
 
+    public static async Task MoveEleTo(
+        this IJSRuntime js,
+        string selector,
+        OneOf<string, ElementReference> container
+    )
+    {
+        if (container.IsT0)
+        {
+            await js.InvokeVoidAsync(JsConstants.MoveEleTo, selector, container.AsT0);
+        }
+        else
+        {
+            await js.InvokeVoidAsync(JsConstants.MoveEleTo, selector, container.AsT1);
+        }
+    }
+
     public static async Task DisableBodyScroll(
         this IJSRuntime js
     )
@@ -32,7 +48,7 @@ public static class JsRuntimeEtx
         this IJSRuntime js
     )
     {
-        await js.InvokeVoidAsync(JsConstants.DisableBodyScroll);
+        await js.InvokeVoidAsync(JsConstants.EnableBodyScroll);
     }
 
 }
