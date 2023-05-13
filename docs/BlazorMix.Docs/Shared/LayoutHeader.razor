@@ -47,10 +47,10 @@
     }
     <div class="top-nav">
         <nav>
-            <NavItem Href="/guide">
+            <NavItem Href="/guide/intro" MatchFunc="@IsGuide">
                 指南
             </NavItem>
-            <NavItem Href="/components/Button" MatchFunc="@IsComponents">
+            <NavItem Href="/components/ActionSheet" MatchFunc="@IsComponents">
                 组件
             </NavItem>
         </nav>
@@ -74,8 +74,17 @@
         {
             return false;
         }
-        Console.WriteLine(path);
         return path.StartsWith("/components");
+    }
+
+    private bool IsGuide(string uri)
+    {
+        var path = new Uri(uri).AbsolutePath;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return false;
+        }
+        return path.StartsWith("/guide");
     }
 
     private void OnSearchTxtChange(ChangeEventArgs e)

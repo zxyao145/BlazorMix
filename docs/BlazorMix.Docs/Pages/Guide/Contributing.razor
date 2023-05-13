@@ -1,0 +1,60 @@
+﻿@page "/guide/contributing"
+
+<div class="guide-page">
+    <section>
+        <h2>开发指南</h2>
+        <div>
+            <h3>1. Clone 代码</h3>
+            <h3>2. 安装依赖</h3>
+            <div>
+                <p>解决方案目录下执行以下命令：</p>
+                <HighlightCode Language="plain"
+                               Code="@(@"npm install
+dotnet restore")"/>
+            </div>
+            <h3>3. 组件开发</h3>
+            <div>
+                <p>
+                    <b>a.</b> 在 <b>BlazorMix</b> 项目下新建一个 组件名（假设为 ComponentA） 的文件夹
+                </p>
+                <p>
+                    <b>b.</b> 在 ComponentA 文件夹下，对组件进行开发，需要指定组件的命令空间为：<code>@@namespace BlazorMix</code>
+                </p>
+                <p>
+                    <b>c.</b> 如何需要编写组件相关的 js和 css，请在 ComponentA 文件夹下新建 <b>index.scss</b> 和 <b>index.ts</b>。
+                    使用 js 的时候，函数名为 <code>Bm.ComponentA.method</code>
+                </p>
+                <p>
+                    <b>d.</b> 在 _scripts 和 _styles 存放的是公共的 ts 和 scss 文件
+                </p>
+                <p>
+                    <b>e.</b> 在 BlazorMix.Docs 项目下，找到 Demos\Components 文件夹，新建 ComponentA 文件夹，
+                    <br />
+                    ComponentA\Demos 中存放 ComponentA 的 demo，在 ComponentA\Docs 下存放的是 ComponentA 的使用说明文件。
+                    <br/>
+                    使用说明文件中，通过 <b><code>code-demo</code></b> 标签以下方式引入 demo 文件：
+                    <HighlightCode Language="plain" Code="@("<code-demo Src=\"Demos/Components/Dialog/Demos/Demo1\"></code-demo>\r\n")" />
+                    <br/>
+                    使用下面语法，可以自动从 C# 的 XmlDoc 中提取注释：
+                    <HighlightCode Language="plain" Code="@(@"// 当前组件 [Parameter] 的相关说明
+> [xmldoc] 
+// BlazorMix 中，ToastOption 这个类所有 public 属性的说明
+> [xmldoc](ToastOption)")" />
+                </p>
+                <p>
+                    <b>f.</b> 文档运行。重新生成解决方案，或者 重新生成 BlazorMix.Docs 项目，会自动构建 BlazorMix 的 js 和 css，以及 BlazorMix.Docs 项目所需的 demo 文档、使用说明等，
+                    之后运行 BlazorMix.Docs 即可观察到效果。
+                </p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>手动生成组件的js和css</h2>
+        <p>
+            解决方案根目录下，运行 <code>npm run build:css</code> 和 <code>npm run build:js</code>，会分别为组件库生成 css 和 js 文件。
+        </p>
+        <p>
+            通过 <code>npm run build</code> 命令，同时组件库生成 css 和 js 文件。
+        </p>
+    </section>
+</div>

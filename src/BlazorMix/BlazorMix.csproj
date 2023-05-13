@@ -8,6 +8,15 @@
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <RootNamespace>BlazorMix</RootNamespace>
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+        <Authors>zxyao</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/zxyao145/BlazorMix.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>blazor;mobile</PackageTags>
+        <LICENSE>Apache 2.0</LICENSE>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <Description>A Blazor Mobile UI components lib.</Description>
+        <Title>A Blazor Mobile UI components lib.</Title>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,6 +49,17 @@
         <Folder Include="Swiper\" />
         <Folder Include="Barrage\" />
         <Folder Include="Watermark\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Include="..\..\LICENSE.txt">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>

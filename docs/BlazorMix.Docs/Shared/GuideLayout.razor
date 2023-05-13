@@ -1,0 +1,34 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+<div class="page">
+    <LayoutHeader />
+
+    <main>
+        <div class="sidebar">
+            <NavItem Href="@("/guide/intro")" MatchFunc="@IsActive">
+                使用简介
+            </NavItem>
+            <NavItem Href="@("/guide/install")">
+                开始使用
+            </NavItem>            
+            <NavItem Href="@("/guide/contributing")">
+                贡献指南
+            </NavItem>
+        </div>
+        @Body
+    </main>
+</div>
+
+@code
+{
+    private bool IsActive(string url)
+    {
+        var path = new Uri(NavigationManager.Uri).AbsolutePath;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return true;
+        }
+
+        return path == "/guide/intro" || path == "/";
+    }
+}

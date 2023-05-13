@@ -1,0 +1,51 @@
+﻿@page "/guide/install"
+
+<div class="guide-page">
+    <section>
+        <h2 id="install">安装</h2>
+
+        <h3>1. 安装 nuget 包</h3>
+        <HighlightCode Language="plain" CanLoad="true" Code="@("dotnet add package BlazorMix")">
+
+        </HighlightCode>
+
+
+        <h3>2. 在项目中注册:</h3>
+
+        <HighlightCode Language="csharp" Code="@("builder.Services.AddBlazorMix();")">
+
+        </HighlightCode>
+
+
+        <h3>3. 引用 css, js</h3>
+
+        <HighlightCode Language="html" Code="@("<link href=\"_content/BlazorMix/dist/style.css\" rel=\"stylesheet\" />\r\n<script src=\"_content/BlazorMix/dist/index.min.js\"></script>")">
+        </HighlightCode>
+
+
+        <h3>4. 在 _Imports.razor 中加入命名空间</h3>
+
+        <HighlightCode Language="html" Code="@("@using BlazorMix;")">
+
+        </HighlightCode>
+
+
+        <h3>5. 在 App.razor 中添加一个 &lt;BlazorMixContainer /&gt; 组件。</h3>
+
+        <HighlightCode Language="html"
+                       Code="@(@"<Router AppAssembly=""@typeof(App).Assembly"">
+    <Found Context=""routeData"">
+        <RouteView RouteData=""@routeData"" DefaultLayout=""@typeof(MainLayout)"" />
+        <FocusOnNavigate RouteData=""@routeData"" Selector=""h3"" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout=""@typeof(MainLayout)"">
+            <p role=""alert"">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
++ <BlazorMixContainer />")" />
+    </section>
+</div>

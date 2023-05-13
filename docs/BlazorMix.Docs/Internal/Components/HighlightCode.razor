@@ -13,7 +13,7 @@
     public string Language { get; set; } = "razor";
 
     [Parameter]
-    public bool CanLoad { get; set; }
+    public bool CanLoad { get; set; } = true;
 
     MarkupString sourceCode { get; set; }
 
@@ -24,6 +24,7 @@
         if (CanLoad && !hasLoaded)
         {
             sourceCode = await Highlighter.HighlightAsync(Code, Language);
+            StateHasChanged();
             hasLoaded = true;
         }
     }
