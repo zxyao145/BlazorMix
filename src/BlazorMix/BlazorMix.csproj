@@ -42,7 +42,6 @@
     
     <ItemGroup>
         <Folder Include="Modal\" />
-        <Folder Include="NoticeBar\" />
         <Folder Include="SwipeAction\" />
         <Folder Include="FixedNav\" />
         <Folder Include="Drag\" />

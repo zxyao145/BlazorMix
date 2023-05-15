@@ -1,0 +1,101 @@
+﻿$c-prefix: #{$prefix}-notice-bar;
+
+
+.#{$c-prefix} {
+    --background-color: #ababab;
+    --border-color: #999999;
+    --text-color: #fff;
+    --font-size: 14px;
+    --icon-font-size: 18px;
+    --height: 40px;
+    height: var(--height);
+    box-sizing: border-box;
+    font-size: var(--font-size);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px var(--border-color);
+    border-left: none;
+    border-right: none;
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+    & > span[role='img'] {
+        color: var(--text-color);
+    }
+
+    &.#{$c-prefix}-alert {
+        --background-color: #fff9ed;
+        --border-color: #fff3e9;
+        --text-color: #ff6010;
+    }
+
+    &.#{$c-prefix}-error {
+        --background-color: #ff3b30;
+        --border-color: #d9281e;
+        --text-color: #ffffff;
+    }
+
+    &.#{$c-prefix}-info {
+        --background-color: #d0e4ff;
+        --border-color: #bcd8ff;
+        --text-color: #1677ff;
+    }
+
+    & .#{$c-prefix}-left {
+        flex-shrink: 0;
+        margin-right: 8px;
+        font-size: var(--icon-font-size);
+    }
+
+    & .#{$c-prefix}-content {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        & .#{$c-prefix}-content-inner {
+            width: auto;
+            transition-timing-function: linear;
+            white-space: nowrap;
+        }
+    }
+
+    &.#{$c-prefix}-wrap {
+        & .#{$c-prefix}-content {
+            & .#{$c-prefix}-content-inner {
+                white-space: normal;
+            }
+        }
+    }
+
+    & .#{$c-prefix}-right {
+        flex-shrink: 0;
+        margin-left: 12px;
+    }
+
+    &-close {
+        width: 24px;
+        height: 24px;
+        margin-right: -3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    &-close-icon {
+        font-size: var(--icon-font-size);
+    }
+
+    &-wrap {
+        height: auto;
+        align-items: flex-start;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 22px;
+    }
+}

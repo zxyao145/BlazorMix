@@ -21,4 +21,10 @@ internal class JsConstants
     public const string EnableBodyScroll = $"{PrefixCommon}{nameof(EnableBodyScroll)}";
 
     #endregion
+
+    public const string PrefixNoticeBar = "Bm.NoticeBar.";
+
+    public const string NoticeBarStartScroll = $"{PrefixNoticeBar}startScroll";
+    public const string NoticeBarEndScroll = $"{PrefixNoticeBar}endScroll";
+    
 }

@@ -1,0 +1,33 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+@if (_visible)
+{
+    <div class="@_classBuilder" style="@Style">
+        @if (Icon != null)
+        {
+            <span class="@PrefixCls-left">
+                @Icon
+            </span>
+        }
+        <span @ref="@_contentEleRef"  class="@PrefixCls-content">
+            <span class="@PrefixCls-content-inner">
+                @ChildContent
+            </span>
+        </span>
+        @if (Closeable || Extra != null)
+        {
+            <span class="@PrefixCls-right">
+                @Extra
+                @if (Closeable)
+                {
+                    <div class="@PrefixCls-close" @onclick="@HandleClose">
+                        @CloseIcon
+                    </div>
+                }
+            </span>
+        }
+
+    </div>
+}

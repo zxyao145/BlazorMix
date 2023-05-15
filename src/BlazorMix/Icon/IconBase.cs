@@ -6,4 +6,7 @@ public class IconBase : ComponentBase
 
     [Parameter]
     public string Height { get; set; } = "1em";
+    
+    [Parameter]
+    public ClassBuilder Class { get; set; } =new ClassBuilder();
 }

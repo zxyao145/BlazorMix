@@ -1,15 +1,14 @@
 ﻿
-using System.ComponentModel;
-using System.Xml.Linq;
-
 namespace BlazorMix.Core;
 public static class JsRuntimeEtx
 {
+    #region common
+
     public static async Task MoveEleTo(
-        this IJSRuntime js,
-        ElementReference element,
-        OneOf<string, ElementReference> container
-        )
+  this IJSRuntime js,
+  ElementReference element,
+  OneOf<string, ElementReference> container
+  )
     {
         if (container.IsT0)
         {
@@ -51,4 +50,22 @@ public static class JsRuntimeEtx
         await js.InvokeVoidAsync(JsConstants.EnableBodyScroll);
     }
 
+    #endregion
+
+    public static async Task NoticeBarStartScroll(
+        this IJSRuntime js,
+        ElementReference element,
+        int delayMs,
+        int speed
+    )
+    {
+        await js.InvokeVoidAsync(JsConstants.NoticeBarStartScroll, element, delayMs, speed);
+    }
+    public static async Task NoticeBarEndScroll(
+        this IJSRuntime js,
+        ElementReference element
+    )
+    {
+        await js.InvokeVoidAsync(JsConstants.NoticeBarEndScroll, element);
+    }
 }
