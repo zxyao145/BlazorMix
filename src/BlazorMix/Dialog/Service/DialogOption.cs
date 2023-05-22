@@ -71,7 +71,6 @@ public class DialogOption
     /// 操作按钮列表，可以传入二级数组（List&lt;DialogActionItem&gt;）来实现同一行内并排多个按钮。
     /// Alert 和 Confirm 模式中不允许设置
     /// </summary>
-    [Parameter]
     public List<DialogAction> Actions { get; set; } = new();
 
     /// <summary>

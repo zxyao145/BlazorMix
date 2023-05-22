@@ -11,8 +11,8 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <link href="_content/BlazorMix/dist/style.css" rel="stylesheet" />
-	<link href="assets/dist/lib/prism.css" rel="stylesheet" /> 
-    <link href="assets/dist/css/app.css" rel="stylesheet" />   
+    <link href="assets/dist/lib/prism.css" rel="stylesheet" />
+    <link href="assets/dist/css/app.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,7 +28,28 @@
     <script src="_content/BlazorMix/dist/index.min.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
-
+    <!--<script type="module">
+        import { BrotliDecode } from './assets/dist/js/decode.min.js';
+        Blazor.start({
+            loadBootResource: function (type, name, defaultUri, integrity) {
+                console.log(type, defaultUri);
+                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+                    return (async function () {
+                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        const originalResponseBuffer = await response.arrayBuffer();
+                        const originalResponseArray = new Int8Array(originalResponseBuffer);
+                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
+                        const contentType = type ===
+                            'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+                        return new Response(decompressedResponseArray,
+                            { headers: { 'content-type': contentType } });
+                    })();
+                }
+            }
+        });
+    </script>-->
 </body>
-
 </html>

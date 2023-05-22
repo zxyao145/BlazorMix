@@ -44,6 +44,7 @@ namespace BlazorMix.Docs.Build
 
         static void RunOptions(Options opts)
         {
+            Console.WriteLine($"opts:{opts.Type}, {opts.Src}, {opts.Out}");
             var cmd = new GenDemoDocs(opts);
             cmd.Run();
             //handle options

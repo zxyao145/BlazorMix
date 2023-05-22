@@ -103,10 +103,10 @@ public class XmlDocHelper
         Func<PropertyInfo, bool>? propertyFilter = null)
     {
         Console.WriteLine("className: {0}", className);
-        if (className == "Mask")
-        {
-            Console.WriteLine("debug");
-        }
+        //if (className == "Mask")
+        //{
+        //    Console.WriteLine("debug");
+        //}
         var sb = new StringBuilder();
 
         MakeSureLanguageXmlDoc(language);

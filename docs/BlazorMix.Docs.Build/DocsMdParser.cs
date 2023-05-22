@@ -44,11 +44,6 @@ internal class DocsMdParser
             var block = document[i];
             if (block is QuoteBlock quoteBlock)
             {
-                if (componentName == "Toast")
-                {
-                    Console.WriteLine("debug");
-                }
-
                 if (TryRenderXmlDoc(quoteBlock, componentName, lang, out var tableSb))
                 {
                     sb.Append(tableSb);
@@ -92,11 +87,6 @@ internal class DocsMdParser
         out StringBuilder tableSb
         )
     {
-        if (componentName == "Toast")
-        {
-            Console.WriteLine("debug");
-        }
-
         var firstLine = quoteBlock.ToList()[0];
         if (firstLine is ParagraphBlock { Inline: { } } paragraph)
         {

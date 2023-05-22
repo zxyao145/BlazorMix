@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 
-namespace BlazorMix.Docs.Pages;
+namespace BlazorMix.Docs.Pages.Components;
 
 public partial class Components: IDisposable
 {
@@ -22,7 +22,7 @@ public partial class Components: IDisposable
 
 
     [Parameter]
-    public string Language { get; set; } = "zh-cn";
+    public string Language { get; set; } = "zh-CN";
 
     [CascadingParameter(Name = "TocRefWrapper")]
     public EleRefWrapper TocRefWrapper { get; set; } = default!;

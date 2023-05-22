@@ -8,6 +8,8 @@ let tasks = []
 let fileStr = `import Bm from "./main";\nimport * as common from "./common";\n\n`
 let interop = "Bm.common = common;\n";
 
+fs.ensureDirSync(outputDir)
+
 componentsJs.map((cs) => {
   cs = cs.replaceAll('\\', '/')
   if (cs.indexOf('src/BlazorMix/_scripts') > -1 || cs.indexOf("wwwroot") > -1) {
@@ -19,7 +21,6 @@ componentsJs.map((cs) => {
   const srcFile = path.resolve(__dirname, `../${cs}`);
   // copy file path: src\BlazorMix\Button\index.ts --> src\BlazorMix\wwwroot/src\components\Button\index.ts
   const targetFile = path.resolve(__dirname, `../${outputDir}`, tempFilePath);
-  // console.log(`${cs}, ${srcFile} --> ${targetFile}`);
   tasks.push(
     fs
       .copy(
@@ -28,6 +29,7 @@ componentsJs.map((cs) => {
       )
       .catch((error) => {})
   )
+
   let pathInfo = tempFilePath.split('/');
   let componentName = pathInfo[pathInfo.length - 2];
   fileStr += `import * as ${componentName} from './${tempFilePath.replace(".ts", "")}';\n`;
@@ -41,7 +43,6 @@ tasks.push(
   )
 )
 
-
 fileStr += `\n\n` + interop;
 
 Promise.all(tasks).then((res) => {
@@ -54,3 +55,4 @@ Promise.all(tasks).then((res) => {
     }
   )
 })
+

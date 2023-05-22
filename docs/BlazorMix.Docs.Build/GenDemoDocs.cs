@@ -15,7 +15,16 @@ internal class GenDemoDocs
 
     public void Run()
     {
-        var componentsRootDir = Path.Combine(AppContext.BaseDirectory, _options.Src);
+        string componentsRootDir;
+        if (_options.Src.StartsWith("./") || _options.Src.StartsWith(".."))
+        {
+            componentsRootDir = Path.Combine(AppContext.BaseDirectory, _options.Src);
+        }
+        else
+        {
+            componentsRootDir = _options.Src;
+        }
+
         var components = Directory.GetDirectories(componentsRootDir);
         var cache = new Dictionary<string, bool>();
         foreach (var component in components)
@@ -84,8 +93,17 @@ internal class GenDemoDocs
         )
     {
         var outputRelaPath = PathUtil.GetRelativePath(componentsRootDir, srcFilePath);
-        var output = Path.Combine(AppContext.BaseDirectory, outDir, "Components/", outputRelaPath);
+        string output;
+        if (outDir.StartsWith("./") || outDir.StartsWith("../"))
+        {
+            output = Path.Combine(AppContext.BaseDirectory, outDir, "Components/", outputRelaPath);
+        }
+        else
+        {
+            output = Path.Combine(outDir, "Components/", outputRelaPath);
+        }
         output = Path.ChangeExtension(output, outputExtension);
+        Console.WriteLine($"output: {outDir}, {outputRelaPath}, {output}");
         var dir = Path.GetDirectoryName(output);
         if (!Directory.Exists(dir))
         {

@@ -1,0 +1,75 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup .NET 6.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.408
+      - name: Setup .NET 7.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.201
+
+      - uses: actions/setup-node@v2.5.2
+        with:
+          node-version: "18.x"
+      
+      - name: Prepare AOT workload
+        run: |
+          dotnet workload install wasm-tools
+
+      - name: Publish Docs
+        run: |
+            npm install
+            npm run build
+            dotnet restore
+            dotnet build src/BlazorMix/BlazorMix.csproj
+            dotnet build docs/BlazorMix.Docs/BlazorMix.Docs.csproj
+            dotnet publish docs/BlazorMix.Docs/BlazorMix.Docs.csproj -c Release -o publish -p:EnableAOT=true
+            ls -R publish/wwwroot/_framework
+
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_MEADOW_05E24C400 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "publish/wwwroot" # App source code path
+          # api_location: "Api" # Api source code path - optional
+          output_location: "publish/wwwroot" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+          skip_api_build: true
+          skip_app_build: true
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_MEADOW_05E24C400 }}
+          action: "close"
