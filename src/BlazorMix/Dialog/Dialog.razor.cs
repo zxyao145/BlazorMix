@@ -40,11 +40,13 @@ public partial class Dialog
     /// <summary>
     /// Dialog 遮罩类名	
     /// </summary>
+    [Parameter]
     public ClassBuilder? MaskClass { get; set; }
 
     /// <summary>
     /// Dialog 遮罩样式	
     /// </summary>
+    [Parameter]
     public StyleBuilder? MaskStyle { get; set; }
 
     /// <summary>
@@ -56,11 +58,13 @@ public partial class Dialog
     /// <summary>
     /// Dialog 内容类名
     /// </summary>
+    [Parameter]
     public ClassBuilder? BodyClass { get; set; }
 
     /// <summary>
     /// Dialog 内容样式
     /// </summary>
+    [Parameter]
     public StyleBuilder? BodyStyle { get; set; }
 
     /// <summary>
@@ -151,12 +155,6 @@ public partial class Dialog
             .Add(() => BodyClass?.ToString() ?? "");
 
         return base.OnInitializedAsync();
-    }
-
-    public override Task SetParametersAsync(ParameterView parameters)
-    {
-        Console.WriteLine("SetParametersAsync:" + Visible);
-        return base.SetParametersAsync(parameters);
     }
 
     private async Task HandleAction(DialogActionItem actionItem, int index)

@@ -31,7 +31,7 @@ namespace BlazorMix.Docs.Build
         static void Main(string[] args)
         {
             //var translator = new AggregateTranslator();
-            //var result = await translator.TranslateAsync("是否渲染为块级元素", "en", "zh-cn");
+            //var result = await translator.TranslateAsync("是否渲染为块级元素", "en", "zh-CN");
             //Console.WriteLine($"Translation: {result.Translation}");
             //Console.WriteLine($"Source Language: {result.SourceLanguage}");
             //Console.WriteLine($"Target Language: {result.TargetLanguage}");

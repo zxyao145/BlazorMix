@@ -61,7 +61,6 @@
 
 
     <Target Name="CopyExmaplesToMd" BeforeTargets="Build">
-        <!--<Copy SourceFiles="@(DemoDocs)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\%(Filename).md" />-->
         <Copy SourceFiles="@(DemoSourceCode)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\%(Filename).txt" />
     </Target>
 

@@ -160,7 +160,6 @@ public abstract class PopupBase: BmDomComponentBase
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine("popup base OnAfterRenderAsync");
         if (firstRender)
         {
             _moveEleToState = new StateFunc(async () =>
