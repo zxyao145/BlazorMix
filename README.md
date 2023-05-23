@@ -3,6 +3,8 @@ A Blazor Mobile UI components lib.
 
 [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorMix)](https://www.nuget.org/packages/BlazorMix/)
 
+[Docs](https://blazormix.com/)
+
 
 ## What is "Mix"?
 
@@ -62,6 +64,7 @@ During the construction process of this component and documentation, the React/B
 *   TDesignBlazor
 *   Ant Design of Blazor
 *   MASA.Blazor
+*   Bootstrap
 
 Other technologies/frameworks/components:
 
