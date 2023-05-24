@@ -44,6 +44,7 @@ jobs:
             dotnet build src/BlazorMix/BlazorMix.csproj
             dotnet build docs/BlazorMix.Docs/BlazorMix.Docs.csproj
             dotnet publish docs/BlazorMix.Docs/BlazorMix.Docs.csproj -c Release -o publish -p:EnableAOT=true
+            cp -rf publish/staticwebapp.config.json publish/wwwroot
             ls -R publish/wwwroot/_framework
 
       - name: Build And Deploy
