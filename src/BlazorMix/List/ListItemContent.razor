@@ -1,0 +1,48 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+<div class="@($"{ClsPrefix}-content") ">
+    @if (Parent.Prefix != null)
+    {
+        <div class="@($"{ClsPrefix}-content-prefix")">@Parent.Prefix</div>
+    }
+
+    <div class="@($"{ClsPrefix}-content-main")">
+        @if (Parent.Title != null)
+        {
+            <div class="@($"{ClsPrefix}-title")">@Parent.Title</div>
+        }
+        @Parent.ChildContent
+        @if (Parent.Description != null)
+        {
+            <div class="@($"{ClsPrefix}-title")">@Parent.Description</div>
+        }
+    </div>
+    @if (Parent.Extra != null)
+    {
+        <div class="@($"{ClsPrefix}-content-extra")">@Parent.Extra</div>
+    }
+
+    @if (Parent._arrow is { IsT0: true, AsT0: true })
+    {
+        <div class="@($"{ClsPrefix}-content-arrow")">
+            <RightOutline />
+        </div>
+    }
+    else if (Parent._arrow.IsT1)
+    {
+        <div class="@($"{ClsPrefix}-content-arrow")">
+            @Parent._arrow.AsT1
+        </div>
+    }
+</div>
+
+@code
+{
+    public const string ClsPrefix = "bm-list-item";
+
+
+    [Parameter, EditorRequired]
+    public ListItem Parent { get; set; } = default!;
+}

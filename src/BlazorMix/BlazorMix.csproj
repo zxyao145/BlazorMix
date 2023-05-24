@@ -42,7 +42,6 @@
     
     <ItemGroup>
         <Folder Include="Modal\" />
-        <Folder Include="SwipeAction\" />
         <Folder Include="FixedNav\" />
         <Folder Include="Drag\" />
         <Folder Include="Swiper\" />
@@ -60,5 +59,4 @@
         <PackagePath>\</PackagePath>
       </None>
     </ItemGroup>
-
 </Project>

@@ -1,0 +1,79 @@
+﻿@inject DialogService DialogService
+@inject ToastService ToastService
+
+<DemoBlock Title="搭配列表使用">
+    <List>
+        <SwipeAction LeftActions="@_left" RightActions="@_right">
+            <ListItem>A</ListItem>
+        </SwipeAction>
+        <SwipeAction LeftActions="@_left" RightActions="@_right">
+            <ListItem>B</ListItem>
+        </SwipeAction>
+        <SwipeAction LeftActions="@_left" RightActions="@_right">
+            <ListItem>C</ListItem>
+        </SwipeAction>
+    </List>
+</DemoBlock>
+
+<DemoBlock Title="搭配图片使用">
+    <SwipeAction RightActions="@_left">
+        <div class="bm-image">
+            <img class="bm-image-img" src="@demoSrc" />
+        </div>
+    </SwipeAction>
+</DemoBlock>
+
+<DemoBlock Title="手动控制归位逻辑">
+    <List>
+        <SwipeAction @ref="@swipeAction"
+                     CloseOnAction="@false"
+                     CloseOnTouchOutside="@false"
+                     RightActions="@(new List<SwipeActionInfo>() { new() { Key = "delete", Text = "删除", Color = SwipeActionColor.Danger, OnClick = async () => { await DialogService.Confirm( new DialogConfirmOption() { Content = "确定要删除吗？" }); await swipeAction?.Close(); } } })">
+            <ListItem OnClick="@(async () =>
+                               {
+                                 await ToastService.Show("你点击了列表项");
+                               })">
+                A
+            </ListItem>
+        </SwipeAction>
+    </List>
+</DemoBlock>
+
+@code
+{
+    private SwipeAction? swipeAction;
+    readonly List<SwipeActionInfo> _left = new()
+    {
+        new SwipeActionInfo()
+        {
+            Key= "pin",
+            Text="置顶",
+            Color= SwipeActionColor.Primary,
+        }
+    };
+
+    readonly List<SwipeActionInfo> _right = new()
+    {
+        new ()
+        {
+            Key= "unsubscribe",
+            Text="取消关注",
+            Color= SwipeActionColor.Light,
+        },
+        new ()
+        {
+            Key= "mute",
+            Text="免打扰",
+            Color= SwipeActionColor.Warning,
+        },
+        new ()
+        {
+            Key= "delete",
+            Text="删除",
+            Color= SwipeActionColor.Danger,
+        }
+    };
+
+    const string demoSrc = "https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60";
+
+}

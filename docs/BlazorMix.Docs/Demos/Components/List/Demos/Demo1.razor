@@ -1,0 +1,91 @@
+﻿
+<List Header="@("基础用法")">
+    <ListItem>1</ListItem>
+    <ListItem>2</ListItem>
+    <ListItem>3</ListItem>
+</List>
+
+<List Header="@("可点击列表")">
+    <ListItem OnClick="@(() => {})">
+        <Prefix>
+            <IconPark.ListTwo />
+        </Prefix>
+        <ChildContent>
+            账单
+        </ChildContent>
+    </ListItem>
+    <ListItem OnClick="@(() => { })">
+        <Prefix>
+            <IconPark.FinancingOne />
+        </Prefix>
+        <ChildContent>
+            总资产
+        </ChildContent>
+    </ListItem>
+    <ListItem OnClick="@(() => { })">
+        <Prefix>
+            <IconPark.Setting />
+        </Prefix>
+        <ChildContent>
+            设置
+        </ChildContent>
+    </ListItem>
+</List>
+
+<List Header="@("复杂列表")">
+    <ListItem>
+        <Extra>
+            Switch
+        </Extra>
+        <ChildContent>
+            新消息通知
+        </ChildContent>
+    </ListItem>
+    <ListItem Clickable>
+        <Extra>
+            未开启
+        </Extra>
+        <ChildContent>
+            大字号模式
+        </ChildContent>
+    </ListItem>
+    <ListItem Clickable>
+        <Description>
+            管理已授权的产品和设备
+        </Description>
+        <ChildContent>
+            授权管理
+        </ChildContent>
+    </ListItem>
+    <ListItem Clickable>
+        <Title>
+            副标题信息A
+        </Title>
+        <Description>
+            副标题信息B
+        </Description>
+        <ChildContent>
+            这里是主信息
+        </ChildContent>
+    </ListItem>
+</List>
+
+        
+<List Header="@("禁用状态")">
+    <ListItem Disabled Clickable>
+        <Prefix>
+            <IconPark.ListTwo />
+        </Prefix>
+        <ChildContent>
+            账单
+        </ChildContent>
+    </ListItem>
+    <ListItem Disabled Clickable>
+        <Prefix>
+            <IconPark.FinancingOne />
+        </Prefix>
+        <ChildContent>
+            总资产
+        </ChildContent>
+    </ListItem>
+</List>

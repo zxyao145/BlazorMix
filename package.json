@@ -26,5 +26,8 @@
     "sass": "^1.59.2",
     "typescript": "^4.9.5",
     "vite": "^4.1.4"
+  },
+  "dependencies": {
+    "@use-gesture/vanilla": "^10.2.26"
   }
 }

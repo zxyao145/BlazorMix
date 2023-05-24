@@ -1,6 +1,6 @@
 {
-  "name": "BlazorMix.Docs.Wasm",
-  "short_name": "BlazorMix.Docs.Wasm",
+  "name": "BlazorMix.Docs",
+  "short_name": "BlazorMix.Docs",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

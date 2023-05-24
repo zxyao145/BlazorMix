@@ -4,7 +4,7 @@
 
 @if (_visible)
 {
-    <div class="@_classBuilder" style="@Style">
+    <div class="@_classBuilder" style="@Style?.ToString()">
         @if (Icon != null)
         {
             <span class="@PrefixCls-left">

@@ -1,0 +1,76 @@
+﻿<DemoBlock Title="通告栏语义">
+    <Space Block Direction="BmDirection.Vertical">
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Default">
+                默认
+            </NoticeBar>
+        </SpaceItem>
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Alert">
+                警告
+            </NoticeBar>
+        </SpaceItem>
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Error">
+                错误
+            </NoticeBar>
+        </SpaceItem>
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Info">
+                信息
+            </NoticeBar>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+
+<DemoBlock Title="可关闭">
+    <NoticeBar Color="@NoticeBarColor.Alert" Closeable>
+        这条通知可以关闭
+    </NoticeBar>
+</DemoBlock>
+
+<DemoBlock Title="超长滚动">
+    <NoticeBar Color="@NoticeBarColor.Alert">
+        Lorem irure elit Lorem laboris id est occaecat enim id sint dolore magna anim fugiat nisi ut mollit adipisicing ut
+    </NoticeBar>
+</DemoBlock>
+
+
+<DemoBlock Title="多行展示">
+    <NoticeBar Color="@NoticeBarColor.Alert" Wrap>
+        适用于当前页面内信息的通知，是一种较醒目的页面内通知方式
+    </NoticeBar>
+</DemoBlock>
+
+                
+<DemoBlock Title="自定义">
+    <Space Block Direction="BmDirection.Vertical">
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Default" Closeable>
+                <Icon>
+                    <IconPark.Attention />
+                </Icon>
+                <ChildContent>
+                    自定义图标
+                </ChildContent>
+                <CloseIcon>
+                    <IconPark.CloseOne />
+                </CloseIcon>
+            </NoticeBar>
+        </SpaceItem>
+        <SpaceItem>
+            <NoticeBar Color="@NoticeBarColor.Alert">
+                <ChildContent>
+                    自定义右侧功能区
+                </ChildContent>
+                <Extra>
+                    <Space>
+                        <SpaceItem><span>查看详情</span></SpaceItem>   
+                        <SpaceItem><span>关闭</span></SpaceItem>
+                    </Space>
+                </Extra>
+            </NoticeBar>
+        </SpaceItem>
+    </Space>
+</DemoBlock>

@@ -1,0 +1,17 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+@if (_clickable)
+{
+    <a class="@($"{_classBuilder}")" style="@Style" @onclick="@HandleClick">
+        <ListItemContent Parent="@this" />
+    </a>
+}
+else
+{
+    <div class="@($"{_classBuilder}")" style="@Style">
+        <ListItemContent Parent="@this" />
+    </div>
+}
+

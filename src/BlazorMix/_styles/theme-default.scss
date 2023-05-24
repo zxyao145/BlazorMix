@@ -10,6 +10,7 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #212529;
+    --weak: #999;
 
     --border-color: #efefef;
     --border-radius: 0.25rem;
@@ -17,8 +18,11 @@
     --border-style: solid;
 
     --main-backgroup-color: #fff;
+    --active-backgroup-color: #eee;
     --main-text-color: #000;
-    --weak-text-color: #999;
+    --light-text-color: #ccc;
+    --main-text-reverse-color: #fff;
+    --weak-text-color: var(--weak);
     --color-gray-dark: #333;
 
 

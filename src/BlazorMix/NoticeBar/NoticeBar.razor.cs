@@ -84,7 +84,8 @@ public partial class NoticeBar
         _classBuilder.Clear()
             .Add(PrefixCls)
             .Add($"{PrefixCls}-{Color.GetDisplayName()}")
-            .AddIf($"{PrefixCls}-wrap", () => Wrap);
+            .AddIf($"{PrefixCls}-wrap", () => Wrap)
+            .Add(() => Class?.ToString() ?? "");
     }
 
     private ElementReference _contentEleRef;

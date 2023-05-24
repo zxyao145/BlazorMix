@@ -1,0 +1,37 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<Button @key="@Action.Key"
+        Class="@($"{SwipeAction.ClsPrefix}-action-button")"
+        Style="@($"--btn-bg-color:{ColorRecord[Action.Color]}")"
+        Shape="@ButtonShape.Rectangular"
+        OnClick="@HandleClick">
+    @Action.Text.Node
+</Button>
+
+@code
+{
+    static Dictionary<SwipeActionColor, string> ColorRecord = new ()
+    {
+        { SwipeActionColor.Light, "var(--secondary)" },
+        { SwipeActionColor.Weak, "var(--weak)" },
+        { SwipeActionColor.Primary, "var(--primary)" },
+        { SwipeActionColor.Success, "var(--success)" },
+        { SwipeActionColor.Warning, "var(--warning)" },
+        { SwipeActionColor.Danger, "var(--danger)" },
+    };
+
+    [Parameter, EditorRequired]
+    public SwipeActionInfo Action { get; set; } = new ();
+
+    [Parameter, EditorRequired]
+    public EventCallback<SwipeActionInfo> OnBtnClick { get; set; } = default!;
+
+    private async Task HandleClick()
+    {
+        if (OnBtnClick.HasDelegate)
+        {
+            await OnBtnClick.InvokeAsync(Action);
+        }
+    }
+}

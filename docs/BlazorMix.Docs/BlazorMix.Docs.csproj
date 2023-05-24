@@ -46,6 +46,15 @@
     </ItemGroup>
 
     <ItemGroup>
+      <DemoDocs Remove="Demos\Components\List\Docs\index.zh-CN.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <DemoSourceCode Remove="Demos\Components\List\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\List\Demos\Demo2.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Remove="Pages\Guide.razor.css" />
     </ItemGroup>
 

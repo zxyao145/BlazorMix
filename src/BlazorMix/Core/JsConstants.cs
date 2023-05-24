@@ -26,5 +26,10 @@ internal class JsConstants
 
     public const string NoticeBarStartScroll = $"{PrefixNoticeBar}startScroll";
     public const string NoticeBarEndScroll = $"{PrefixNoticeBar}endScroll";
-    
+
+
+    public const string PrefixSwipeActionBar = "Bm.SwipeAction.";
+    public const string SwipeActionInit = $"{PrefixSwipeActionBar}init";
+    public const string SwipeActionStop = $"{PrefixSwipeActionBar}stop";
+
 }

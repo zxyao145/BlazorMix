@@ -1,0 +1,17 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+<div class="@(_classBuilder.ToString())">
+    @if (Header != null)
+    {
+        <div class="@($"{ClsPrefix}-header")">@Header.Value.Node</div>
+    }
+    <div class="@($"{ClsPrefix}-body")">
+        <div class="@($"{ClsPrefix}-body-inner")">
+            <CascadingValue TValue="@List" Value="@this" IsFixed="@true">
+                @ChildContent
+            </CascadingValue>
+        </div>
+    </div>
+</div>

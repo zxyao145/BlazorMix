@@ -1,0 +1,26 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div @ref="@_root" class="@_classBuilder.ToString()" style="@Style?.ToString()">
+    <div class="@ClsPrefix-track" >
+        <div class="@($"{ClsPrefix}-actions {ClsPrefix}-actions-left")">
+        @foreach (var actionInfo in LeftActions)
+        {
+            <SwipeActionButton Action="@actionInfo" OnBtnClick="@HandleActionButtonClick"/>
+        }
+            <div style="clear:both;"></div>
+        </div>
+        <div class="@ClsPrefix-content">
+            <div>
+                @ChildContent
+            </div>
+        </div>
+        <div class="@($"{ClsPrefix}-actions {ClsPrefix}-actions-right")">
+        @foreach (var actionInfo in RightActions)
+        {
+                <SwipeActionButton Action="@actionInfo" OnBtnClick="@HandleActionButtonClick"/>
+        }
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</div>

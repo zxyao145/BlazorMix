@@ -52,6 +52,8 @@ public static class JsRuntimeEtx
 
     #endregion
 
+    #region NoticeBar
+
     public static async Task NoticeBarStartScroll(
         this IJSRuntime js,
         ElementReference element,
@@ -68,4 +70,26 @@ public static class JsRuntimeEtx
     {
         await js.InvokeVoidAsync(JsConstants.NoticeBarEndScroll, element);
     }
+    #endregion
+
+
+    #region SwipeAction
+
+    public static async Task SwipeActionInit(
+        this IJSRuntime js,
+        DotNetObjectReference<SwipeAction> obj,
+        ElementReference componentRoot
+    )
+    {
+        await js.InvokeVoidAsync(JsConstants.SwipeActionInit, obj, componentRoot);
+    }
+
+    public static async Task SwipeActionStop(
+        this IJSRuntime js,
+        DotNetObjectReference<SwipeAction> obj
+    )
+    {
+        await js.InvokeVoidAsync(JsConstants.SwipeActionStop, obj);
+    }
+    #endregion
 }
