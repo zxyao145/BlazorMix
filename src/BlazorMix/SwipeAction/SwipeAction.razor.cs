@@ -1,7 +1,7 @@
 ﻿using BlazorMix.Core;
 
 namespace BlazorMix;
-public partial class SwipeAction
+public partial class SwipeAction: IAsyncDisposable
 {
     /// <summary>
     /// 
@@ -18,7 +18,7 @@ public partial class SwipeAction
     public EventCallback<SwipeActionInfo> OnAction { get; set; }
 
     [Parameter]
-    public bool CloseOnTouchOutside { get; set; }
+    public bool CloseOnTouchOutside { get; set; } = true;
 
     [Parameter]
     public bool CloseOnAction { get; set; } = true;
@@ -38,14 +38,28 @@ public partial class SwipeAction
         base.OnInitialized();
     }
 
+
+    protected override async Task OnParametersSetAsync()
+    {
+        bool lastCloseOnTouchOutside = CloseOnTouchOutside;
+        await base.OnParametersSetAsync();
+
+        if (_mirror is not null && lastCloseOnTouchOutside != CloseOnTouchOutside)
+        {
+            await _mirror.InvokeVoidAsync("setCloseOnTouchOutside", CloseOnTouchOutside).AsTask();
+        }
+    }
+
+
     private ElementReference _root;
-    private DotNetObjectReference<SwipeAction>? obj;
+    private DotNetObjectReference<SwipeAction>? _obj;
+    private IJSObjectReference? _mirror;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            obj = DotNetObjectReference.Create(this);
-            await JsRuntime.SwipeActionInit(obj, _root);
+            _obj = DotNetObjectReference.Create(this);
+            _mirror = await JsRuntime.SwipeActionInit(_obj, CloseOnTouchOutside, _root);
         }
         await base.OnAfterRenderAsync(firstRender);
     }
@@ -70,13 +84,10 @@ public partial class SwipeAction
 
     public async Task Close()
     {
-        await JsRuntime.SwipeActionStop(obj!);
-    }
-
-    [JSInvokable]
-    public async Task HandleClose()
-    {
-        await Close();
+        if (_mirror is not null)
+        {
+            await _mirror.InvokeVoidAsync(JsConstants.SwipeActionClose, CloseOnTouchOutside).AsTask();
+        }
     }
 
     [JSInvokable]
@@ -95,7 +106,15 @@ public partial class SwipeAction
 
     protected override void Dispose(bool disposing)
     {
-        obj?.Dispose();
+        _obj?.Dispose();
         base.Dispose(disposing);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_mirror is not null)
+        {
+            await _mirror.DisposeAsync();
+        }
     }
 }

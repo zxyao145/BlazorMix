@@ -37,7 +37,7 @@ html, * {
 
 .component-container {
     color: #314659;
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 1.8;
     margin: auto;
 }
@@ -269,4 +269,35 @@ html, * {
 
 .component-container img {
     max-width: 100%
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+    .top-row .component-search,
+    .sidebar,
+    .docs-toc {
+        display: none;
+    }
+    .main-body {
+        padding: 12px 12px 24px;
+    }
+
+    .component-container .demo-previewer > .previewer-source {
+        display: none;
+    }
+
+    .component-container .demo-previewer > .previewer-device {
+        width: 100%;
+    }
+    .component-container table {
+        display: none;
+    }
+    .component-container table tr td {
+        max-width: auto;
+        width: auto;
+        word-wrap: break-word;
+    }
 }

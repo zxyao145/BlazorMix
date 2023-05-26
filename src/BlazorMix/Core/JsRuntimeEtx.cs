@@ -75,21 +75,15 @@ public static class JsRuntimeEtx
 
     #region SwipeAction
 
-    public static async Task SwipeActionInit(
+    public static async Task<IJSObjectReference> SwipeActionInit(
         this IJSRuntime js,
         DotNetObjectReference<SwipeAction> obj,
+        bool closeOnTouchOutside,
         ElementReference componentRoot
     )
     {
-        await js.InvokeVoidAsync(JsConstants.SwipeActionInit, obj, componentRoot);
+        return await js.InvokeAsync< IJSObjectReference>(JsConstants.SwipeActionInit, obj, closeOnTouchOutside, componentRoot);
     }
 
-    public static async Task SwipeActionStop(
-        this IJSRuntime js,
-        DotNetObjectReference<SwipeAction> obj
-    )
-    {
-        await js.InvokeVoidAsync(JsConstants.SwipeActionStop, obj);
-    }
     #endregion
 }

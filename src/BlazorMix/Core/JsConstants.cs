@@ -30,6 +30,6 @@ internal class JsConstants
 
     public const string PrefixSwipeActionBar = "Bm.SwipeAction.";
     public const string SwipeActionInit = $"{PrefixSwipeActionBar}init";
-    public const string SwipeActionStop = $"{PrefixSwipeActionBar}stop";
+    public const string SwipeActionClose = "close";
 
 }

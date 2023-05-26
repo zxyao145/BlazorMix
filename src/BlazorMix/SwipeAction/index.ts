@@ -1,8 +1,6 @@
 ﻿
 import SwipeAction from "./SwipeAction"
 
-const clsPrefix = "bm-swipe-action";
-
 const delObs = new WeakMap<Node, () => void>();
 const observer = new MutationObserver((recordArr: MutationRecord[]) => {
     if (recordArr.length > 0 && recordArr[0].type === 'childList') {
@@ -18,14 +16,13 @@ const observer = new MutationObserver((recordArr: MutationRecord[]) => {
 });
 const insMap = new Map<any, SwipeAction>();
 
-let a: any;
-export const init = (dotObj: any, container: HTMLElement) => {
+export const init = (dotObj: any, closeOnTouchOutside: boolean, container: HTMLElement) => {
     const id = dotObj._id;
     if (insMap.has(id)) {
         return;
     }
 
-    const sa = new SwipeAction(dotObj, container);
+    const sa = new SwipeAction(dotObj, closeOnTouchOutside, container);
     delObs.set(container, () => {
         sa.dispose();
     })
@@ -36,12 +33,11 @@ export const init = (dotObj: any, container: HTMLElement) => {
     observer.observe(container, observerOptions);
 
     insMap.set(id, sa)
+    return sa;
 }
 
-export const stop = (dotObj: any, container: HTMLElement) => {
-    const id = dotObj._id;
-    (window as any).insMap = insMap;
-    if (insMap.get(id)) {
-        insMap.get(id)!.stopTransform();
+document.addEventListener('touchstart', (e) => {
+    for (let kvArr of insMap) {
+        kvArr[1].handleOnTouchOutsideEvent(e);
     }
-}
+});

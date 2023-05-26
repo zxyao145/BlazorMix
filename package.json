@@ -18,6 +18,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/animejs": "^3.1.7",
     "@types/node": "^18.15.2",
     "fs-extra": "^11.1.0",
     "glob": "^9.2.1",
@@ -28,6 +29,7 @@
     "vite": "^4.1.4"
   },
   "dependencies": {
-    "@use-gesture/vanilla": "^10.2.26"
+    "@use-gesture/vanilla": "^10.2.26",
+    "animejs": "^3.2.1"
   }
 }
