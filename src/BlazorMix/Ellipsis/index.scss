@@ -1,0 +1,8 @@
+﻿
+$cls-prefix: #{$prefix}-ellipsis;
+
+
+.#{$cls-prefix} {
+  overflow: hidden;
+  line-height: 1.5;
+}

@@ -29,7 +29,12 @@ componentsJs.map((cs) => {
       )
       .catch((error) => {})
   )
-
+  
+  console.log(tempFilePath);
+  if(!tempFilePath.endsWith("index.ts")){
+	  return;
+  }
+  
   let pathInfo = tempFilePath.split('/');
   let componentName = pathInfo[pathInfo.length - 2];
   fileStr += `import * as ${componentName} from './${tempFilePath.replace(".ts", "")}';\n`;

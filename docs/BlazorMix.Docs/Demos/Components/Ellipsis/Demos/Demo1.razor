@@ -1,0 +1,47 @@
+﻿
+<DemoBlock Title="尾部省略">
+    <Ellipsis Content="@_content" />
+</DemoBlock>
+
+<DemoBlock Title="头部省略">
+    <Ellipsis Direction="EllipsisDirection.Start" Content="@_content" />
+</DemoBlock>
+
+<DemoBlock Title="中间省略">
+    <Ellipsis Direction="EllipsisDirection.Middle" Content="@_content" />
+</DemoBlock>
+
+<DemoBlock Title="多行省略">
+    <Ellipsis Rows="3" Content="@_content" />
+</DemoBlock>
+
+<DemoBlock Title="展开收起">
+    <Ellipsis Rows="3" Content="@_content" ExpandText="展开" CollapseText="收起" />
+</DemoBlock>
+
+<DemoBlock Title="仅展开">
+    <Space Direction="BmDirection.Vertical">
+        <SpaceItem>
+            <Ellipsis Direction="EllipsisDirection.End" Content="@_content" ExpandText="展开"/>
+        </SpaceItem>
+        
+        <SpaceItem>
+            <Ellipsis Direction="EllipsisDirection.Start" Content="@_content" ExpandText="展开"/>
+        </SpaceItem>
+        
+        <SpaceItem>
+            <Ellipsis Direction="EllipsisDirection.Middle" Content="@_content" ExpandText="展开"/>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+
+<DemoBlock Title="默认展开">
+    <Ellipsis DefaultExpanded="true" Content="@_content" ExpandText="展开" CollapseText="收起" />
+</DemoBlock>
+
+
+@code
+{
+    private readonly string _content = "蚂蚁的企业级产品是一个庞大且复杂的体系。这类产品不仅量级巨大且功能复杂，而且变动和并发频繁，常常需要设计与开发能够快速的做出响应。同时这类产品中有存在很多类似的页面以及组件，可以通过抽象得到一些稳定且高复用性的内容。";
+}

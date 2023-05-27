@@ -1,0 +1,36 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div @ref="@_root" class="@ClsPrefix" @onclick="@HandleContentClick">
+    @if (_calcResult != null)
+    {
+        @if (!_calcResult.Exceeded)
+        {
+            @Content
+        }
+        else if (_isExpanded)
+        {
+            @Content
+            <a @onclick="@HandleCollapseClick"
+               @onclick:stopPropagation="true"
+               @onclick:preventDefault="true">
+                @CollapseText
+            </a>
+        }
+        else
+        {
+            @_calcResult.Leading
+            <a @onclick="@HandleExpandClick"
+               @onclick:stopPropagation="true"
+               @onclick:preventDefault="true">
+                @ExpandText
+            </a>
+            @_calcResult.Tailing
+        }
+    }
+    else
+    {
+        @Content
+    }
+   
+</div>

@@ -17,6 +17,7 @@
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <Description>A Blazor Mobile UI components lib.</Description>
         <Title>A Blazor Mobile UI components lib.</Title>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

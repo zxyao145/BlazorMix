@@ -1,4 +1,4 @@
-using BlazorMix;
+﻿using BlazorMix;
 using BlazorMix.Docs;
 using BlazorMix.Docs.Core.Services;
 using BlazorMix.Docs.Internal;

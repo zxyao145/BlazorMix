@@ -82,8 +82,27 @@ public static class JsRuntimeEtx
         ElementReference componentRoot
     )
     {
-        return await js.InvokeAsync< IJSObjectReference>(JsConstants.SwipeActionInit, obj, closeOnTouchOutside, componentRoot);
+        return await js.InvokeAsync<IJSObjectReference>(JsConstants.SwipeActionInit, obj, closeOnTouchOutside, componentRoot);
     }
 
+
     #endregion
+
+
+    public static async Task<CalcResult> EllipsisCalcEllipsised(
+        this IJSRuntime js,
+        DotNetObjectReference<Ellipsis> obj,
+        ElementReference componentRoot,
+        EllipsisProps props,
+        string content
+    )
+    {
+        return await js.InvokeAsync<CalcResult>(
+            JsConstants.EllipsisCalcEllipsised, 
+            obj, 
+            componentRoot, 
+            props,
+            content
+            );
+    }
 }
