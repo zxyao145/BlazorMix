@@ -4,7 +4,7 @@
 @if (!_hasDestroyed)
 {
     <div @ref="@Ref"
-         class="@PrefixCls @(Class?.ToString() ?? "")" 
+         class="@ClsPrefix @(Class?.ToString() ?? "")" 
          style="@Style?.ToString()">
         @if (ShowMask)
         {
@@ -27,7 +27,7 @@
                 <a @onclick="HandleCloserClick" 
                    @onclick:preventDefault
                    @onclick:stopPropagation
-                   class="@PrefixCls-close-icon bm-plain-anchor">
+                   class="@ClsPrefix-close-icon bm-plain-anchor">
                     <CloserIcon />
                 </a>
             }

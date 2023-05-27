@@ -2,14 +2,14 @@
 @inherits BmDomComponentBase
 
 
-<div class="@PrefixCls">
-    <div class="@($"{PrefixCls}-content")">
+<div class="@ClsPrefix">
+    <div class="@($"{ClsPrefix}-content")">
         @ChildContent
     </div>
 </div>
 
 @code {
-    public const string PrefixCls = "bm-auto-center";
+    public const string ClsPrefix = "bm-auto-center";
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

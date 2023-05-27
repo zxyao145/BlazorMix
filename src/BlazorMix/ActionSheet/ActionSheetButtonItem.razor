@@ -1,7 +1,7 @@
 ﻿@namespace BlazorMix
 @inherits BmDomComponentBase
 
-<div @key="@Action.Key" class="@(ActionSheet.PrefixCls + "-button-item-wrapper")">
+<div @key="@Action.Key" class="@(ActionSheet.ClsPrefix + "-button-item-wrapper")">
     <a class="@_classBuilder.ToString()"
        @onclick="@(async e =>{
                      if (Action.OnClick != null)
@@ -19,12 +19,12 @@
                 })"
        role='option'
        aria-disabled="@Action.Disabled">
-        <div class="@(ActionSheet.PrefixCls + "-button-item-name")">
+        <div class="@(ActionSheet.ClsPrefix + "-button-item-name")">
             @Action.Text.Node
         </div>
         @if (Action.Description != null)
         {
-            <div class="@(ActionSheet.PrefixCls + "-button-item-description")">
+            <div class="@(ActionSheet.ClsPrefix + "-button-item-description")">
                 @Action.Description.Value.Node
             </div>
         }
@@ -47,10 +47,10 @@
         _classBuilder
             .Clear()
             .Add("bm-plain-anchor")
-            .Add(ActionSheet.PrefixCls + "-button-item")
-            .AddIf(ActionSheet.PrefixCls + "-button-item-danger", () => Action.Danger)
-            .AddIf(ActionSheet.PrefixCls + "-button-item-disabled", () => Action.Disabled)
-            .AddIf(ActionSheet.PrefixCls + "-button-item-bold", () => Action.Bold);
+            .Add(ActionSheet.ClsPrefix + "-button-item")
+            .AddIf(ActionSheet.ClsPrefix + "-button-item-danger", () => Action.Danger)
+            .AddIf(ActionSheet.ClsPrefix + "-button-item-disabled", () => Action.Disabled)
+            .AddIf(ActionSheet.ClsPrefix + "-button-item-bold", () => Action.Bold);
 
     }
 }

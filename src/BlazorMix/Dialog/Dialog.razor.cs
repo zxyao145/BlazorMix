@@ -9,7 +9,7 @@ public partial class Dialog
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-dialog";
+    public const string ClsPrefix = "bm-dialog";
 
     #region CenterPopup
 
@@ -147,11 +147,11 @@ public partial class Dialog
     protected override Task OnInitializedAsync()
     {
         _classBuilder.Clear()
-            .Add(PrefixCls)
+            .Add(ClsPrefix)
             ;
         _bodyClass
-            .Add($"{PrefixCls}-body")
-            .AddIf($"{PrefixCls}-with-image", () => !string.IsNullOrWhiteSpace(Image))
+            .Add($"{ClsPrefix}-body")
+            .AddIf($"{ClsPrefix}-with-image", () => !string.IsNullOrWhiteSpace(Image))
             .Add(() => BodyClass?.ToString() ?? "");
 
         return base.OnInitializedAsync();

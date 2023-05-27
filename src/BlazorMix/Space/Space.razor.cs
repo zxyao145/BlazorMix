@@ -7,7 +7,7 @@ public partial class Space
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-space";
+    public const string ClsPrefix = "bm-space";
 
     #region Parameter
 
@@ -60,12 +60,12 @@ public partial class Space
     {
         await base.SetParametersAsync(parameters);
         _classBuilder.Clear()
-            .Add(PrefixCls)
-            .Add($"{PrefixCls}-{Direction.GetDisplayName()}")
-            .AddIf($"{PrefixCls}-block", () => Block)
-            .AddIf($"{PrefixCls}-wrap", () => Wrap)
-            .AddIf($"{PrefixCls}-justify-{Justify}", () => !string.IsNullOrWhiteSpace(Justify))
-            .AddIf($"{PrefixCls}-align-{Align}", () => !string.IsNullOrWhiteSpace(Align))
+            .Add(ClsPrefix)
+            .Add($"{ClsPrefix}-{Direction.GetDisplayName()}")
+            .AddIf($"{ClsPrefix}-block", () => Block)
+            .AddIf($"{ClsPrefix}-wrap", () => Wrap)
+            .AddIf($"{ClsPrefix}-justify-{Justify}", () => !string.IsNullOrWhiteSpace(Justify))
+            .AddIf($"{ClsPrefix}-align-{Align}", () => !string.IsNullOrWhiteSpace(Align))
             ;
     }
 }

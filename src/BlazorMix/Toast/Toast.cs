@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.CompilerServices;
 namespace BlazorMix;
 internal partial class Toast : BmDomComponentBase
 {
-    public const string PrefixCls = "bm-toast";
+    public const string ClsPrefix = "bm-toast";
 
     private readonly ToastOption _props;
 
@@ -17,10 +17,10 @@ internal partial class Toast : BmDomComponentBase
         _props = props;
 
         _mainClass = new ClassBuilder();
-        _mainClass.Add($"{PrefixCls}-main")
+        _mainClass.Add($"{ClsPrefix}-main")
             .Add(() => _props.Icon != null
-                ? $"{PrefixCls}-main-icon"
-                : $"{PrefixCls}-main-text"
+                ? $"{ClsPrefix}-main-icon"
+                : $"{ClsPrefix}-main-text"
             );
         _top = new StyleBuilder();
         _top.Add(() => _props.Position == ToastPosition.Top
@@ -73,20 +73,20 @@ internal partial class Toast : BmDomComponentBase
                 $";pointer-events:{(_props.MaskClickable ? "none" : "auto")};{_props.MaskStyle}"
                 ))
             .AddAttribute("Class", RuntimeHelpers.TypeCheck<ClassBuilder>(
-                $" {PrefixCls}-mask {_props.MaskClass}"
+                $" {ClsPrefix}-mask {_props.MaskClass}"
                 ))
             .AddAttribute("ChildContent", (RenderFragment)((builder2) =>
             {
                 var fb2 = builder2.Fluent(fluentRenderTreeBuilder.CurSequence);
                 fb2.OpenElement("div")
-                    .AddAttribute("class", $"{PrefixCls}-wrap")
+                    .AddAttribute("class", $"{ClsPrefix}-wrap")
                     .OpenElement("div")
                     .AddAttribute("style", _top.ToString())
                     .AddAttribute("class", _mainClass.ToString());
                 if (_iconElement != null)
                 {
                     fb2.OpenElement("div")
-                        .AddAttribute("class", $"{PrefixCls}-icon")
+                        .AddAttribute("class", $"{ClsPrefix}-icon")
                         .AddContent(_iconElement)
                         .CloseElement();
                 }

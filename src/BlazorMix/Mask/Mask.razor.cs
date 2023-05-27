@@ -25,7 +25,7 @@ public partial class Mask
         }
 
         _classBuilder.Clear()
-            .Add(PrefixCls);
+            .Add(ClsPrefix);
 
         var rgb = Color == "black" ? "0, 0, 0" : "255, 255, 255";
         var bgColor = Color == "transparent"

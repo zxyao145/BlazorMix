@@ -9,7 +9,7 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-action-sheet";
+    public const string ClsPrefix = "bm-action-sheet";
 
     #region paramters
 
@@ -113,10 +113,10 @@ public partial class ActionSheet : BmDomComponentBase, IActionSheetProps
 
         _classBuilder
             .Clear()
-            .Add(PrefixCls);
+            .Add(ClsPrefix);
 
         _popupClass.Clear()
-            .Add(PrefixCls + "-popup-body")
+            .Add(ClsPrefix + "-popup-body")
             .Add(() => PopupClass.ToString());
     }
 

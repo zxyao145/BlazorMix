@@ -4,7 +4,7 @@
 
 <CenterPopup Visible="@Visible"
              Style="@Style"
-             Class="@((Class?.ToString() ?? "") + PrefixCls)"
+             Class="@((Class?.ToString() ?? "") + ClsPrefix)"
              OnMaskClick="HandleMaskClick"
              Container="@Container"
              AfterClose="@AfterClose"
@@ -17,7 +17,7 @@
              DisableBodyScroll="@DisableBodyScroll">
     @if (!string.IsNullOrWhiteSpace(Image))
     {
-        <div class="@PrefixCls-image-container">
+        <div class="@ClsPrefix-image-container">
             <div class="bm-image" style="--width:100%; width: 100%;">
                 <img class="bm-image-img" src="@Image" alt="dialog header image"
                      draggable="false"
@@ -29,17 +29,17 @@
 
     @if (Header != null)
     {
-        <div class="@PrefixCls-header">
+        <div class="@ClsPrefix-header">
             <AutoCenter>@Header.Value.Node</AutoCenter>
         </div>
     }
     @if (Title != null)
     {
-        <div class="@PrefixCls-title">
+        <div class="@ClsPrefix-title">
             @Title.Value.Node
         </div>
     }
-    <div class="@PrefixCls-content @_classBuilder">
+    <div class="@ClsPrefix-content @_classBuilder">
         @if (Content.HasValue)
         {
             if (Content.Value.IsText)
@@ -52,12 +52,12 @@
             }
         }
     </div>
-    <div class="@PrefixCls-footer">
+    <div class="@ClsPrefix-footer">
         @{
             var index = 0;
             foreach (var actionInfoGrp in Actions)
             {
-                <div class="@PrefixCls-action-row" @key="actionInfoGrp">
+                <div class="@ClsPrefix-action-row" @key="actionInfoGrp">
                     @foreach (var actionInfo in actionInfoGrp.ActionList)
                     {
                         var temp = index;

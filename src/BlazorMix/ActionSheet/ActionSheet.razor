@@ -8,14 +8,14 @@
        Class="@_popupClass"
        Style="@PopupStyle"
        DestroyOnClose="@DestroyOnClose">
-    <div class="@PrefixCls">
+    <div class="@ClsPrefix">
         @if (Extra != null)
         {
-            <div class="@(PrefixCls + "-extra")">
+            <div class="@(ClsPrefix + "-extra")">
                 @Extra.Value.Node
             </div>
         }
-        <div class="@(PrefixCls + "-button-list")">
+        <div class="@(ClsPrefix + "-button-list")">
             @{
                 for (var i = 0; i < Actions.Count; i++)
                 {
@@ -32,13 +32,13 @@
         {
             var classBuilder = new ClassBuilder()
             .Add("bm-plain-anchor")
-            .Add(PrefixCls + "-button-item");
+            .Add(ClsPrefix + "-button-item");
 
 
-            <div class="@(PrefixCls+"-cancel")"
+            <div class="@(ClsPrefix+"-cancel")"
                  role="option"
                  aria-label="@CancelText">
-                <div class="@(PrefixCls + "-button-item-wrapper")">
+                <div class="@(ClsPrefix + "-button-item-wrapper")">
                     <a class="@classBuilder.ToString()"
                    @onclick="@(async (e) =>{
                                        if (OnClose.HasDelegate)
@@ -46,7 +46,7 @@
                                            await OnClose.InvokeAsync();
                                        }
                                  })">
-                        <div class="@(PrefixCls + "-button-item-name")">
+                        <div class="@(ClsPrefix + "-button-item-name")">
                             @CancelText.Value.Node
                         </div>
                     </a>

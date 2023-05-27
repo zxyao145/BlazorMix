@@ -8,7 +8,7 @@ public partial class SpaceItem
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-space-item";
+    public const string ClsPrefix = "bm-space-item";
 
     /// <summary>
     /// 

@@ -6,7 +6,7 @@ public partial class NoticeBar
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-notice-bar";
+    public const string ClsPrefix = "bm-notice-bar";
 
     public static RenderFragment DefaultIcon = b => b.Fluent()
         .OpenComponent<SoundOutline>()
@@ -14,7 +14,7 @@ public partial class NoticeBar
 
     public static RenderFragment DefaultCloseIcon = b => b.Fluent()
         .OpenComponent<CloseOutline>()
-        .AddAttribute("Class", new ClassBuilder($"{PrefixCls}-close-icon"))
+        .AddAttribute("Class", new ClassBuilder($"{ClsPrefix}-close-icon"))
         .CloseComponent();
 
 
@@ -82,9 +82,9 @@ public partial class NoticeBar
     protected override void OnInitialized()
     {
         _classBuilder.Clear()
-            .Add(PrefixCls)
-            .Add($"{PrefixCls}-{Color.GetDisplayName()}")
-            .AddIf($"{PrefixCls}-wrap", () => Wrap)
+            .Add(ClsPrefix)
+            .Add($"{ClsPrefix}-{Color.GetDisplayName()}")
+            .AddIf($"{ClsPrefix}-wrap", () => Wrap)
             .Add(() => Class?.ToString() ?? "");
     }
 

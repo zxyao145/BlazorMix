@@ -4,7 +4,7 @@ public abstract class MaskBase: BmDomComponentBase
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-mask";
+    public const string ClsPrefix = "bm-mask";
 
     /// <summary>
     /// 

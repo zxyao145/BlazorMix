@@ -32,7 +32,7 @@ public partial class SafeArea
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-safe-area";
+    public const string ClsPrefix = "bm-safe-area";
 
     [Parameter]
     public SafeAreaPosition Position { get; set; }
@@ -42,7 +42,7 @@ public partial class SafeArea
     {
         await base.SetParametersAsync(parameters);
         _classBuilder.Clear()
-            .Add(PrefixCls)
-            .Add($"{PrefixCls}-position-{Position.GetDisplayName()}");
+            .Add(ClsPrefix)
+            .Add($"{ClsPrefix}-position-{Position.GetDisplayName()}");
     }
 }

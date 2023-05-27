@@ -9,7 +9,7 @@ public partial class Divider : BmDomComponentBase
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-divider";
+    public const string ClsPrefix = "bm-divider";
 
     /// <summary>
     /// 
@@ -43,8 +43,8 @@ public partial class Divider : BmDomComponentBase
         await base.SetParametersAsync(parameters);
 
         _classBuilder.Clear()
-            .Add(PrefixCls)
-            .Add($"{PrefixCls}-{ContentPosition.GetDisplayName()}")
-            .Add($"{PrefixCls}-{Direction.GetDisplayName()}");
+            .Add(ClsPrefix)
+            .Add($"{ClsPrefix}-{ContentPosition.GetDisplayName()}")
+            .Add($"{ClsPrefix}-{Direction.GetDisplayName()}");
     }
 }

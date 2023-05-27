@@ -8,7 +8,7 @@ public partial class Popup
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-popup";
+    public const string ClsPrefix = "bm-popup";
 
     private Position _pos = Position.Bottom;
 
@@ -42,9 +42,9 @@ public partial class Popup
     protected override void OnAfterRender(bool firstRender)
     {
         _classBuilder
-            .Add($"{PrefixCls}-body")
+            .Add($"{ClsPrefix}-body")
             .Add(() => BodyClass?.ToString() ?? "")
-            .Add($"{PrefixCls}-body-position-{Position.GetDisplayName()}");
+            .Add($"{ClsPrefix}-body-position-{Position.GetDisplayName()}");
 
         base.OnAfterRender(firstRender);
     }

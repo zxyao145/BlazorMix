@@ -7,7 +7,7 @@ public partial class Button : BmDomComponentBase
     /// <summary>
     /// 
     /// </summary>
-    public const string PrefixCls = "bm-btn";
+    public const string ClsPrefix = "bm-btn";
 
     #region options
 
@@ -137,13 +137,13 @@ public partial class Button : BmDomComponentBase
 
         _classBuilder
             .Clear()
-            .Add(PrefixCls)
+            .Add(ClsPrefix)
             .Add($"{Shape}")
-            .Add($"{PrefixCls}-{Color}")
-            .AddIf($"{PrefixCls}-{Size}", () => Size != ButtonSize.Medium)
-            .AddIf($"{PrefixCls}-{Fill}", () => Fill != ButtonFillType.Solid)
-            .AddIf($"{PrefixCls}-block", () => Block)
-            .AddIf($"{PrefixCls}-disabled", () => Disabled)
-            .AddIf($"{PrefixCls}-loading", () => Loading);
+            .Add($"{ClsPrefix}-{Color}")
+            .AddIf($"{ClsPrefix}-{Size}", () => Size != ButtonSize.Medium)
+            .AddIf($"{ClsPrefix}-{Fill}", () => Fill != ButtonFillType.Solid)
+            .AddIf($"{ClsPrefix}-block", () => Block)
+            .AddIf($"{ClsPrefix}-disabled", () => Disabled)
+            .AddIf($"{ClsPrefix}-loading", () => Loading);
     }
 }
