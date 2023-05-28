@@ -21,11 +21,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <NoWarn>1701;1702; CS1591</NoWarn>
+      <NoWarn>1701;1702;CS1591;TS2300</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <NoWarn>1701;1702; CS1591</NoWarn>
+      <NoWarn>1701;1702;CS1591;TS2300</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -47,7 +47,6 @@
         <Folder Include="Drag\" />
         <Folder Include="Swiper\" />
         <Folder Include="Barrage\" />
-        <Folder Include="Watermark\" />
     </ItemGroup>
     
     <ItemGroup>

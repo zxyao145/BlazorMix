@@ -1,7 +1,7 @@
 ﻿@namespace BlazorMix
 @inherits BmDomComponentBase
 
-<div @ref="@_root" class="@ClsPrefix" @onclick="@HandleContentClick">
+<div @ref="@_root" class="@ClsPrefix" style="@(Style?.ToString() ?? "")" @onclick="@HandleContentClick">
     @if (_calcResult != null)
     {
         @if (!_calcResult.Exceeded)

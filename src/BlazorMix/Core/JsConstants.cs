@@ -23,7 +23,6 @@ internal class JsConstants
     #endregion
 
     public const string PrefixNoticeBar = "Bm.NoticeBar.";
-
     public const string NoticeBarStartScroll = $"{PrefixNoticeBar}startScroll";
     public const string NoticeBarEndScroll = $"{PrefixNoticeBar}endScroll";
 
@@ -34,5 +33,9 @@ internal class JsConstants
     
     
     public const string PrefixEllipsis = "Bm.Ellipsis.";
-    public const string EllipsisCalcEllipsised = $"{PrefixEllipsis}calcEllipsised";
+    public const string EllipsisCalcEllipsised = $"{PrefixEllipsis}calcEllipsised";   
+    
+    
+    public const string PrefixWaterMark = "Bm.WaterMark.";
+    public const string PrefixWaterMarkRender = $"{PrefixWaterMark}render";
 }

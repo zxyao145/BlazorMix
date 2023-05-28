@@ -48,12 +48,15 @@
     <ItemGroup>
       <DemoDocs Remove="Demos\Components\Ellipsis\Docs\index.zh-CN.md" />
       <DemoDocs Remove="Demos\Components\List\Docs\index.zh-CN.md" />
+      <DemoDocs Remove="Demos\Components\WaterMark\Docs\index.zh-CN.md" />
     </ItemGroup>
 
     <ItemGroup>
       <DemoSourceCode Remove="Demos\Components\Ellipsis\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\List\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\List\Demos\Demo2.razor" />
+      <DemoSourceCode Remove="Demos\Components\WaterMark\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\WaterMark\Demos\Demo2.razor" />
     </ItemGroup>
 
     <ItemGroup>
@@ -68,6 +71,14 @@
         <CliProjectDir>docs/BlazorMix.Docs.Build</CliProjectDir>
         <CliPath>$(CLIProjectDir)/BlazorMix.Docs.Build.csproj</CliPath>
         <DocsDir>$(SolutionDir)docs/BlazorMix.Docs</DocsDir>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <NoWarn>1701;1702;TS2300</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <NoWarn>1701;1702;TS2300</NoWarn>
     </PropertyGroup>
 
 

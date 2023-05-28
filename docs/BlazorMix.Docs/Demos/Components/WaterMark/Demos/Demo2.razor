@@ -1,0 +1,13 @@
+﻿<DemoBlock Title="局部水印">
+    <div style="display:inline-flex; position:relative;">
+        <image src='icon-192.png' />
+        <WaterMark Content="@("Blazor Mix")"
+                   GapX="12"
+                   GapY="24"
+                   FullPage="@false"
+        />
+    </div>
+    <DemoDescription>
+        把 WaterMark 放到一个 relative 定位的父元素，它会自动撑满这个父元素的范围。
+    </DemoDescription>
+</DemoBlock>

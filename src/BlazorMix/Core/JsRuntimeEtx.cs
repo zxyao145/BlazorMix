@@ -88,6 +88,7 @@ public static class JsRuntimeEtx
 
     #endregion
 
+    #region Ellipsised
 
     public static async Task<CalcResult> EllipsisCalcEllipsised(
         this IJSRuntime js,
@@ -98,11 +99,26 @@ public static class JsRuntimeEtx
     )
     {
         return await js.InvokeAsync<CalcResult>(
-            JsConstants.EllipsisCalcEllipsised, 
-            obj, 
-            componentRoot, 
+            JsConstants.EllipsisCalcEllipsised,
+            obj,
+            componentRoot,
             props,
             content
+            );
+    } 
+
+    #endregion
+
+    public static async Task WaterMarkRender(
+        this IJSRuntime js,
+        ElementReference componentRoot,
+        WaterMarkProps props
+    )
+    {
+        await js.InvokeVoidAsync(
+            JsConstants.PrefixWaterMarkRender,
+            componentRoot,
+            props
             );
     }
 }
