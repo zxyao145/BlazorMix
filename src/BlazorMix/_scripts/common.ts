@@ -1,10 +1,6 @@
-﻿export const getEle = (e: HTMLElement | string) => {
-    if (typeof e === "string") {
-        return document.querySelector(e as string) as HTMLElement;
-    } else {
-        return e;
-    }
-}
+﻿import { observeInViewportOnce } from "./IntersectionObserver";
+import { getEle } from "./util";
+
 
 export const MoveEleTo = (
     ref: HTMLElement | string,
@@ -15,6 +11,11 @@ export const MoveEleTo = (
     if (ele && c) {
         c.append(ele);
     } 
+}
+
+
+export const ObserveInViewportOnce = (dotNetObj: any, el: Element) => {
+    observeInViewportOnce(dotNetObj, el);
 }
 
 

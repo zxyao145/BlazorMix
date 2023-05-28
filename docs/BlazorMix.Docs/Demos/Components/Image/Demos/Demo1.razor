@@ -1,0 +1,71 @@
+﻿
+<DemoBlock Title="基础用法">
+    <Image Src="@demoSrc" />
+</DemoBlock>
+
+
+<DemoBlock Title="多种填充模式">
+    <Space Wrap>
+        <SpaceItem>
+            <Image Src="@demoSrc" Width=100 Height=100 Fit=ImageFit.Fill/>
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Width=100 Height=100 Fit=ImageFit.Contain />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Width=100 Height=100 Fit=ImageFit.Cover />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Width=100 Height=100 Fit=ImageFit.ScaleDown />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Width=100 Height=100 Fit=ImageFit.None />
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+
+<DemoBlock Title="自定义圆角">
+    <Space Wrap>
+        <SpaceItem>
+            <Image Src="@demoSrc" Class="@BorderRadius.Rounded" Width=64 Height=64 Fit=ImageFit.Cover />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Class="@BorderRadius.Rounded" Style="@("--border-radius: 0.5rem;")" Width=64 Height=64 Fit=ImageFit.Cover />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" Class="@BorderRadius.Circle" Width=64 Height=64 Fit=ImageFit.Cover />
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="通过 CSS 变量统一设置图片大小">
+    <Space Wrap Style="@("--bm-image-width: 120px;--bm-image-height: 60px;")">
+        <SpaceItem>
+            <Image Src="@demoSrc" />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" />
+        </SpaceItem>
+        <SpaceItem>
+            <Image Src="@demoSrc" />
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+    <DemoBlock Title="加载失败">
+    <Image Src="/404" Width=100 Height=100 />
+</DemoBlock>
+
+
+<DemoBlock Title="懒加载">
+    <Image Lazy Src="@demoSrc2" />
+</DemoBlock>
+
+
+@code
+{
+    const string demoSrc = "https://bing.com/th?id=OHR.SaksunFaroe_ZH-CN7150180006_1920x1080.webp&qlt=50";
+    const string demoSrc2 = "https://bing.com/th?id=OHR.OldFortress_ZH-CN6469523538_1920x1080.webp&qlt=50";
+
+}

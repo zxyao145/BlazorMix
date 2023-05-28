@@ -20,7 +20,6 @@ export interface WaterMark {
 }
 
 export const render = (root: HTMLElement, props: WaterMark) => {
-    console.log("props", props);
     const setBase64Url = (base64Url: string) => {
         root.style.backgroundImage = `url(${base64Url})`;
     };

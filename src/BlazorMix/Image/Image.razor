@@ -1,0 +1,33 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div class="@ClsPrefix @Class?.ToString()"
+     style="@_styleBuilder.ToString()"
+     @ref="@_root"
+     onclick="@HandleContainerClick"
+>
+    @if (_initialized)
+    {
+        if (_failed)
+        {
+            @Fallback.Node
+        }
+        else 
+        {
+            if (!_loaded && Placeholder.Node != null)
+            {
+                @Placeholder.Node
+            }
+
+            <img class="@($"{ClsPrefix}-img")"
+                 src="@Src"
+                 alt="@Alt"
+                 @onclick="@HandleImageClick"
+                 @onload="SetLoaded"
+                 @onerror="SetFailed"
+                 style="@($"object-fit:{Fit.GetDisplayName()}; display:{(_loaded ?"block" : "none")}")"
+            />
+        }
+    }
+</div>
+

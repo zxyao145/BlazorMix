@@ -1,14 +1,16 @@
 ﻿
+using OneOf.Types;
+
 namespace BlazorMix.Core;
 public static class JsRuntimeEtx
 {
     #region common
 
     public static async Task MoveEleTo(
-  this IJSRuntime js,
-  ElementReference element,
-  OneOf<string, ElementReference> container
-  )
+          this IJSRuntime js,
+          ElementReference element,
+          OneOf<string, ElementReference> container
+        )
     {
         if (container.IsT0)
         {
@@ -48,6 +50,15 @@ public static class JsRuntimeEtx
     )
     {
         await js.InvokeVoidAsync(JsConstants.EnableBodyScroll);
+    }
+
+    public static async Task ObserveInViewportOnce(
+    this IJSRuntime js,
+        DotNetObjectReference<CallbackFunc<Task>> dotNetObject,
+        ElementReference element
+        )
+    {
+        await js.InvokeVoidAsync(JsConstants.ObserveInViewportOnce, dotNetObject, element);
     }
 
     #endregion
@@ -105,7 +116,7 @@ public static class JsRuntimeEtx
             props,
             content
             );
-    } 
+    }
 
     #endregion
 

@@ -19,6 +19,7 @@ internal class JsConstants
     public const string MoveEleTo = $"{PrefixCommon}{nameof(MoveEleTo)}";
     public const string DisableBodyScroll = $"{PrefixCommon}{nameof(DisableBodyScroll)}";
     public const string EnableBodyScroll = $"{PrefixCommon}{nameof(EnableBodyScroll)}";
+    public const string ObserveInViewportOnce = $"{PrefixCommon}{nameof(ObserveInViewportOnce)}";
 
     #endregion
 

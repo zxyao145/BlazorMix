@@ -47,12 +47,14 @@
 
     <ItemGroup>
       <DemoDocs Remove="Demos\Components\Ellipsis\Docs\index.zh-CN.md" />
+      <DemoDocs Remove="Demos\Components\Image\Docs\index.zh-CN.md" />
       <DemoDocs Remove="Demos\Components\List\Docs\index.zh-CN.md" />
       <DemoDocs Remove="Demos\Components\WaterMark\Docs\index.zh-CN.md" />
     </ItemGroup>
 
     <ItemGroup>
       <DemoSourceCode Remove="Demos\Components\Ellipsis\Demos\Demo1.razor" />
+      <DemoSourceCode Remove="Demos\Components\Image\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\List\Demos\Demo1.razor" />
       <DemoSourceCode Remove="Demos\Components\List\Demos\Demo2.razor" />
       <DemoSourceCode Remove="Demos\Components\WaterMark\Demos\Demo1.razor" />
