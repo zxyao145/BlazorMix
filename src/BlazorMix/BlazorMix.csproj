@@ -8,9 +8,11 @@
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <RootNamespace>BlazorMix</RootNamespace>
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+        
         <Authors>zxyao</Authors>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/zxyao145/BlazorMix.git</RepositoryUrl>
+        <PackageProjectUrl>https://blazormix.com/</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>blazor;mobile</PackageTags>
         <LICENSE>Apache 2.0</LICENSE>
@@ -18,6 +20,7 @@
         <Description>A Blazor Mobile UI components lib.</Description>
         <Title>A Blazor Mobile UI components lib.</Title>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <PackageId>BlazorMix</PackageId>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

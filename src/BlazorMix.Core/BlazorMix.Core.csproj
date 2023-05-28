@@ -1,19 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>BlazorMix</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <RootNamespace>BlazorMix</RootNamespace>
+        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+
+        <Authors>zxyao</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/zxyao145/BlazorMix.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>blazor;blazormix</PackageTags>
+        <LICENSE>Apache 2.0</LICENSE>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <Description>BlazorMix lib core code.</Description>
+        <Title>BlazorMix lib core code.</Title>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <PackageId>BlazorMix.Core</PackageId>
+    </PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\LICENSE.txt">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
+    </ItemGroup>
 
 </Project>

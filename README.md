@@ -3,7 +3,9 @@ A Blazor Mobile UI components lib.
 
 [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorMix)](https://www.nuget.org/packages/BlazorMix/)
 
-[Docs](https://blazormix.com/)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/BlazorMix.Core)](https://www.nuget.org/packages/BlazorMix.Core/)
+
+[BlazorMix Docs](https://blazormix.com/)
 
 
 ## What is "Mix"?
