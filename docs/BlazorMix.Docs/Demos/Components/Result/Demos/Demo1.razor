@@ -1,0 +1,50 @@
+﻿
+<DemoBlock Title="成功状态">
+    <Result Status="ResultStatus.Success"
+            Title="@("操作成功")">
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+<DemoBlock Title="等待状态">
+    <Result Status="ResultStatus.Waiting"
+            Title="@("等待处理")">
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+<DemoBlock Title="提示状态">
+    <Result Status="ResultStatus.Info"
+            Title="@("等待处理")">
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+<DemoBlock Title="警告状态">
+    <Result Status="ResultStatus.Warning"
+            Title="@("警告提示")">
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+<DemoBlock Title="失败状态">
+    <Result Status="ResultStatus.Error"
+            Title="@("无法完成操作")">
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+<DemoBlock Title="自定义图标">
+    <Result Status="ResultStatus.Error"
+            Title="@("Well done")">
+        <Icon>
+            <IconPark.GrinningFaceWithTightlyClosedEyes Fill="@(new List<string>(){"#864ae2"})" />
+        </Icon>
+        <Description>@Description</Description>
+    </Result>
+</DemoBlock>
+
+@code
+{
+    private static string Description = "内容详情可折行，建议不超过两行建议不超过两行建议不超过两行";
+}

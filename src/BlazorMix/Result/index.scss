@@ -1,0 +1,70 @@
+﻿$cls-prefix: #{$prefix}-result;
+
+.#{$cls-prefix} {
+    padding: 32px 12px;
+    background-color: var(--main-backgroup-color);
+
+    &-icon {
+        box-sizing: border-box;
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px auto;
+        padding: 6px;
+        font-size: 52px;
+    }
+
+    &-title {
+        color: var(--color-gray-dark);
+        font-size: 1.125rem;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    &-description {
+        margin-top: 8px;
+        color: var(--weak);
+        font-size: 0.8125rem;
+        line-height: 1.4;
+        text-align: center;
+    }
+}
+
+.#{$cls-prefix}-success {
+  .#{$cls-prefix}-icon {
+    .mix-icon {
+      color: var(--primary);
+    }
+  }
+}
+
+.#{$cls-prefix}-error {
+  .#{$cls-prefix}-icon {
+    .mix-icon {
+      color: var(--danger);
+    }
+  }
+}
+
+.#{$cls-prefix}-info {
+  .#{$cls-prefix}-icon {
+    .mix-icon {
+      color: var(--primary);
+    }
+  }
+}
+
+.#{$cls-prefix}-waiting {
+  .#{$cls-prefix}-icon {
+    .mix-icon {
+      color: var(--success);
+    }
+  }
+}
+
+.#{$cls-prefix}-warning {
+  .#{$cls-prefix}-icon {
+    .mix-icon {
+      color: var(--warning);
+    }
+  }
+}

@@ -33,18 +33,12 @@ public partial class Divider : BmDomComponentBase
 
     #endregion
 
-    /// <summary>
-    /// override
-    /// </summary>
-    /// <param name="parameters"></param>
-    /// <returns></returns>
-    public override async Task SetParametersAsync(ParameterView parameters)
+    protected override Task OnInitializedAsync()
     {
-        await base.SetParametersAsync(parameters);
-
         _classBuilder.Clear()
             .Add(ClsPrefix)
             .Add($"{ClsPrefix}-{ContentPosition.GetDisplayName()}")
             .Add($"{ClsPrefix}-{Direction.GetDisplayName()}");
+        return base.OnInitializedAsync();
     }
 }

@@ -1,0 +1,12 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+
+<div class="@_classBuilder">
+    <div class="@($"{ClsPrefix}-icon")">@_resultIcon</div>
+    <div class="@($"{ClsPrefix}-title")">@Title.Node</div>
+    @if (Description != null)
+    {
+        <div class="@($"{ClsPrefix}-description")">@Description</div>
+    }
+</div>
