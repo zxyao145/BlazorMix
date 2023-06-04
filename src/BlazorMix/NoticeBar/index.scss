@@ -1,13 +1,14 @@
-﻿$c-prefix: #{$prefix}-notice-bar;
+﻿$cls-prefix: #{$prefix}-notice-bar;
 
 
-.#{$c-prefix} {
+.#{$cls-prefix} {
     --background-color: #ababab;
     --border-color: #999999;
     --text-color: #fff;
     --font-size: 14px;
     --icon-font-size: 18px;
     --height: 40px;
+
     height: var(--height);
     box-sizing: border-box;
     font-size: var(--font-size);
@@ -25,31 +26,31 @@
         color: var(--text-color);
     }
 
-    &.#{$c-prefix}-alert {
+    &.#{$cls-prefix}-alert {
         --background-color: #fff9ed;
         --border-color: #fff3e9;
         --text-color: #ff6010;
     }
 
-    &.#{$c-prefix}-error {
+    &.#{$cls-prefix}-error {
         --background-color: #ff3b30;
         --border-color: #d9281e;
         --text-color: #ffffff;
     }
 
-    &.#{$c-prefix}-info {
+    &.#{$cls-prefix}-info {
         --background-color: #d0e4ff;
         --border-color: #bcd8ff;
         --text-color: #1677ff;
     }
 
-    & .#{$c-prefix}-left {
+    & .#{$cls-prefix}-left {
         flex-shrink: 0;
         margin-right: 8px;
         font-size: var(--icon-font-size);
     }
 
-    & .#{$c-prefix}-content {
+    & .#{$cls-prefix}-content {
         flex: 1;
         overflow: hidden;
         position: relative;
@@ -57,22 +58,22 @@
         display: flex;
         align-items: center;
 
-        & .#{$c-prefix}-content-inner {
+        & .#{$cls-prefix}-content-inner {
             width: auto;
             transition-timing-function: linear;
             white-space: nowrap;
         }
     }
 
-    &.#{$c-prefix}-wrap {
-        & .#{$c-prefix}-content {
-            & .#{$c-prefix}-content-inner {
+    &.#{$cls-prefix}-wrap {
+        & .#{$cls-prefix}-content {
+            & .#{$cls-prefix}-content-inner {
                 white-space: normal;
             }
         }
     }
 
-    & .#{$c-prefix}-right {
+    & .#{$cls-prefix}-right {
         flex-shrink: 0;
         margin-left: 12px;
     }

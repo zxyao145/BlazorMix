@@ -1,18 +1,17 @@
-﻿@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';
+﻿
+$cls-prefix: #{$prefix}-space;
 
-$space-prefix: #{$prefix}-space;
-
-.#{$space-prefix} {
-    display: inline-flex;
+.#{$cls-prefix} {
     --space-gap: var(--gap);
     --space-gap-vertical: var(--space-gap);
     --space-gap-horizontal: var(--space-gap);
 
+    display: inline-flex;
+
     &-vertical {
         flex-direction: column;
 
-        > .#{$space-prefix}-item {
+        > .#{$cls-prefix}-item {
             margin-bottom: var(--space-gap-vertical);
 
             &:last-child {
@@ -25,7 +24,7 @@ $space-prefix: #{$prefix}-space;
         flex-direction: row;
 
 
-        > .#{$space-prefix}-item {
+        > .#{$cls-prefix}-item {
             margin-right: var(--space-gap-horizontal);
 
             &:last-child {
@@ -33,17 +32,17 @@ $space-prefix: #{$prefix}-space;
             }
         }
 
-        &.#{$space-prefix}-wrap {
+        &.#{$cls-prefix}-wrap {
             flex-wrap: wrap;
             margin-bottom: calc(var(--space-gap-vertical) * -1);
 
-            > .#{$space-prefix}-item {
+            > .#{$cls-prefix}-item {
                 padding-bottom: var(--space-gap-vertical);
             }
         }
     }
 
-    &.#{$space-prefix}-block {
+    &.#{$cls-prefix}-block {
         display: flex;
     }
 

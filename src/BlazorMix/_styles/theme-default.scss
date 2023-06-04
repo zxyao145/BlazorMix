@@ -12,25 +12,22 @@
     --dark: #212529;
     --weak: #999;
 
+    --color-box: #f5f5f5;
+
     --border-color: #efefef;
     --border-radius: 0.25rem;
     --border-width: 1px;
     --border-style: solid;
 
-    --main-backgroup-color: #fff;
-    --active-backgroup-color: #eee;
-    --main-text-color: #000;
-    --light-text-color: #ccc;
-    --main-text-reverse-color: #fff;
-    --weak-text-color: var(--weak);
+    --color-main-background: #fff;
+    --color-main-text: #000;
+    --color-main-text-reverse: #fff;
+
+    --color-active-backgroup: #eee;
+    --color-light-text: #ccc;
+    --color-weak-text: var(--weak);
     --color-gray-dark: #333;
 
-
-    --color-box: #f5f5f5;
-
-
-
     --gap: 8px;
-
     --z-index: 1000;
 }

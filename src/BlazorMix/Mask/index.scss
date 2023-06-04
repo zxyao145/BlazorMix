@@ -1,10 +1,10 @@
-﻿/*@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';*/
+﻿/**/
 
-$c-prefix: #{$prefix}-mask;
+$cls-prefix: #{$prefix}-mask;
 
-.#{$c-prefix} {
-    --mask-z-index: 1000;
+.#{$cls-prefix} {
+    --mask-z-index: var(--z-index);
+    
     position: fixed;
     top: 0;
     left: 0;

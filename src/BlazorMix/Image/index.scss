@@ -1,8 +1,9 @@
-﻿$c-prefix: #{$prefix}-image;
+﻿$cls-prefix: #{$prefix}-image;
 
-.#{$c-prefix} {
+.#{$cls-prefix} {
     --width: var(--bm-image-width, auto);
     --height: var(--bm-image-height, auto);
+
     width: var(--width);
     height: var(--height);
     display: block;

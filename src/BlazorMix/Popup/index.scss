@@ -1,47 +1,46 @@
-﻿@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';
+﻿
 
-$btn-prefix: #{$prefix}-popup;
+$cls-prefix: #{$prefix}-popup;
 
-.#{$btn-prefix} {
+.#{$cls-prefix} {
     --popup-z-index: calc(var(--z-index) + 10);
     --popup-bg-color: #fff;
 }
 
-.#{$btn-prefix}-body {
+.#{$cls-prefix}-body {
     position: fixed;
     background-color: var(--popup-bg-color);
     z-index: var(--popup-z-index);
 }
 
-.#{$btn-prefix}-close-icon {
+.#{$cls-prefix}-close-icon {
     cursor: pointer;
     padding: 4px;
     font-size: 18px;
     line-height: 1;
-    color: var(--weak-text-color);
+    color: var(--color-weak-text);
     position: absolute;
     z-index: 100;
 }
 
-.#{$btn-prefix}-body-position-bottom {
+.#{$cls-prefix}-body-position-bottom {
     width: 100%;
     bottom: 0;
     left: 0;
 
-    .#{$btn-prefix}-close-icon {
+    .#{$cls-prefix}-close-icon {
         right: 8px;
         top: 8px;
     }
 }
 
-.#{$btn-prefix}-body-position-top {
+.#{$cls-prefix}-body-position-top {
     height: 40vw;
     width: 100%;
     top: 0;
     left: 0;
 
-    .#{$btn-prefix}-close-icon {
+    .#{$cls-prefix}-close-icon {
         right: 8px;
         bottom: 8px;
     }
@@ -49,24 +48,24 @@ $btn-prefix: #{$prefix}-popup;
 
 
 
-.#{$btn-prefix}-body-position-left {
+.#{$cls-prefix}-body-position-left {
     height: 100%;
     top: 0;
     left: 0;
 
-    .#{$btn-prefix}-close-icon {
+    .#{$cls-prefix}-close-icon {
         right: 8px;
         top: 8px;
     }
 }
 
-.#{$btn-prefix}-body-position-right {
+.#{$cls-prefix}-body-position-right {
     width: 60vw;
     height: 100%;
     top: 0;
     right: 0;
 
-    .#{$btn-prefix}-close-icon {
+    .#{$cls-prefix}-close-icon {
         left: 8px;
         top: 8px;
     }

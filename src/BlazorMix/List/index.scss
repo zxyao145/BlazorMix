@@ -16,13 +16,13 @@
     --extra-max-width: 70%;
 
     &-header {
-        color: var(--weak-text-color);
+        color: var(--color-weak-text);
         font-size: var(--header-font-size);
         padding: 8px var(--padding-right) 8px var(--padding-left);
     }
 
     &-body {
-        background-color: var(--main-backgroup-color);
+        background-color: var(--color-main-background);
         overflow: hidden;
         font-size: var(--font-size);
     }
@@ -55,12 +55,12 @@
     display: block;
     padding-left: var(--padding-left);
     position: relative;
-    background-color: var(--main-backgroup-color);
+    background-color: var(--color-main-background);
     line-height: 1.5;
 
     &-title,
     &-description {
-        color: var(--weak-text-color);
+        color: var(--color-weak-text);
         font-size: 13px;
     }
 
@@ -86,7 +86,7 @@
             flex: none;
             padding-left: 12px;
             font-size: 15px;
-            color: var(--weak-text-color);
+            color: var(--color-weak-text);
             max-width: var(--extra-max-width);
         }
 
@@ -95,7 +95,7 @@
             display: flex;
             align-items: center;
             margin-left: 4px;
-            color: var(--light-text-color);
+            color: var(--color-light-text);
             font-size: 19px;
         }
     }
@@ -112,7 +112,7 @@
 
 a.#{$cls-prefix}-item {
     &:active:not(.#{$cls-prefix}-item-disabled) {
-        background-color: var(--active-backgroup-color);
+        background-color: var(--color-active-backgroup);
 
         &::after {
             content: ' ';

@@ -1,16 +1,14 @@
-﻿@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';
+﻿
+$cls-prefix: #{$prefix}-center-popup;
 
-$btn-prefix: #{$prefix}-center-popup;
-
-.#{$btn-prefix} {
+.#{$cls-prefix} {
     --popup-z-index: calc(var(--z-index) + 10);
     --popup-bg-color: #fff;
     --popup-max-width: 75vw;
     --popup-min-width: 280px;
 }
 
-.#{$btn-prefix}-wrap {
+.#{$cls-prefix}-wrap {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -26,17 +24,17 @@ $btn-prefix: #{$prefix}-center-popup;
     }
 }
 
-.#{$btn-prefix}-body {
+.#{$cls-prefix}-body {
     background-color: var(--popup-bg-color);
     border-radius: var(--border-radius);
 }
 
-.#{$btn-prefix}-close-icon {
+.#{$cls-prefix}-close-icon {
     cursor: pointer;
     padding: 4px;
     font-size: 18px;
     line-height: 1;
-    color: var(--weak-text-color);
+    color: var(--color-weak-text);
     position: absolute;
     z-index: 100;
     right: 8px;

@@ -2,14 +2,12 @@
 @import "./mixins/index.scss";
 
 
-
 // blazor mix
 $ui-prefix: "bm";
 $prefix: "bm";
-$prefixCls: $prefix;
 
-$themm-bg-color: var(--main-backgroup-color);
-$themm-text-color: var(--main-text-color);
+$themm-bg-color: var(--color-main-background);
+$themm-text-color: var(--color-main-text);
 
 // color
 $theme-colors: (

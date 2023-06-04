@@ -47,7 +47,6 @@
     <ItemGroup>
         <Folder Include="Modal\" />
         <Folder Include="FixedNav\" />
-        <Folder Include="Drag\" />
         <Folder Include="Swiper\" />
         <Folder Include="Barrage\" />
     </ItemGroup>

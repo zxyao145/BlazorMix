@@ -1,7 +1,7 @@
-﻿$c-prefix: #{$prefix}-dialog;
+﻿$cls-prefix: #{$prefix}-dialog;
 
 
-.#{$c-prefix} {
+.#{$cls-prefix} {
     --dialog-z-index: var(--popup-z-index, 1000);
     --border-radius: 0.5rem;
         
@@ -10,7 +10,7 @@
     }
 }
 
-.#{$c-prefix}-body {
+.#{$cls-prefix}-body {
   width: 100%;
   max-height: 70vh;
   font-size: 14px;
@@ -60,7 +60,7 @@
         height: 12px;
     }
 }
-.#{$c-prefix}-footer {
+.#{$cls-prefix}-footer {
   user-select: none;
   .bm-dialog-action-row {
     display: flex;
@@ -85,6 +85,6 @@
   }
 }
 
-.#{$c-prefix}-image-container {
+.#{$cls-prefix}-image-container {
   overflow-y: auto;
 }

@@ -1,14 +1,14 @@
-﻿@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';
+﻿
 
-$btn-prefix: #{$prefix}-divider;
+$cls-prefix: #{$prefix}-divider;
 
-.#{$btn-prefix} {
+.#{$cls-prefix} {
     --divider-color: #eee;
     --divider-text-color: #999;
+
     color: var(--divider-text-color);
 
-    &.#{$btn-prefix}-horizontal {
+    &.#{$cls-prefix}-horizontal {
         display: flex;
         align-items: center;
         margin: 16px 0;
@@ -25,20 +25,20 @@ $btn-prefix: #{$prefix}-divider;
             border-width: 1px 0 0;
         }
 
-        &.#{$btn-prefix}-left {
+        &.#{$cls-prefix}-left {
             &:before {
                 max-width: 10%;
             }
         }
 
-        &.#{$btn-prefix}-right {
+        &.#{$cls-prefix}-right {
             &:after {
                 max-width: 10%;
             }
         }
     }
 
-    &.#{$btn-prefix}-vertical {
+    &.#{$cls-prefix}-vertical {
         position: relative;
         top: -0.06em;
         display: inline-block;
@@ -49,7 +49,7 @@ $btn-prefix: #{$prefix}-divider;
         border-left: 1px solid var(--divider-color);
     }
 
-    & > .#{$btn-prefix}-content {
+    & > .#{$cls-prefix}-content {
         flex: none;
         padding: 0 16px;
     }

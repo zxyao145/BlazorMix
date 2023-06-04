@@ -1,10 +1,9 @@
-﻿@import '@/styles/mixins/index.scss';
-@import '@/styles/animation/index.scss';
+﻿
 
-$btn-prefix: #{$prefix}-btn;
+$cls-prefix: #{$prefix}-btn;
 
 @each $color, $value in $theme-colors {
-    .#{$btn-prefix}-#{$color} {
+    .#{$cls-prefix}-#{$color} {
         --btn-bg-color: #{$value};
         --btn-border-color: #{$value};
 
@@ -18,12 +17,12 @@ $btn-prefix: #{$prefix}-btn;
             --btn-text-color: #fff;
         }
 
-        &.#{$btn-prefix}-outline {
+        &.#{$cls-prefix}-outline {
             --btn-text-color: #{$value};
             --btn-bg-color: transparent;
         }
 
-        &.#{$btn-prefix}-none {
+        &.#{$cls-prefix}-none {
             --btn-text-color: #{$value};
             --btn-bg-color: transparent;
             --btn-border-width: 0px;
@@ -31,7 +30,7 @@ $btn-prefix: #{$prefix}-btn;
     }
 }
 
-.#{$btn-prefix}-default {
+.#{$cls-prefix}-default {
     --btn-text-color: #{$themm-text-color};
     --btn-bg-color: #{$themm-bg-color};
     --btn-border-width: var(--border-width);
@@ -45,7 +44,7 @@ button {
     --bs-btn-font-size: 1rem;
 }
 
-.#{$btn-prefix} {
+.#{$cls-prefix} {
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color);
     border: var(--btn-border-width) var(--btn-border-style) var(--btn-border-color);
@@ -87,17 +86,17 @@ button {
 }
 
 
-.#{$btn-prefix}-block {
+.#{$cls-prefix}-block {
     display: block;
     width: 100%;
 }
 
-.#{$btn-prefix}-disabled {
+.#{$cls-prefix}-disabled {
     cursor: not-allowed;
     opacity: .4;
 }
 
-.#{$btn-prefix}-xs {
+.#{$cls-prefix}-xs {
     --bs-btn-padding-y: 0.125rem;
     --bs-btn-padding-x: 0.25rem;
     --bs-btn-font-size: 0.75rem;
@@ -108,7 +107,7 @@ button {
     }
 }
 
-.#{$btn-prefix}-sm {
+.#{$cls-prefix}-sm {
     --bs-btn-padding-y: 0.25rem;
     --bs-btn-padding-x: 0.5rem;
     --bs-btn-font-size: 0.875rem;
@@ -119,11 +118,11 @@ button {
     }
 }
 
-/*.#{$btn-prefix}-md {
+/*.#{$cls-prefix}-md {
     
 }*/
 
-.#{$btn-prefix}-lg {
+.#{$cls-prefix}-lg {
     --bs-btn-padding-y: 0.5rem;
     --bs-btn-padding-x: 1rem;
     --bs-btn-font-size: 1.125rem;
@@ -134,7 +133,7 @@ button {
     }
 }
 
-.#{$btn-prefix}-xl {
+.#{$cls-prefix}-xl {
     --bs-btn-padding-y: 0.75rem;
     --bs-btn-padding-x: 1rem;
     --bs-btn-font-size: 1.25rem;

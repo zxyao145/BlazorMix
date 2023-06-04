@@ -3,8 +3,8 @@ $cls-prefix: #{$prefix}-badge;
 
 
 .#{$cls-prefix}-wrapper {
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 .#{$cls-prefix} {
@@ -17,33 +17,34 @@ $cls-prefix: #{$prefix}-badge;
     box-sizing: content-box;
     border-radius: 100px;
     background-color: var(--color);
+
     &-content {
-    color: var(--main-text-reverse-color);
-    box-sizing: border-box;
-    min-width: 8px;
-    padding: 1px 4px;
-    font-size: 9px;
-    line-height: 12px;
-    white-space: nowrap;
-    font-weight: normal;
-    text-align: center;
-}
+        color: var(--color-main-text-reverse);
+        box-sizing: border-box;
+        min-width: 8px;
+        padding: 1px 4px;
+        font-size: 9px;
+        line-height: 12px;
+        white-space: nowrap;
+        font-weight: normal;
+        text-align: center;
+    }
 
-  &-fixed {
-    position: absolute;
-    right: var(--right);
-    top: var(--top);
-    transform: translate(50%, -50%);
-  }
+    &-fixed {
+        position: absolute;
+        right: var(--right);
+        top: var(--top);
+        transform: translate(50%, -50%);
+    }
 
-  &-dot {
-    min-width: 10px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-  }
+    &-dot {
+        min-width: 10px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+    }
 
     &-bordered {
-        border: solid 1px var(--main-text-reverse-color);
+        border: solid 1px var(--color-main-text-reverse);
     }
 }
