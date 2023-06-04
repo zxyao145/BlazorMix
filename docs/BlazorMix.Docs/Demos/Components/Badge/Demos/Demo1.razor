@@ -1,0 +1,74 @@
+﻿
+<DemoBlock Title="基础用法">
+    <Space>
+        <SpaceItem>
+            <Badge Content="@("5")">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Content="@("新")">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Content="true">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+<DemoBlock Title="带边框">
+    <Badge Content="@("更新啦")" Bordered>
+        <div style="@($"{_box}; background: #666;")" />
+    </Badge>
+</DemoBlock>
+
+<DemoBlock Title="独立使用">
+    <Space>
+        <SpaceItem>
+            <Badge Content="@("99+")" />
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Content="@("新消息!")" />
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+
+<DemoBlock Title="自定义颜色和偏移量">
+    <Space>
+        <SpaceItem>
+            <Badge Color="#108ee9"
+                Content="true"
+                   Style="@("--right: 100%; --top: 100%")">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Color="#87d068"
+                   Content="true"
+                   Style="@("--right: 100%;")">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Content="true">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+        <SpaceItem>
+            <Badge Color="orange"
+                   Content="true"
+                   Style="@("--top: 100%;")">
+                <div style="@_box" />
+            </Badge>
+        </SpaceItem>
+    </Space>
+</DemoBlock>
+
+@code
+{
+    private StyleBuilder _box = "background: #eee; width: 40px; height: 40px; display: block; border-radius: 8px;";
+}

@@ -1,0 +1,23 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+@{
+    RenderFragment element = @<div class="@_classBuilder" style="@_styleBuilder">
+                      @if (!_isDot)
+                      {
+                        <div class="@($"{ClsPrefix}-content")">@_content</div>
+                      }
+                  </div>;
+}
+
+@if (ChildContent != null)
+{
+    <div class="@_wrapperClassName" style="@(WrapperStyle?.ToString()??"")">
+        @ChildContent
+        @element
+    </div>
+}
+else
+{
+    @element
+}

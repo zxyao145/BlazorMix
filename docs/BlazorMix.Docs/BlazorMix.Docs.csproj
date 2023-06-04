@@ -55,11 +55,12 @@
       <NoWarn>1701;1702;TS2300</NoWarn>
     </PropertyGroup>
 
-
-    <Target Name="CopyExmaplesToMd" BeforeTargets="Build">
+    <!-- 生成 demo 的 txt 文件 -->
+    <Target Name="CopyDemoToTxt" BeforeTargets="Build">
         <Copy SourceFiles="@(DemoSourceCode)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\%(Filename).txt" />
     </Target>
 
+    <!-- 将 docs 的 md 文件渲染为 html 文件 -->
     <Target Name="GenDocsHtml" BeforeTargets="Build">
         <Message Importance="high" Text="generate docs ..." />
         <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet run --project $(CliPath) -- -c gendemo -s $(DocsDir)/Demos/Components -o $(DocsDir)/wwwroot/pages" />
