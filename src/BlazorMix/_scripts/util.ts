@@ -13,3 +13,16 @@ export function pxToNumber(value: string | null): number {
     const match = value.match(/^\d*(\.\d*)?/)
     return match ? Number(match[0]) : 0
 }
+
+export const nearest = (arr: number[], target: number) => {
+    return arr.reduce((pre, cur) => {
+        return Math.abs(pre - target) < Math.abs(cur - target) ? pre : cur;
+    });
+};
+
+export const canUseDom = !!(
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+)

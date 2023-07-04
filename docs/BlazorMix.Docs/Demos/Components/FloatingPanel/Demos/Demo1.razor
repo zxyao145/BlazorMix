@@ -1,0 +1,21 @@
+﻿
+@{
+    char[] data = new Char[]
+    {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 
+        'H', 'I', 'J', 'K', 'L', 'M', 'N', 
+        'O', 'P', 'Q',
+    };
+}
+<DemoBlock Title="">
+    <FloatingPanel Anchors="@(new int[]{100, 250, 500})">
+        <List>
+            @foreach (var ch in data)
+            {
+                <ListItem @key="@ch">
+                    @ch
+                </ListItem>
+            }
+        </List>
+    </FloatingPanel>
+</DemoBlock>

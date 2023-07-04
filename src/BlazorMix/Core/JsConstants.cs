@@ -39,4 +39,8 @@ internal class JsConstants
     
     public const string PrefixWaterMark = "Bm.WaterMark.";
     public const string PrefixWaterMarkRender = $"{PrefixWaterMark}render";
+
+
+    public const string PrefixFloatingPanel = "Bm.FloatingPanel.";
+    public const string FloatingPanelInit = $"{PrefixFloatingPanel}init";
 }

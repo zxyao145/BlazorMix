@@ -120,6 +120,9 @@ public static class JsRuntimeEtx
 
     #endregion
 
+
+    #region WaterMark
+
     public static async Task WaterMarkRender(
         this IJSRuntime js,
         ElementReference componentRoot,
@@ -132,4 +135,42 @@ public static class JsRuntimeEtx
             props
             );
     }
+
+    #endregion
+
+
+    #region FloatingPanel
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="js"></param>
+    /// <param name="obj"></param>
+    /// <param name="root"></param>
+    /// <param name="handleDraggingOfContent"></param>
+    /// <param name="anchors"></param>
+    /// <param name="callbackDotNetObject">
+    ///  on height change callback
+    /// </param>
+    /// <returns></returns>
+    internal static async Task<IJSObjectReference> FloatingPanelInit(
+        this IJSRuntime js,
+        DotNetObjectReference<FloatingPanel> obj,
+        ElementReference root,
+        bool handleDraggingOfContent,
+        int[] anchors,
+        DotNetObjectReference<CallbackFunc<double, Task>> callbackDotNetObject
+    )
+    {
+        return await js.InvokeAsync<IJSObjectReference>(
+            JsConstants.FloatingPanelInit,
+            obj,
+            root,
+            handleDraggingOfContent,
+            anchors,
+            callbackDotNetObject
+            );
+    }
+
+    #endregion
 }

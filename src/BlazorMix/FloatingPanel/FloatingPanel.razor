@@ -1,0 +1,14 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div @ref="@_rootRef" class="@($"{ClsPrefix} {Class?.ToString() ?? ""}")" style="@("transform: translateY(calc(100% + -100px));" + (Style?.ToString() ?? ""))">
+    <div class="@($"{ClsPrefix}-mask")"
+         style="display: none;">
+    </div>
+    <div class="@($"{ClsPrefix}-header")">
+        <div class="@($"{ClsPrefix}-bar")" />
+    </div>
+    <div class="@($"{ClsPrefix}-content")">
+        @ChildContent
+    </div>
+</div>

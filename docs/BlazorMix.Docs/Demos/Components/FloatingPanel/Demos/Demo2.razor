@@ -1,0 +1,25 @@
+﻿<DemoBlock Title="结合onHeightChange实现透明度变化">
+    <FloatingPanel OnHeightChange="OnHeightChange"
+        Anchors="@(new int[] { _minHeight, 250, _maxHeight })">
+        <div style="@_style"></div>
+    </FloatingPanel>
+</DemoBlock>
+
+@code
+{
+    private readonly int _minHeight = 100;
+    private readonly int _maxHeight = 500;
+    private string _style = "height: 100%;";
+
+    protected override void OnInitialized()
+    {
+        OnHeightChange(_minHeight);
+    }
+
+    private void OnHeightChange(double height)
+    {
+        var ratio = height / _maxHeight;
+        _style = $"height: 100%; background: linear-gradient(rgba(185,147,214,{ratio}),rgba(140,166,219,{ratio}))";
+        StateHasChanged();
+    }
+}
