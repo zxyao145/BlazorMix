@@ -1,0 +1,10 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div class="@_classBuilder" style="@_styleBuilder">
+    @for (var i = 0; i < Total; i++)
+    {
+        var itemCls = $"{ClsPrefix}-dot {((Current == i) ? ClsDotActive : "")}";
+        <div @key="@i" class="@itemCls" />
+    }
+</div>

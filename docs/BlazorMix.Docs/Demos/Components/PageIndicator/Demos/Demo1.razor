@@ -1,0 +1,27 @@
+﻿
+<DemoBlock Title="基础用法">
+    <PageIndicator Total=4 Current=0 />
+</DemoBlock>
+
+<DemoBlock Title="白色">
+    <PageIndicator Total=4 Current=0 Color="@("white")" />
+</DemoBlock>
+
+<DemoBlock Title="竖直方向">
+    <PageIndicator Total=4 Current=0 Direction="BmDirection.Vertical" />
+</DemoBlock>
+
+<DemoBlock Title="自定义颜色和大小">
+    <PageIndicator Total=4 Current=0
+                   Style="@(@"
+                              --dot-color: rgba(0, 0, 0, 0.4);
+                              --active-dot-color: #ffc0cb;
+                              --dot-size: 10px;
+                              --active-dot-size: 30px;
+                              --dot-border-radius: 50%;
+                              --active-dot-border-radius: 15px;
+                              --dot-spacing: 8px
+                              "
+)"
+                   />
+</DemoBlock>
