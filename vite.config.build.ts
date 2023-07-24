@@ -14,6 +14,7 @@ const { resolve } = path;
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   var isProd = mode === "production";
+  console.log("isProd", isProd)
   return {
     resolve: {
       alias: [
@@ -34,9 +35,11 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    plugins: [],
+  plugins: [],
     build: {
+      sourcemap: !isProd,
       emptyOutDir: true,
+      minify: true,
       outDir: "./src/BlazorMix/wwwroot/dist",
       rollupOptions: {
         output: {

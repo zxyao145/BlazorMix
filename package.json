@@ -13,7 +13,7 @@
     "build:css": "npm run generate:themes && vite build --config vite.config.build.css.ts --mode production",
     "build:js": "npm run generate:js && vite build --config vite.config.build.js.ts --mode production",
     "build-dev": "npm run build-dev:js && && npm run build-dev:css",
-    "build": "npm run generate && vite build --config vite.config.build.ts --mode development -- --theme=defaultt"
+    "build": "npm run generate && vite build --config vite.config.build.ts --mode production -- --theme=defaultt"
   },
   "author": "",
   "license": "MIT",

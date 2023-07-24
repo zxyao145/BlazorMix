@@ -21,6 +21,7 @@
         <Title>A Blazor Mobile UI components lib.</Title>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <PackageId>BlazorMix</PackageId>
+        <!--dotnet pack  -c Release /p:Version=0.3.0-preview-->
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -54,5 +55,17 @@
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Release'">
+        <Compile Remove="wwwroot\src\**" />
+        <Content Remove="wwwroot\src\**" />
+        <EmbeddedResource Remove="wwwroot\src\**" />
+        <None Remove="wwwroot\src\**" />
+
+        <Compile Remove="wwwroot\dist\default.min.js" />
+        <Content Remove="wwwroot\dist\default.min.js" />
+        <EmbeddedResource Remove="wwwroot\dist\default.min.js" />
+        <None Remove="wwwroot\dist\default.min.js" />
     </ItemGroup>
 </Project>

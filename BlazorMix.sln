@@ -8,6 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-solution", "1-solution", "{828439F2-D89C-4950-A124-6D2810D8F5A6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		package.json = package.json
+		vite.config.build.css.ts = vite.config.build.css.ts
+		vite.config.build.js.ts = vite.config.build.js.ts
+		vite.config.build.ts = vite.config.build.ts
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMix", "src\BlazorMix\BlazorMix.csproj", "{EB49471F-2FF7-42A6-9DDD-B88B7D7BD868}"
