@@ -20,6 +20,7 @@ internal class JsConstants
     public const string DisableBodyScroll = $"{PrefixCommon}{nameof(DisableBodyScroll)}";
     public const string EnableBodyScroll = $"{PrefixCommon}{nameof(EnableBodyScroll)}";
     public const string ObserveInViewportOnce = $"{PrefixCommon}{nameof(ObserveInViewportOnce)}";
+    public const string GetBoundingClientRect = $"{PrefixCommon}{nameof(GetBoundingClientRect)}";
 
     #endregion
 

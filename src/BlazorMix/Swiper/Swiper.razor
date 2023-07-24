@@ -1,0 +1,50 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+
+<div @ref="_rootElement" class="@_classBuilder" style="@_styleBuilder">
+    <div class="@_trackClassBuilder">
+        <CascadingValue Value="this" TValue="Swiper" IsFixed="@true">
+            <CascadingValue Value="this" >
+            </CascadingValue>
+
+            <div class="@ClsPrefixTrackInner"
+                 style="@_trackInnerStyleBuilder"
+                 @ontouchstart="OnTrackInnerTouchStart"
+                 @ontouchmove="OnTrackInnerTouchMove"
+                 @ontouchend="OnTrackInnerTouchEnd"
+            
+            >
+                @ChildContent                
+                
+                @*
+                @for (var i = 0; i < _items.Count; i++)
+                {
+                    <div class="@($"{ClsPrefix}-slide {(Current == i ? ClsPrefixSlideActive : "")} {_items[i].Class?.ToString() ?? ""}")"
+                         style="@(_items[i].GetMergedStyle())">
+                        @_items[i].ChildContent
+                    </div>
+                }*@
+
+            </div>
+        </CascadingValue>
+    </div>
+    @if (!NoIndicator)
+    {
+        if (Indicator == null)
+        {
+            <div class="@($"{ClsPrefix}-indicator")">
+                <PageIndicator
+                    Total="@_items.Count"
+                    Direction="@Direction"
+                    Current="@Current"
+                    Style="@IndicatorProps.Style"
+                    Class="@IndicatorProps.Class"
+                    Color="@IndicatorProps.Color" />
+            </div>
+        }
+        else
+        {
+            @Indicator(new IndicatorInfo(_items.Count, Current))
+        }
+    }
+</div>

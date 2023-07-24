@@ -1,0 +1,80 @@
+﻿<DemoBlock Title="卡在边界">
+    <Swiper TrackOffset="10" SlideSize="80" Autoplay
+            Style="@("--border-radius:8px;")">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")"
+                     >
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+<DemoBlock Title="允许越过边界">
+    <Swiper StuckAtBoundary="false"
+            SlideSize="80"
+            DefaultIndex="3">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")"
+                >
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+
+<DemoBlock Title="居中展示">
+    <Swiper StuckAtBoundary="false"
+            TrackOffset="10"
+            SlideSize="80">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")"
+                >
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+
+<DemoBlock Title="循环居中展示">
+    <Swiper StuckAtBoundary="false"
+            TrackOffset="15"
+            SlideSize="70"
+            Loop
+            Autoplay
+            >
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")">
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+@code
+{
+    const string ContentStyle = "height:120px; color:#fff; font-size: 48px;display: flex;justify-content: center;align-items: center;user-select: none;";
+    string[] _colors = new[]
+    {
+        "#ace0ff", "#bcffbd", "#e4fabd", "#ffcfac"
+    };
+
+}

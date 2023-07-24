@@ -32,3 +32,21 @@ export const EnableBodyScroll = () => {
         document.body.classList.remove("overflow-hidden")
     }
 }
+
+
+export const GetBoundingClientRect = (ele: HTMLElement) => {
+    if (ele && ele.getBoundingClientRect) {
+        const rect = ele.getBoundingClientRect();
+        return {
+            width: rect.width,
+            height: rect.height,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+            left: rect.left,
+            x: rect.x,
+            y: rect.y
+        };
+    }
+    return null;
+}

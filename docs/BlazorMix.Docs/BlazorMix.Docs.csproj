@@ -41,15 +41,6 @@
         <DemoSourceCode Include="Demos\**\*.razor" />
     </ItemGroup>
 
-    <ItemGroup>
-      <DemoDocs Remove="Demos\Components\FloatingPanel\Docs\index.zh-CN.md" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <DemoSourceCode Remove="Demos\Components\FloatingPanel\Demos\Demo1.razor" />
-      <DemoSourceCode Remove="Demos\Components\FloatingPanel\Demos\Demo2.razor" />
-    </ItemGroup>
-
     <PropertyGroup>
         <CliProjectDir>docs/BlazorMix.Docs.Build</CliProjectDir>
         <CliPath>$(CLIProjectDir)/BlazorMix.Docs.Build.csproj</CliPath>

@@ -25,13 +25,7 @@ public abstract class BmComponentBase : ComponentBase, IDisposable
 
     protected void InvokeStateHasChanged()
     {
-        InvokeAsync(() =>
-        {
-            if (!IsDisposed)
-            {
-                StateHasChanged();
-            }
-        });
+        StateHasChanged();
     }
 
     protected async Task InvokeStateHasChangedAsync()

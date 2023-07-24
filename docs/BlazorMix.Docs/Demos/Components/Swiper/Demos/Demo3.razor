@@ -1,0 +1,97 @@
+﻿
+<DemoBlock Title="指示器颜色">
+    <Swiper Autoplay IndicatorProps="@(new PageIndicatorProps(){ Color = "white"})">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem >
+                <div style="@($"{ContentStyle} background: {_colors[index]};")"
+                >
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+    <DemoDescription>
+        通过 indicatorProps 可以控制指示器的外观
+    </DemoDescription>
+</DemoBlock>
+
+
+<DemoBlock Title="指示器在滑块外面">
+    <Swiper Autoplay 
+            Style="@("--track-padding: 0 0 16px")">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")">
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+    <DemoDescription>
+        通过 --track-padding 可以控制滑动轨道区域的 padding，从而实现指示器和滑块"分离"的效果
+    </DemoDescription>
+</DemoBlock>
+
+
+<DemoBlock Title="自定义指示器">
+    <Swiper Autoplay
+            Indicator="@_indicator">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")">
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+
+<DemoBlock Title="无指示器">
+    <Swiper Autoplay NoIndicator>
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")">
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+<style>
+    .customIndicator {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: rgba(0,0,0,.3);
+        padding: 4px 8px;
+        color: #fff;
+        border-radius: 4px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>
+
+@code
+{
+    const string ContentStyle = "height:120px; color:#fff; font-size: 48px;display: flex;justify-content: center;align-items: center;user-select: none;";
+    string[] _colors = new[]
+    {
+        "#ace0ff", "#bcffbd", "#e4fabd", "#ffcfac"
+    };
+
+    RenderFragment<IndicatorInfo> _indicator = 
+    indicatorInfo => @<div class="customIndicator">@($"{indicatorInfo.Current + 1} / {indicatorInfo.Total}")</div>;
+
+}

@@ -44,12 +44,6 @@
         <ProjectReference Include="..\BlazorMix.Core\BlazorMix.Core.csproj" />
     </ItemGroup>
     
-    <ItemGroup>
-        <Folder Include="Modal\" />
-        <Folder Include="FixedNav\" />
-        <Folder Include="Swiper\" />
-        <Folder Include="Barrage\" />
-    </ItemGroup>
     
     <ItemGroup>
       <None Include="..\..\LICENSE.txt">

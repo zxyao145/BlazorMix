@@ -1,0 +1,8 @@
+﻿@namespace BlazorMix
+@inherits BmDomComponentBase
+<div class="@($"{Swiper.ClsPrefix}-slide")"
+     style="@(GetMergedStyle())">
+    <div class="@($"{ClsPrefix}")">
+        @ChildContent
+    </div>
+</div>

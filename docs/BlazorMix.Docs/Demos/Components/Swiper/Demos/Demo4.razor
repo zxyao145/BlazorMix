@@ -1,0 +1,46 @@
+﻿<DemoBlock Title="竖向">
+    <Swiper Autoplay 
+            Direction="BmDirection.Vertical"
+            Style="@("--height: 200px")">
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem >
+                <div style="@($"{ContentStyle} background: {_colors[index]};")"
+                >
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+
+<DemoBlock Title="竖向居中">
+    <Swiper Autoplay
+            Direction="BmDirection.Vertical" 
+            TrackOffset="10"
+            SlideSize="80"
+            StuckAtBoundary="false"
+            Style="@("--height: 200px")"
+    >
+        @for (int i = 0; i < _colors.Length; i++)
+        {
+            var index = i;
+            <SwiperItem>
+                <div style="@($"{ContentStyle} background: {_colors[index]};")">
+                    @(index + 1)
+                </div>
+            </SwiperItem>
+        }
+    </Swiper>
+</DemoBlock>
+
+@code
+{
+    const string ContentStyle = "height: 100%; color:#fff; font-size: 48px;display: flex;justify-content: center;align-items: center;user-select: none;";
+    string[] _colors = new[]
+    {
+        "#ace0ff", "#bcffbd", "#e4fabd", "#ffcfac"
+    };
+}

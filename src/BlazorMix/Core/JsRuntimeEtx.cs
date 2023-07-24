@@ -61,6 +61,14 @@ public static class JsRuntimeEtx
         await js.InvokeVoidAsync(JsConstants.ObserveInViewportOnce, dotNetObject, element);
     }
 
+    public static async Task<DomRect?> GetBoundingClientRect(
+        this IJSRuntime js,
+        ElementReference element
+    )
+    {
+        return await js.InvokeAsync<DomRect?>(JsConstants.GetBoundingClientRect, element);
+    }
+
     #endregion
 
     #region NoticeBar
